@@ -48,5 +48,20 @@
     <fragment
         android:id="@+id/projectMainFragment"
         android:name="com.eric.startupmatching.project.ProjectMainFragment"
-        android:label="ProjectMainFragment" /><action android:id="@+id/action_global_projectMainFragment" app:destination="@id/projectMainFragment"/>
+        android:label="ProjectMainFragment" />
+    <action android:id="@+id/action_global_projectMainFragment" app:destination="@id/projectMainFragment" />
+    <fragment
+        android:id="@+id/projectAddFragment"
+        android:name="com.eric.startupmatching.project.add.ProjectAddFragment"
+        android:label="ProjectAddFragment" />
+    <fragment
+        android:id="@+id/projectDetailFragment"
+        android:name="com.eric.startupmatching.project.detail.ProjectDetailFragment"
+        android:label="ProjectDetailFragment" >
+        <argument
+            android:name="projectArgs"
+            app:argType="com.eric.startupmatching.data.Project" />
+    </fragment>
+    <action android:id="@+id/action_global_projectDetailFragment" app:destination="@id/projectDetailFragment" />
+    <action android:id="@+id/action_global_projectAddFragment" app:destination="@id/projectAddFragment" />
 </navigation>

@@ -174,7 +174,7 @@ class BackStageFragment: Fragment() {
             projectName = "Cost reduction of new product",
             description = "Current cost: 15 USD/Kg \nTarget cost: 12 USD/Kg",
             tasks = mutableListOf("00001", "00002"),
-            teams = mutableListOf("000, 001, 002, 003"),
+            teams = mutableListOf("000", "001", "002", "003"),
             startupStatus = mutableListOf("Running", "Recruiting"),
             positions = mutableListOf("001", "002", "003", "004"),
             hiringPosition = mutableListOf("004"),

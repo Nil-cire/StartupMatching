@@ -31,6 +31,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:text="新增"
+                android:id="@+id/project_main_add"
+                style="@style/center_text_font_noto"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="@dimen/regular_margin"
+                android:visibility="gone"/>
+
+
             <ImageView
                 android:id="@+id/social_media_post_btn"
                 style="@style/center_text_font_noto"

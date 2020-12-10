@@ -25,6 +25,10 @@ class ProjectMainViewModel: ViewModel() {
     val team: LiveData<Team>
         get() = _team
 
+    private val _teamAsTeamleader = MutableLiveData<List<Team>>()
+    val teamAsTeamleader: LiveData<List<Team>>
+        get() = _teamAsTeamleader
+
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>
         get() = _teamList
@@ -35,6 +39,7 @@ class ProjectMainViewModel: ViewModel() {
 
     val user = UserInfo.currentUser
 
+//run by default
     fun getUserTeam() {
         coroutineScope.launch {
             db.collection("Team")
@@ -42,9 +47,25 @@ class ProjectMainViewModel: ViewModel() {
                 .get()
                 .addOnSuccessListener {
                     _teamList.value = it.toObjects(Team::class.java)
+                    Log.d("teamList", teamList.toString())
                 }
         }
     }
+
+    fun getUserTeamAsTeamLeader() {
+        var teamAsTeamleaderList = mutableListOf<Team>()
+        coroutineScope.launch {
+            db.collection("Team")
+                .whereEqualTo("teamLeader", user.value?.id)
+                .get()
+                .addOnSuccessListener {
+                    teamAsTeamleaderList.addAll(it.toObjects(Team::class.java))
+                    _teamAsTeamleader.value = teamAsTeamleaderList
+                    Log.d("teamAsTeamleader", teamAsTeamleader.toString())
+                }
+        }
+    }
+
 
     fun getAllProject() {
         coroutineScope.launch {
@@ -57,11 +78,36 @@ class ProjectMainViewModel: ViewModel() {
                         for (project in it) {
                             list.add(project.toObject(Project::class.java))
                         }
+                        _projectList.value = list
+                        Log.d("getAllProject", list.toString())
                     }
             }
-            _projectList.value = list
-            Log.d("ProjectALL", projectList.value.toString())
+
+//            Log.d("ProjectALL", projectList.value.toString())
         }
+    }
+
+
+//run on Chip Selected
+    fun getProjectAsOwner() {
+        var projectAsOwnerList = mutableListOf<Project>()
+        coroutineScope.launch {
+            db.collection("Project")
+                .whereEqualTo("projectLeader", user.value?.id)
+                .get()
+                .addOnSuccessListener {
+                    projectAsOwnerList.addAll(it.toObjects(Project::class.java))
+                    _projectList.value = projectAsOwnerList
+                    Log.d("projectAsOwnerList", _projectList.toString())
+                }
+        }
+}
+
+
+
+    init {
+        getUserTeam()
+        getUserTeamAsTeamLeader()
     }
 
 }

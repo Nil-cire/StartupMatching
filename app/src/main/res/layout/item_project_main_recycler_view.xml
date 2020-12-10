@@ -45,7 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/regular_margin"
-                android:text="@string/project_name_cn"
+                android:text="@{project.projectName}"
+                tools:text="@string/project_name_cn"
                 app:layout_constraintStart_toEndOf="@+id/project_name"
                 app:layout_constraintTop_toTopOf="@+id/project_name" />
 
@@ -62,7 +63,8 @@
                 android:id="@+id/leader_name_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/supervisor"
+                android:text="@{project.projectLeader}"
+                tools:text="@string/supervisor"
                 app:layout_constraintStart_toStartOf="@+id/project_name_content"
                 app:layout_constraintTop_toTopOf="@+id/leader_name" />
 
@@ -79,7 +81,8 @@
                 android:id="@+id/start_time_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/start_time"
+                android:text="@{project.startTime.toLocaleString()}"
+                tools:text="@string/start_time"
                 app:layout_constraintStart_toStartOf="@+id/project_name_content"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -98,7 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_regular_margin"
-                android:text="@string/end_time"
+                android:text="@{project.endTime.toLocaleString()}"
+                tools:text="@string/end_time"
                 app:layout_constraintStart_toEndOf="@+id/to"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -117,9 +121,12 @@
                 android:id="@+id/description_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/description"
+                android:text="@{project.description}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/regular_margin"
                 app:layout_constraintStart_toStartOf="@+id/start_time_content"
-                app:layout_constraintTop_toTopOf="@+id/description" />
+                app:layout_constraintTop_toTopOf="@+id/description"
+                tools:text="@string/description" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
