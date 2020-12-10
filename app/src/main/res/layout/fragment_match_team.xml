@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.eric.startupmatching.match.team.MatchTeamViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/teamKeywordSearch"
+            style="@style/center_text_font_noto"
+            android:layout_width="128dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/twox_regular_margin"
+            android:layout_marginStart="@dimen/twox_regular_margin"
+            android:text="@string/search_by_keyword"/>
+
+        <EditText
+            android:layout_width="192dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toTopOf="@id/teamKeywordSearch"
+            app:layout_constraintStart_toEndOf="@+id/teamKeywordSearch"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:id="@+id/positionTeamSearch"
+            style="@style/center_text_font_noto"
+            android:layout_width="128dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toBottomOf="@id/teamKeywordSearch"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/twox_regular_margin"
+            android:text="@string/search_by_position"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/positionSearchSpinner"
+            android:layout_width="192dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toTopOf="@id/positionTeamSearch"
+            app:layout_constraintStart_toEndOf="@+id/positionTeamSearch"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+
+        <TextView
+            android:id="@+id/timeSearchTeamSearch"
+            style="@style/center_text_font_noto"
+            android:layout_width="128dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toBottomOf="@id/positionTeamSearch"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/twox_regular_margin"
+            android:text="適合我"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/scheduleSearchSwitch"
+            android:layout_width="96dp"
+            android:layout_height="32dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/timeSearchTeamSearch"
+            app:layout_constraintStart_toEndOf="@+id/timeSearchTeamSearch"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:id="@+id/searchTeamBtn"
+            app:layout_constraintEnd_toEndOf="@+id/positionSearchSpinner"
+            app:layout_constraintTop_toTopOf="@id/scheduleSearchSwitch"
+            android:text="@string/search"
+            style="@style/center_text_font_noto"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layout_constraintTop_toBottomOf="@id/scheduleSearchSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingLeft="@dimen/regular_margin"
+            android:paddingRight="@dimen/regular_margin"
+            android:paddingTop="@dimen/regular_margin"
+            android:paddingBottom="@dimen/regular_margin">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:id="@+id/team_searching_recycler_view"
+                tools:itemCount="20"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.eric.startupmatching.login.LoginFragment"
+        android:label="LoginFragment" />
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment" />
+    <fragment
+        android:id="@+id/teamMainFragment"
+        android:name="com.eric.startupmatching.team.TeamMainFragment"
+        android:label="TeamMainFragment" />
+    <action
+        android:id="@+id/action_global_teamMainFragment"
+        app:destination="@id/teamMainFragment" />
+    <fragment
+        android:id="@+id/matchMainFragment"
+        android:name="com.eric.startupmatching.match.MatchMainFragment"
+        android:label="MatchMainFragment" />
+    <fragment
+        android:id="@+id/matchTeamFragment"
+        android:name="com.eric.startupmatching.match.team.MatchTeamFragment"
+        android:label="MatchTeamFragment" />
+    <fragment
+        android:id="@+id/matchProjectFragment"
+        android:name="com.eric.startupmatching.match.project.MatchProjectFragment"
+        android:label="MatchProjectFragment" />
+    <action
+        android:id="@+id/action_global_matchMainFragment"
+        app:destination="@id/matchMainFragment" />
+    <action
+        android:id="@+id/action_global_matchProjectFragment"
+        app:destination="@id/matchProjectFragment" />
+    <action
+        android:id="@+id/action_global_matchTeamFragment"
+        app:destination="@id/matchTeamFragment" />
+    <fragment
+        android:id="@+id/backStageFragment"
+        android:name="com.eric.startupmatching.BackStageFragment"
+        android:label="BackStageFragment" />
+    <action
+        android:id="@+id/action_global_backStageFragment"
+        app:destination="@id/backStageFragment" />
+    <fragment
+        android:id="@+id/projectMainFragment"
+        android:name="com.eric.startupmatching.project.ProjectMainFragment"
+        android:label="ProjectMainFragment" /><action android:id="@+id/action_global_projectMainFragment" app:destination="@id/projectMainFragment"/>
+</navigation>

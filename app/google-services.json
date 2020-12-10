@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "145352377830",
+    "project_id": "pp001-af6cc",
+    "storage_bucket": "pp001-af6cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145352377830:android:6218b1c0de136e21aac227",
+        "android_client_info": {
+          "package_name": "com.eric.startupmatching"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145352377830-8g0kdte9aecgkjvl9oqt8gnmfnf0076l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhBEbVVSJ20R4Xybqne1R15Bx9bdQVw2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145352377830-8g0kdte9aecgkjvl9oqt8gnmfnf0076l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

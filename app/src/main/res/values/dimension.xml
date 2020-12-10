@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="quarter_regular_margin">4dp</dimen>
+    <dimen name="half_regular_margin">8dp</dimen>
+    <dimen name="regular_margin">16dp</dimen>
+    <dimen name="twox_regular_margin">32dp</dimen>
+    <dimen name="threex_regular_margin">48dp</dimen>
+    <dimen name="fourx_regular_margin">64dp</dimen>
+
+    <dimen name="content_text_size">16sp</dimen>
+    <dimen name="title_text_size">24sp</dimen>
+<!--    <dimen name="twox_regular_margin">32sp</dimen>-->
+<!--    <dimen name="threex_regular_margin">40sp</dimen>-->
+<!--    <dimen name="fourx_regular_margin">48sp</dimen>-->
+
+</resources>
