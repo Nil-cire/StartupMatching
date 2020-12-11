@@ -29,13 +29,14 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
                         .get()
                         .addOnSuccessListener {
                             messageList.add(it.toObjects(Message::class.java)[0])
-                            messageList.sortBy { it.postTimestamp }
+                            messageList.sortByDescending { it.postTimestamp }
+                            binding.lastMessage.text = messageList[0].content
                         }
                 }
             }
-            binding.lastMessage.text = messageList[0].toString()
 
-            TODO("Snapshopt message update and change text")
+
+//            TODO("Snapshopt message update and change text")
         }
     }
 

@@ -169,7 +169,7 @@ data class Comment(
 @Parcelize
 data class ChatRoom(
     val name: String? = null, // Task.id or Team.id or null for personal chat room
-    val type: String? = null, // User, Task, Team
+    val type: String? = null, // Private, Task, Team
     val id: String? = null ,
     val member: List<String?>? = null, // User id
     val updateTime: Date = Calendar.getInstance().time,

@@ -277,8 +277,8 @@ class BackStageFragment: Fragment() {
         }
 
         val messages = mutableListOf(
-            Message("001", "Yo", "000", Calendar.getInstance().time, mutableListOf("000", "004")),
-            Message("003", "Yes?", "004", Calendar.getInstance().time, mutableListOf("004"))
+            Message("002", "Hi all", "004", Calendar.getInstance().time, mutableListOf("004", "005")),
+            Message("004", "Hi", "005", Calendar.getInstance().time, mutableListOf("004", "005"))
         )
 
         addMessage.setOnClickListener {

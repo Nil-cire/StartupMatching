@@ -29,14 +29,18 @@ class ChatRoomTeamAdapter(val onClickListener: OnClickListener) : ListAdapter<Ch
                         .whereEqualTo("id", messageId)
                         .get()
                         .addOnSuccessListener {
-                            messageList.add(it.toObjects(Message::class.java)[0])
-                            messageList.sortBy { it.postTimestamp }
+                            it?.let {
+                                messageList.add(it.toObjects(Message::class.java)[0])
+                                messageList.sortByDescending { it.postTimestamp }
+                                binding.lastMessage.text = messageList[0].content
+                            }
+
                         }
                 }
             }
-            binding.lastMessage.text = messageList[0].toString()
 
-            TODO("Snapshopt message update and change text")
+
+//            TODO("Snapshopt message update and change text")
         }
     }
 

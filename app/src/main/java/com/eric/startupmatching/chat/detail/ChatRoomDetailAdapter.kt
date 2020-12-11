@@ -37,7 +37,7 @@ class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position).poster) {
-            UserInfo.currentUser.value!!.name -> 1
+            UserInfo.currentUser.value!!.id -> 1
             else -> 0
         }
     }
