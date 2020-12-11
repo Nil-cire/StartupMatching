@@ -134,10 +134,7 @@ class BackStageFragment: Fragment() {
             Position("00005", "Bassist")
         )
 
-        val allPost = mutableListOf<Post>(
-            Post("00001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
-            Post("00002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
-        )
+
 
         //Functions
 
@@ -232,6 +229,11 @@ class BackStageFragment: Fragment() {
             }
         }
 
+        val allPost = mutableListOf<Post>(
+            Post("001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
+            Post("002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
+        )
+
         addPosts.setOnClickListener {
             try {
                 for (post in allPost) {
@@ -275,7 +277,8 @@ class BackStageFragment: Fragment() {
         }
 
         val messages = mutableListOf(
-            Message("00003", "Hi sample", "00001", Calendar.getInstance().time, mutableListOf("00001", "00002"))
+            Message("001", "Yo", "000", Calendar.getInstance().time, mutableListOf("000", "004")),
+            Message("003", "Yes?", "004", Calendar.getInstance().time, mutableListOf("004"))
         )
 
         addMessage.setOnClickListener {
@@ -291,8 +294,8 @@ class BackStageFragment: Fragment() {
         }
 
         val chatRooms = mutableListOf(
-            ChatRoom(null, "User","00001", mutableListOf("00001", "00002"), Calendar.getInstance().time, mutableListOf("00001", "00003")),
-            ChatRoom(null, "Team","00002", mutableListOf("00001", "00002", "00003"), Calendar.getInstance().time, mutableListOf("00002", "00002"))
+            ChatRoom(null, "User","001", mutableListOf("000", "004"), Calendar.getInstance().time, mutableListOf("001", "003")),
+            ChatRoom(null, "Team","002", mutableListOf("004", "005"), Calendar.getInstance().time, mutableListOf("002", "004"))
 
         )
 

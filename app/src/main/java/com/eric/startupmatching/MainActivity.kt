@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         chatBtn.setOnClickListener {
             chatPageIconSetup()
-//            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalChatroomMainFragment())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalChatRoomMainFragment())
         }
 
         socialmediaBtn.setOnClickListener {

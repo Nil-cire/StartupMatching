@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.databinding.FragmentProjectMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_project_main.view.*
@@ -22,7 +24,9 @@ class ProjectMainFragment: Fragment() {
         val viewModel = ViewModelProvider(this).get(ProjectMainViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        val adapter = ProjectMainAdapter(ProjectMainAdapter.OnClickListener{})
+        val adapter = ProjectMainAdapter(ProjectMainAdapter.OnClickListener{
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
+        })
         binding.recyclerView.adapter = adapter
 
         // init data
@@ -91,5 +95,10 @@ class ProjectMainFragment: Fragment() {
         requireActivity().project_main_add.setOnClickListener {
             Log.d("project_main_add", "pressed")
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        requireActivity().project_main_add.visibility = View.GONE
     }
 }

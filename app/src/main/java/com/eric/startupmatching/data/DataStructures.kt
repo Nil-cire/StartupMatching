@@ -53,7 +53,7 @@ data class Project(
     val description: String? = "",
     val tasks: List<String?>? = mutableListOf(), //Task id
     val teams: List<String?>? = mutableListOf(), // Team id
-    val startupStatus: List<String?>? = mutableListOf(), // Recruiting, Planning ,Ready, Running
+    val startupStatus: List<String?>? = mutableListOf(), // Recruiting, Planning ,Ready, Running, done
     val positions:List<String?>? = mutableListOf(), // position
     val hiringPosition: List<String?>? = mutableListOf(), // position
     val industry: String? = "", // industry id
