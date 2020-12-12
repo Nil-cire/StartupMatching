@@ -19,8 +19,6 @@ class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<
         fun bind(message: Message) {
             binding.message = message
             binding.executePendingBindings()
-//            binding.sendText.setOnClickListener {
-//            }
         }
     }
 

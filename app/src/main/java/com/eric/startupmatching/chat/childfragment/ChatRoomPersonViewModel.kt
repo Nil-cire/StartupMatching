@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.ChatRoom
 import com.eric.startupmatching.data.Team
-import com.eric.startupmatching.data.TeamMember
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
