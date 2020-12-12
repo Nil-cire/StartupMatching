@@ -21,7 +21,7 @@ class ChildViewBinder : ItemViewBinder<ChildModel, ChildViewBinder.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, child: ChildModel) {
-        holder.itemView.tvContent.text = child.content
+        holder.itemView.tvContent.text = child.content.name
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

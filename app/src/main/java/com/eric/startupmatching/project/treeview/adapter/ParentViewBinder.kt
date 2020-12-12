@@ -25,7 +25,7 @@ class ParentViewBinder : ItemViewBinder<ParentModel, ParentViewBinder.ViewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: ParentModel) {
-        holder.itemView.tvContent.text = model.content
+        holder.itemView.tvContent.text = model.content.teamName
         holder.itemView.setOnClickListener {
             when (model.expand) {
                 true -> {
