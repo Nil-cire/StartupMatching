@@ -37,7 +37,10 @@ open class TreeViewModel {
          */
         fun getChildCountForHide(item: TreeViewModel): Int {
             val list = ArrayList<TreeViewModel>()
-            printChild(item, list)
+            printChild(
+                item,
+                list
+            )
             return list.size - 1
         }
 
@@ -45,7 +48,10 @@ open class TreeViewModel {
             list.add(item)
             if (item.expand) {
                 item.children?.forEach {
-                    printChild(it, list)
+                    printChild(
+                        it,
+                        list
+                    )
                 }
             }
         }

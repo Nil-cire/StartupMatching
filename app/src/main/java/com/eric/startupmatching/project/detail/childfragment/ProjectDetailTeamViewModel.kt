@@ -53,7 +53,7 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
                         .addOnSuccessListener {
                             cont3 += 1
                             teamList.add(it.toObjects(Team::class.java)[0])
-                            teamList.sortByDescending { it.id }
+                            teamList.sortBy { it.id }
                             if (cont3 == project.teams.size) {
                                 _teamList.value = teamList
                                 Log.d("ProjectTeams", _teamList.value.toString())
@@ -112,94 +112,4 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
             }
         }
     }
-
-
-//    fun getProjectTeamMember(teamList: List<Team>) {
-//        coroutineScope.launch {
-//            var lista = mutableListOf<Team>()
-//            var listb = mutableListOf<List<User>>()
-//            var listc: MutableList<User>
-//            var cont1 = 0
-//            var cont2 = 0
-//
-//            for (team in teamList) {
-//                listc = mutableListOf()
-//                Log.d("teammembers", team.members.toString())
-//
-//                for (userId in team.members!!) {
-//                    lista.add(team)
-//                    Log.d("userId", userId.toString())
-//                    db.collection("User")
-//                        .whereEqualTo("id", userId)
-//                        .get()
-//                        .addOnSuccessListener {
-//                            it?.let {qs ->
-//                                Log.d("userId2", it.toString())
-//                                listc.add(qs.toObjects(User::class.java)[0])
-//                                cont2 += 1
-//                                Log.d("cont2", cont2.toString())
-//                                Log.d("singleTeamUser", listc.toString())
-//
-//                                if (cont2 == team.members.size) {
-//                                    listb.add(listc)
-//                                    listc = mutableListOf()
-//                                    Log.d("multiTeamUser1", listb.toString())
-//                                    cont1 += 1
-//                                    cont2 = 0
-//                                    Log.d("cont1", cont1.toString())
-//
-//                                    if (cont1 == teamList.size) {
-//                                        _projectTeamMemberList.value = listb
-//                                        _teamList.value = lista
-//                                        Log.d("multiTeamUser2", projectTeamMemberList.value.toString())
-//                                        Log.d("ProjectTeams2", _teamList.value.toString())
-//                                    }
-//                                }
-//                            }
-//                        }
-//                }
-//            }
-//        }
-//    }
-
-
-//    fun getProjectTeamMember(teamList: List<Team>) {
-//        coroutineScope.launch {
-//            var listb = mutableListOf<List<User>>()
-//            var listc: MutableList<User>
-//            var cont1 = 0
-//            var cont2 = 0
-//            for (team in teamList) {
-//                listc = mutableListOf()
-//                cont2 = 0
-//                Log.d("teammembers", team.members.toString())
-//
-//                for (userId in team.members!!) {
-//                    Log.d("userId", userId.toString())
-//                    db.collection("User")
-//                        .whereEqualTo("id", userId)
-//                        .get()
-//                        .addOnSuccessListener {
-//                            it?.let {qs ->
-//                                cont2 += 1
-//                                Log.d("cont2", cont2.toString())
-//                                listc.add(qs.toObjects(User::class.java)[0])
-//                                Log.d("singleTeamUser", listc.toString())
-//                                if (cont2 == team.members.size) {
-//                                    listb.add(listc)
-//                                    Log.d("multiTeamUser1", listb.toString())
-//                                    cont1 += 1
-//                                    Log.d("cont1", cont1.toString())
-//                            }
-//                        }
-//                    }.addOnSuccessListener {
-//                            if (cont1 == teamList.size) {
-//                                _projectTeamMemberList.value = listb
-//                                Log.d("multiTeamUser2", projectTeamMemberList.value.toString())
-//                            }
-//                        }
-//                }
-//            }
-//        }
-//    }
 }

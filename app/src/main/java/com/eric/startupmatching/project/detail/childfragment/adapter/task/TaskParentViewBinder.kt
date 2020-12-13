@@ -1,4 +1,4 @@
-package com.eric.startupmatching.project.treeview.adapter
+package com.eric.startupmatching.project.detail.childfragment.adapter.task
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,24 +8,26 @@ import com.drakeet.multitype.ItemViewBinder
 import com.eric.startupmatching.OnExpandAndHideListener
 import com.eric.startupmatching.R
 import com.eric.startupmatching.TreeViewUtil
-import com.eric.startupmatching.project.treeview.model.ParentModel
+import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import kotlinx.android.synthetic.main.item_parent.view.*
 
 /**
  * Created by zzw on 2018/6/22.
  */
-class ParentViewBinder : ItemViewBinder<ParentModel, ParentViewBinder.ViewHolder>() {
+class TaskParentViewBinder : ItemViewBinder<TaskParentModel, TaskParentViewBinder.ViewHolder>() {
     private lateinit var mExpandAndHideListener: OnExpandAndHideListener
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
         val root = inflater.inflate(R.layout.item_parent, parent, false)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
-        return ViewHolder(root)
+        return ViewHolder(
+            root
+        )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, model: ParentModel) {
-        holder.itemView.tvContent.text = model.content.teamName
+    override fun onBindViewHolder(holder: ViewHolder, model: TaskParentModel) {
+        holder.itemView.tvContent.text = model.content.name
         holder.itemView.setOnClickListener {
             when (model.expand) {
                 true -> {

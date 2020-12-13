@@ -10,12 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.drakeet.multitype.MultiTypeAdapter
 import com.eric.startupmatching.data.Project
-import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.FragmentProjectDetailTeamBinding
-import com.eric.startupmatching.project.treeview.adapter.ChildViewBinder
-import com.eric.startupmatching.project.treeview.adapter.ParentViewBinder
-import com.eric.startupmatching.project.treeview.model.ChildModel
-import com.eric.startupmatching.project.treeview.model.ParentModel
+import com.eric.startupmatching.project.detail.childfragment.adapter.team.TeamChildViewBinder
+import com.eric.startupmatching.project.detail.childfragment.adapter.team.TeamParentViewBinder
+import com.eric.startupmatching.project.treeview.model.team.TeamChildModel
+import com.eric.startupmatching.project.treeview.model.team.TeamParentModel
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 
 class ProjectDetailTeamFragment(val arg: Project): Fragment() {
@@ -33,11 +32,16 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
 
 
         val adapter = MultiTypeAdapter()
-        adapter.register(ParentModel::class.java, ParentViewBinder())
-        adapter.register(ChildModel::class.java, ChildViewBinder())
+        adapter.register(
+            TeamParentModel::class.java,
+            TeamParentViewBinder()
+        )
+        adapter.register(
+            TeamChildModel::class.java,
+            TeamChildViewBinder()
+        )
 
         binding.recyclerView.adapter = adapter
-//        adapter.items = generateItems()
 
         viewModel.teamList.observe(viewLifecycleOwner, Observer {
             Log.d("projectMemberListObsv", it.toString())
@@ -48,9 +52,13 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
             val items = mutableListOf<Any>()
             for (i in it.indices) {
                 var member = mutableListOf<TreeViewModel>()
-                val team = viewModel.teamList2.value?.get(i)?.let { it1 -> ParentModel(it1) }
+                val team = viewModel.teamList2.value?.get(i)?.let { it1 ->
+                    TeamParentModel(
+                        it1
+                    )
+                }
                 for (j in it[i]) {
-                    member.add(ChildModel(j))
+                    member.add(TeamChildModel(j))
                 }
                 if (team != null) {
                     team.children = member as ArrayList<TreeViewModel>
@@ -62,44 +70,13 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
             Log.d("adapteritems", items.toString())
         })
 
-
-
-
-
-
         return binding.root
     }
-
-    //    private fun generateItems(): ArrayList<Any> {
-//        val items = ArrayList<Any>()
-//        val beiChild = arrayListOf<TreeViewModel>(ChildModel("刘封"), ChildModel("刘禅"), ChildModel("刘永"), ChildModel("刘理"))
-//        val liangChild = arrayListOf<TreeViewModel>(ChildModel("诸葛乔"), ChildModel("诸葛瞻"), ChildModel("诸葛怀"), ChildModel("诸葛果"))
-//        val yuChild = arrayListOf<TreeViewModel>(ChildModel("关平"), ChildModel("关兴"))
-//        val feiChild = arrayListOf<TreeViewModel>(ChildModel("张苞"), ChildModel("张绍"))
-//        val yunChild = arrayListOf<TreeViewModel>(ChildModel("赵统"), ChildModel("赵广"))
-//        val bei = ParentModel("刘备")
-//        bei.children = beiChild
-//        val liang = ParentModel("诸葛亮")
-//        liang.children = liangChild
-//        val yu = ParentModel("关羽")
-//        yu.children = yuChild
-//        val fei = ParentModel("张飞")
-//        fei.children = feiChild
-//        val yun = ParentModel("赵云")
-//        yun.children = yunChild
-//        items.add(bei)
-//        items.add(liang)
-//        items.add(yu)
-//        items.add(fei)
-//        items.add(yun)
-//        return items
-//    }
     override fun onStart() {
         super.onStart()
         val arg = arg
         val viewModelFactory = ProjectDetailTeamViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTeamViewModel::class.java)
         viewModel.getProjectTeams(arg)
-
     }
 }
