@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.drakeet.multitype.MultiTypeAdapter
 import com.eric.startupmatching.data.Project
+import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.FragmentProjectDetailTeamBinding
 import com.eric.startupmatching.project.treeview.adapter.ChildViewBinder
 import com.eric.startupmatching.project.treeview.adapter.ParentViewBinder
@@ -41,6 +42,24 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
         viewModel.teamList.observe(viewLifecycleOwner, Observer {
             Log.d("projectMemberListObsv", it.toString())
             viewModel.getProjectTeamMember(it)
+        })
+
+        viewModel.projectTeamMemberList.observe(viewLifecycleOwner, Observer {
+            val items = mutableListOf<Any>()
+            for (i in it.indices) {
+                var member = mutableListOf<TreeViewModel>()
+                val team = viewModel.teamList2.value?.get(i)?.let { it1 -> ParentModel(it1) }
+                for (j in it[i]) {
+                    member.add(ChildModel(j))
+                }
+                if (team != null) {
+                    team.children = member as ArrayList<TreeViewModel>
+                    items.add(team)
+                }
+            }
+            adapter.items = items
+            adapter.notifyDataSetChanged()
+            Log.d("adapteritems", items.toString())
         })
 
 

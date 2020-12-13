@@ -8,10 +8,7 @@ import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.data.Team
 import com.eric.startupmatching.data.User
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
 
@@ -33,6 +30,10 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>
         get() = _teamList
+
+    private val _teamList2 = MutableLiveData<List<Team>>()
+    val teamList2: MutableLiveData<List<Team>>
+        get() = _teamList2
 
     private val _projectTeamMemberList = MutableLiveData<List<List<User>>>()
     val projectTeamMemberList: LiveData<List<List<User>>>
@@ -64,72 +65,45 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
         }
     }
 
-    fun getUser(userId: String): User? {
-        var user: User? = null
-        db.collection("User")
-            .whereEqualTo("id", userId)
-            .get()
-            .addOnSuccessListener {
-                user = it.toObjects(User::class.java)[0]
-            }
-
-        return user
-    }
-
-    fun get(teamList: List<Team>) {
-        var listb = mutableListOf<List<User>>()
-        var listc: MutableList<User>
-        var cont1 = 0
-        var cont2 = 0
-
-        for (team in teamList) {
-            for (userId in team.members!!) {
-                val list = mutableListOf<User>()
-                var user = getUser(userId!!)
-                if (user != null) {
-                    list.add(user)
-                }
-            }
-        }
-    }
-
     fun getProjectTeamMember(teamList: List<Team>) {
         coroutineScope.launch {
             var lista = mutableListOf<Team>()
             var listb = mutableListOf<List<User>>()
-            var listc: MutableList<User>
+            var listc = mutableListOf<User>()
             var cont1 = 0
             var cont2 = 0
 
             for (team in teamList) {
-                listc = mutableListOf()
                 Log.d("teammembers", team.members.toString())
+                lista.add(team)
 
                 for (userId in team.members!!) {
-                    lista.add(team)
+                    delay(200)
                     Log.d("userId", userId.toString())
                     db.collection("User")
                         .whereEqualTo("id", userId)
                         .get()
-                        .addOnSuccessListener {
-                            it?.let {qs ->
-                                listc.add(qs.toObjects(User::class.java)[0])
+                        .addOnCompleteListener {
+                            it.let { qs ->
+                                Log.d("userId2", it.toString())
+                                listc.add(qs.result!!.toObjects(User::class.java)[0])
                                 cont2 += 1
                                 Log.d("cont2", cont2.toString())
                                 Log.d("singleTeamUser", listc.toString())
 
                                 if (cont2 == team.members.size) {
-                                    cont2 = 0
                                     listb.add(listc)
                                     listc = mutableListOf()
                                     Log.d("multiTeamUser1", listb.toString())
                                     cont1 += 1
+                                    cont2 = 0
                                     Log.d("cont1", cont1.toString())
 
                                     if (cont1 == teamList.size) {
+                                        _teamList2.value = lista
                                         _projectTeamMemberList.value = listb
-                                        _teamList.value = lista
                                         Log.d("multiTeamUser2", projectTeamMemberList.value.toString())
+                                        Log.d("ProjectTeams2", _teamList2.value.toString())
                                     }
                                 }
                             }
@@ -138,6 +112,55 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
             }
         }
     }
+
+
+//    fun getProjectTeamMember(teamList: List<Team>) {
+//        coroutineScope.launch {
+//            var lista = mutableListOf<Team>()
+//            var listb = mutableListOf<List<User>>()
+//            var listc: MutableList<User>
+//            var cont1 = 0
+//            var cont2 = 0
+//
+//            for (team in teamList) {
+//                listc = mutableListOf()
+//                Log.d("teammembers", team.members.toString())
+//
+//                for (userId in team.members!!) {
+//                    lista.add(team)
+//                    Log.d("userId", userId.toString())
+//                    db.collection("User")
+//                        .whereEqualTo("id", userId)
+//                        .get()
+//                        .addOnSuccessListener {
+//                            it?.let {qs ->
+//                                Log.d("userId2", it.toString())
+//                                listc.add(qs.toObjects(User::class.java)[0])
+//                                cont2 += 1
+//                                Log.d("cont2", cont2.toString())
+//                                Log.d("singleTeamUser", listc.toString())
+//
+//                                if (cont2 == team.members.size) {
+//                                    listb.add(listc)
+//                                    listc = mutableListOf()
+//                                    Log.d("multiTeamUser1", listb.toString())
+//                                    cont1 += 1
+//                                    cont2 = 0
+//                                    Log.d("cont1", cont1.toString())
+//
+//                                    if (cont1 == teamList.size) {
+//                                        _projectTeamMemberList.value = listb
+//                                        _teamList.value = lista
+//                                        Log.d("multiTeamUser2", projectTeamMemberList.value.toString())
+//                                        Log.d("ProjectTeams2", _teamList.value.toString())
+//                                    }
+//                                }
+//                            }
+//                        }
+//                }
+//            }
+//        }
+//    }
 
 
 //    fun getProjectTeamMember(teamList: List<Team>) {
