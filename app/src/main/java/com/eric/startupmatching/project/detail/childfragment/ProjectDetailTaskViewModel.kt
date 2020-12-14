@@ -48,7 +48,7 @@ class ProjectDetailTaskViewModel(arg: Project): ViewModel() {
                             cont3 += 1
                             taskList.add(it.toObjects(Task::class.java)[0])
                             taskList.sortBy { it.id }
-                            if (cont3 == project.tasks?.size ?: 0) {
+                            if (cont3 == project.tasks?.size) {
                                 _taskList.value = taskList
                                 Log.d("ProjectTasks", _taskList.value.toString())
                             }

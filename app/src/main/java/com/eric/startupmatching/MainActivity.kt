@@ -37,49 +37,49 @@ class MainActivity : AppCompatActivity() {
 
         //setup icons of bottom navigation
         fun assistantPageIconSetup() {
-            teamBtn.setImageResource(R.drawable.baseline_fiber_new_white_24dp)
-            matchingBtn.setImageResource(R.drawable.baseline_folder_open_black_24dp)
-            projectBtn.setImageResource(R.drawable.baseline_search_project_black_24dp)
-            chatBtn.setImageResource(R.drawable.baseline_forum_black_24dp)
-            socialmediaBtn.setImageResource((R.drawable.baseline_language_black_24dp))
+            teamBtn.alpha = 1.0F
+            matchingBtn.alpha = 0.3F
+            projectBtn.alpha = 0.3F
+            chatBtn.alpha = 0.3F
+            socialmediaBtn.alpha = 0.3F
         }
 
         fun matchPageIconSetup() {
-            teamBtn.setImageResource(R.drawable.baseline_fiber_new_black_24dp)
-            matchingBtn.setImageResource(R.drawable.baseline_folder_open_white_24dp)
-            projectBtn.setImageResource(R.drawable.baseline_search_project_black_24dp)
-            chatBtn.setImageResource(R.drawable.baseline_forum_black_24dp)
-            socialmediaBtn.setImageResource((R.drawable.baseline_language_black_24dp))
+            teamBtn.alpha = 0.3F
+            matchingBtn.alpha = 1.0F
+            projectBtn.alpha = 0.3F
+            chatBtn.alpha = 0.3F
+            socialmediaBtn.alpha = 0.3F
         }
 
         fun projectPageIconSetup() {
-            teamBtn.setImageResource(R.drawable.baseline_fiber_new_black_24dp)
-            matchingBtn.setImageResource(R.drawable.baseline_folder_open_black_24dp)
-            projectBtn.setImageResource(R.drawable.baseline_search_project_white_24dp)
-            chatBtn.setImageResource(R.drawable.baseline_forum_black_24dp)
-            socialmediaBtn.setImageResource((R.drawable.baseline_language_black_24dp))
+            teamBtn.alpha = 0.3F
+            matchingBtn.alpha = 0.3F
+            projectBtn.alpha = 1.0F
+            chatBtn.alpha = 0.3F
+            socialmediaBtn.alpha = 0.3F
         }
 
         fun chatPageIconSetup() {
-            teamBtn.setImageResource(R.drawable.baseline_fiber_new_black_24dp)
-            matchingBtn.setImageResource(R.drawable.baseline_folder_open_black_24dp)
-            projectBtn.setImageResource(R.drawable.baseline_search_project_black_24dp)
-            chatBtn.setImageResource(R.drawable.baseline_forum_white_24dp)
-            socialmediaBtn.setImageResource((R.drawable.baseline_language_black_24dp))
+            teamBtn.alpha = 0.3F
+            matchingBtn.alpha = 0.3F
+            projectBtn.alpha = 0.3F
+            chatBtn.alpha = 1.0F
+            socialmediaBtn.alpha = 0.3F
         }
 
         fun socialMediaPageIconSetup() {
-            teamBtn.setImageResource(R.drawable.baseline_fiber_new_black_24dp)
-            matchingBtn.setImageResource(R.drawable.baseline_folder_open_black_24dp)
-            projectBtn.setImageResource(R.drawable.baseline_search_project_black_24dp)
-            chatBtn.setImageResource(R.drawable.baseline_forum_black_24dp)
-            socialmediaBtn.setImageResource((R.drawable.baseline_language_white_24dp))
+            teamBtn.alpha = 0.3F
+            matchingBtn.alpha = 0.3F
+            projectBtn.alpha = 0.3F
+            chatBtn.alpha = 0.3F
+            socialmediaBtn.alpha = 1.0F
         }
 
         //setup bottom navigation buttons
         teamBtn.setOnClickListener {
             assistantPageIconSetup()
-//            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalAssistantFragment())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalTeamMainFragment())
         }
 
         matchingBtn.setOnClickListener {

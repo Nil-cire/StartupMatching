@@ -44,17 +44,17 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
     fun getProjectTeams(project: Project) {
         var cont3 = 0
         coroutineScope.launch {
-            val teamList = mutableListOf<Team>()
+            var teamList = mutableListOf<Team>()
             if (!project.teams.isNullOrEmpty()) {
                 for (teamId in project.teams) {
                     db.collection("Team")
                         .whereEqualTo("id", teamId)
                         .get()
                         .addOnSuccessListener {
+                            teamList.addAll(it.toObjects(Team::class.java))
                             cont3 += 1
-                            teamList.add(it.toObjects(Team::class.java)[0])
-                            teamList.sortBy { it.id }
                             if (cont3 == project.teams.size) {
+                                teamList.sortBy { it.id }
                                 _teamList.value = teamList
                                 Log.d("ProjectTeams", _teamList.value.toString())
                             }
@@ -85,7 +85,6 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
                         .get()
                         .addOnCompleteListener {
                             it.let { qs ->
-                                Log.d("userId2", it.toString())
                                 listc.add(qs.result!!.toObjects(User::class.java)[0])
                                 cont2 += 1
                                 Log.d("cont2", cont2.toString())

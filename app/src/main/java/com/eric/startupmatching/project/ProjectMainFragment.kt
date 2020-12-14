@@ -94,6 +94,7 @@ class ProjectMainFragment: Fragment() {
         requireActivity().project_main_add.visibility = View.VISIBLE
         requireActivity().project_main_add.setOnClickListener {
             Log.d("project_main_add", "pressed")
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
         }
     }
 

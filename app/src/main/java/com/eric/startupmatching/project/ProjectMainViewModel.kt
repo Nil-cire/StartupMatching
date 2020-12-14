@@ -68,6 +68,7 @@ class ProjectMainViewModel: ViewModel() {
 
 
     fun getAllProject() {
+        var cont = 0
         coroutineScope.launch {
             var list = mutableListOf<Project>()
             for (team in teamList.value!!) {
@@ -75,20 +76,20 @@ class ProjectMainViewModel: ViewModel() {
                     .whereArrayContains("teams", team.id.toString())
                     .get()
                     .addOnSuccessListener {
-                        for (project in it) {
-                            list.add(project.toObject(Project::class.java))
+                        var a = it.toObjects(Project::class.java)
+                        list.addAll(it.toObjects(Project::class.java))
+                        cont += 1
+                        if (cont == teamList.value!!.size) {
+                            _projectList.value = list
+                            Log.d("getAllProject", list.toString())
                         }
-                        _projectList.value = list
-                        Log.d("getAllProject", list.toString())
                     }
             }
-
-//            Log.d("ProjectALL", projectList.value.toString())
         }
     }
 
 
-//run on Chip Selected
+//filter on Chip Selected
     fun getProjectAsOwner() {
         var projectAsOwnerList = mutableListOf<Project>()
         coroutineScope.launch {

@@ -48,4 +48,6 @@
     <string name="todo_name">待辦事項</string>
     <string name="member">成員</string>
     <string name="supervisor">負責人</string>
+    <string name="hiring_position">職缺</string>
+    <string name="must">必須</string>
 </resources>

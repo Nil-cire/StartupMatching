@@ -13,15 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/half_regular_margin"
+        android:paddingTop="@dimen/half_regular_margin"
         android:paddingEnd="@dimen/half_regular_margin"
         tools:ignore="RtlSymmetry">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/team_member_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="@dimen/regular_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_sentiment_satisfied_alt_black_24dp" />
@@ -31,7 +31,7 @@
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/regular_margin"
             android:layout_marginEnd="@dimen/regular_margin"
-            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/half_regular_margin"
             android:background="@color/warmGrayColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,10 +42,10 @@
             android:id="@+id/user_name"
             style="@style/center_text_font_noto"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/regular_margin"
             android:text="@{user.name}"
-            android:textSize="16sp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/team_member_icon"
             app:layout_constraintTop_toTopOf="@+id/team_member_icon"
             tools:text="@string/user_name" />
@@ -54,21 +54,21 @@
             android:id="@+id/on_off_icon"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginBottom="56dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="44dp"
             android:background="@color/yellowGreenColor"
-            app:layout_constraintBottom_toBottomOf="@+id/team_member_icon"
+            app:layout_constraintTop_toTopOf="@+id/team_member_icon"
             app:layout_constraintStart_toStartOf="@+id/team_member_icon" />
 
         <TextView
             android:id="@+id/user_status"
             style="@style/center_text_font_noto"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/half_regular_margin"
             android:gravity="start"
             android:text="@{user.briefIntro}"
-            android:textSize="16sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/duty_status"
             app:layout_constraintTop_toBottomOf="@+id/duty_status"
@@ -80,8 +80,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/half_regular_margin"
-            android:text="上班狀況"
-            android:textSize="16sp"
+            android:text="@{user.}"
+            tools:text="上班狀況"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/user_name"
             app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
@@ -92,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="時間"
-            android:textSize="16sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/duty_status"
             app:layout_constraintStart_toEndOf="@+id/duty_status" />
 

@@ -90,4 +90,13 @@
             app:argType="com.eric.startupmatching.data.ChatRoom" />
     </fragment>
     <action android:id="@+id/action_global_chatRoomDetailFragment" app:destination="@id/chatRoomDetailFragment" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.eric.startupmatching.user.UserProfileFragment"
+        android:label="UserProfileFragment" >
+        <argument
+            android:name="userArgs"
+            app:argType="com.eric.startupmatching.data.User" />
+    </fragment>
+    <action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment" />
 </navigation>
