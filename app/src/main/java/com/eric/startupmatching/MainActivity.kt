@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         socialmediaBtn.setOnClickListener {
             socialMediaPageIconSetup()
-//            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalSocialMediaMain())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalSocialMediaMainFragment())
         }
 
         //tool bar button functions

@@ -49,6 +49,7 @@ class BackStageFragment: Fragment() {
         val addChatRoom = binding.addChatRoom
         val addTask = binding.addTask
         val addTodo = binding.addTodo
+        val addEvent = binding.addEvent
 
         //instances
 
@@ -351,6 +352,31 @@ class BackStageFragment: Fragment() {
                 Log.d("add todo:", "Success")
             } catch (e:Exception) {
                 Log.d("add todo fail:", e.message ?: null.toString())
+            }
+        }
+
+        val events = mutableListOf<Event>(
+            Event(fromUser = "001", type = "team", project = null, task = null,
+                todo = null, team = "ThUkrGaCYJNulR5ECb8U" , toUsers = mutableListOf("004", "005"), id = "001", time = null, messages = "加入了"),
+            Event(fromUser = "004", type = "team", project = null, task = null,
+                todo = null, team = "nWjaFIKAmJXtyghPEsLS" , toUsers = mutableListOf("004", "005"), id = "002", time = null, messages = "加入了"),
+            Event(fromUser = "004", type = "task", project = null, task = "002",
+                todo = null, team = null, toUsers = mutableListOf("004", "001"), id = "003", time = null, messages = "新增了"),
+            Event(fromUser = "001", type = "todo", project = null, task = "Construct",
+                todo = null, team = null, toUsers = null, id = "004", time = null, messages = "完成了"),
+            Event(fromUser = "001", type = "project", project = "001", task = "Construct",
+                todo = null, team = null, toUsers = null, id = "005", time = null, messages = "建立了")
+        )
+
+        addEvent.setOnClickListener {
+            try {
+                for (event in events) {
+                    db.collection("Event")
+                        .add(event)
+                }
+                Log.d("add event:", "Success")
+            } catch (e:Exception) {
+                Log.d("add event fail:", e.message ?: null.toString())
             }
         }
 

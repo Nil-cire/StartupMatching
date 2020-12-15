@@ -19,7 +19,7 @@ data class User(
     val blacklist: List<String?>? = null, // user id
     val briefIntro: String? = null,
     val time: Date? = null,
-    val workingStatus: String? = null
+    val workingStatus: String? = null // On, Off
 ): Parcelable
 
 @Parcelize
@@ -178,9 +178,14 @@ data class ChatRoom(
 
 @Parcelize
 data class Event(
-    val from: List<String?>? = null, // User.name
-    val to: List<String?>? = null, //
+    val fromUser: String? = null, // User.name
+    val type: String? = null, // team, task, atodo, project
+    val project: String? = null,
+    val task: String? = null,
+    val todo: String? = null,
+    val team: String? = null,
+    val toUsers: List<String?>? = null, // all user involved
     val id: String? = null ,
-    val time: Date = Calendar.getInstance().time, // done time
-    val messages: MutableList<String?>? = null // Message id
+    val time: Date? = Calendar.getInstance().time, // done time
+    val messages: String? = null // Message id
 ): Parcelable

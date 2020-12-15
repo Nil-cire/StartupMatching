@@ -41,13 +41,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <EditText
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="更新狀態"
+            android:textSize="16sp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/regular_margin"
             android:layout_marginTop="8dp"
-            android:text="User Name"
+            android:textSize="16sp"
+            android:text="Jojo"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/user_icon"
             app:layout_constraintTop_toTopOf="@+id/user_icon" />
@@ -71,12 +73,12 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/time"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/user_icon"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/half_regular_margin"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            tools:layout_editor_absoluteY="54dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -93,11 +95,10 @@
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/half_regular_margin"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="@+id/user_icon"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.0"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

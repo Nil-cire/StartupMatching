@@ -28,7 +28,7 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
                         .whereEqualTo("id", messageId)
                         .get()
                         .addOnSuccessListener {
-                            messageList.add(it.toObjects(Message::class.java)[0])
+                            messageList.addAll(it.toObjects(Message::class.java))
                             messageList.sortByDescending { it.postTimestamp }
                             binding.lastMessage.text = messageList[0].content
                         }

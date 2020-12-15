@@ -99,4 +99,8 @@
             app:argType="com.eric.startupmatching.data.User" />
     </fragment>
     <action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment" />
+    <fragment
+        android:id="@+id/socialMediaMainFragment"
+        android:name="com.eric.startupmatching.socialmedia.SocialMediaMainFragment"
+        android:label="SocialMediaMainFragment" /><action android:id="@+id/action_global_socialMediaMainFragment" app:destination="@id/socialMediaMainFragment"/>
 </navigation>

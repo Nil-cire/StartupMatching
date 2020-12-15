@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="post"
+            type="com.eric.startupmatching.data.Post" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/user_icon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        setImages="@{post.image}"
+        android:layout_marginStart="@dimen/regular_margin"
+        android:layout_marginTop="@dimen/regular_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icons_abstract_002" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_name"
+        style="@style/center_text_font_noto"
+        android:text="@string/user_name"
+        app:layout_constraintTop_toTopOf="@id/user_icon"
+        app:layout_constraintStart_toEndOf="@id/user_icon"
+        android:layout_marginStart="@dimen/regular_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/team_name"
+        style="@style/center_text_font_noto"
+        android:text="@string/team_name"
+        app:layout_constraintTop_toTopOf="@id/user_name"
+        app:layout_constraintStart_toEndOf="@id/user_name"
+        android:layout_marginStart="@dimen/regular_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/likes"
+        style="@style/center_text_font_noto"
+        android:text="@string/follow"
+        app:layout_constraintBottom_toBottomOf="@id/user_icon"
+        app:layout_constraintStart_toEndOf="@id/user_icon"
+        android:layout_marginStart="@dimen/regular_margin"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/post_image"
+        android:layout_marginTop="@dimen/regular_margin"
+        android:layout_marginStart="@dimen/regular_margin"
+        android:layout_marginEnd="@dimen/regular_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_icon"
+        app:srcCompat="@drawable/project_management" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/post_time"
+        app:layout_constraintTop_toBottomOf="@id/post_image"
+        android:layout_marginTop="@dimen/regular_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/regular_margin"
+        android:text="@string/post_time"
+        style="@style/center_text_font_noto"/>
+
+    <ImageView
+        android:id="@+id/like"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/regular_margin"
+        android:text="@string/post_time"
+        app:layout_constraintBottom_toBottomOf="@+id/post_time"
+        app:layout_constraintStart_toEndOf="@+id/post_time"
+        app:layout_constraintTop_toTopOf="@id/post_time"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <ImageView
+        android:id="@+id/share"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/regular_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/post_time"
+        app:layout_constraintStart_toEndOf="@+id/like"
+        app:layout_constraintTop_toTopOf="@id/post_time"
+        app:srcCompat="?attr/actionModeShareDrawable" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        style="@style/center_text_font_noto"
+        app:layout_constraintTop_toBottomOf="@id/post_time"
+        android:layout_marginTop="@dimen/regular_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/regular_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/regular_margin"
+        android:text="@string/description"
+        android:gravity="start"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:id="@+id/separate_line"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        android:layout_marginTop="@dimen/regular_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/regular_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/regular_margin"
+        android:background="@color/warmGrayColor"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
