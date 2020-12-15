@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.databinding.FragmentProjectDetailBinding
 import com.eric.startupmatching.databinding.FragmentTeamMainBinding
@@ -58,14 +60,17 @@ class ProjectDetailFragment: Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         requireActivity().project_detail_edit.visibility = View.VISIBLE
+        requireActivity().project_detail_edit.setOnClickListener {
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment())
+        }
 
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         requireActivity().project_detail_edit.visibility = View.GONE
     }
 }

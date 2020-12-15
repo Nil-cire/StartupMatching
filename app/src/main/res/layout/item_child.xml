@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/half_regular_margin"
-    android:paddingStart="@dimen/regular_margin">
+    android:paddingStart="@dimen/regular_margin"
+    android:paddingEnd="@dimen/regular_margin">
 
 
 
@@ -29,6 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -36,6 +38,7 @@
                 android:id="@+id/tvContent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
+                android:textColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/item"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -43,7 +43,6 @@ class TeamInformationAdapter(val onClickListener: OnClickListener) : ListAdapter
 //                        binding.time2.text = team[0].teamName
 //                    }
             }
-
         }
     }
 

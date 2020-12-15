@@ -103,4 +103,8 @@
         android:id="@+id/socialMediaMainFragment"
         android:name="com.eric.startupmatching.socialmedia.SocialMediaMainFragment"
         android:label="SocialMediaMainFragment" /><action android:id="@+id/action_global_socialMediaMainFragment" app:destination="@id/socialMediaMainFragment"/>
+    <fragment
+        android:id="@+id/projectEditTaskFragment"
+        android:name="com.eric.startupmatching.project.edit.ProjectEditTaskFragment"
+        android:label="ProjectEditTaskFragment" /><action android:id="@+id/action_global_projectEditTaskFragment" app:destination="@id/projectEditTaskFragment"/>
 </navigation>

@@ -53,9 +53,7 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
             for (i in it.indices) {
                 var member = mutableListOf<TreeViewModel>()
                 val team = viewModel.teamList2.value?.get(i)?.let { it1 ->
-                    TeamParentModel(
-                        it1
-                    )
+                    TeamParentModel(it1)
                 }
                 for (j in it[i]) {
                     member.add(TeamChildModel(j))
