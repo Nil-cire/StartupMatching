@@ -122,23 +122,23 @@ data class Skill(
 @Parcelize
 data class Task(
     val id: String? = null,
-    val serial: Int? = null,
+    var serial: Int? = null,
     val members: List<String?>? = mutableListOf(), //TeamMember id
-    val name: String? = null,
+    var name: String? = null,
     val chatRoom: String? = null, //chatRoom id
     val todo: List<String?>? = mutableListOf(), // Todo id
     val status: String? = null, //proposal, await, doing, done
-    val startTime: Date? = null,
-    val endTime: Date? = null,
+    var startTime: Date? = null,
+    var endTime: Date? = null,
     val preTask: String? = null, //Task id
     val deadline: Date? = null,
-    val description: String? = null
+    var description: String? = null
 ): Parcelable
 
 @Parcelize
 data class Todo( //adjust while crafting project manage page
     val id: String? = null,
-    val serial: Int? = null,
+    var serial: Int? = null,
     val members: List<String?>? = mutableListOf(),
     val name: String? = null,
     val status: String? = null, //proposal, await, doing, done

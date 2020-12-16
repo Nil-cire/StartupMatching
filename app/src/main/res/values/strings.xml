@@ -50,6 +50,8 @@
     <string name="supervisor">負責人</string>
     <string name="hiring_position">職缺</string>
     <string name="must">必須</string>
+    <string name="add_task">新增任務</string>
+    <string name="cancel">取消</string>
 
     <array name="dummy_items">
         <item>One</item>

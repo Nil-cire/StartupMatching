@@ -62,9 +62,10 @@ class ProjectDetailFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val arg = ProjectDetailFragmentArgs.fromBundle(requireArguments()).projectArgs
         requireActivity().project_detail_edit.visibility = View.VISIBLE
         requireActivity().project_detail_edit.setOnClickListener {
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment())
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment(arg))
         }
 
     }

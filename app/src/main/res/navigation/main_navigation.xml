@@ -106,10 +106,19 @@
     <fragment
         android:id="@+id/projectEditTaskFragment"
         android:name="com.eric.startupmatching.project.edit.ProjectEditTaskFragment"
-        android:label="ProjectEditTaskFragment" />
+        android:label="ProjectEditTaskFragment" >
+        <argument
+            android:name="projectArgs"
+            app:argType="com.eric.startupmatching.data.Project" />
+    </fragment>
     <action android:id="@+id/action_global_projectEditTaskFragment" app:destination="@id/projectEditTaskFragment" />
     <fragment
         android:id="@+id/projectEditTeamFragment"
         android:name="com.eric.startupmatching.project.edit.ProjectEditTeamFragment"
-        android:label="ProjectEditTeamFragment" /><action android:id="@+id/action_global_projectEditTeamFragment" app:destination="@id/projectEditTeamFragment"/>
+        android:label="ProjectEditTeamFragment" />
+    <action android:id="@+id/action_global_projectEditTeamFragment" app:destination="@id/projectEditTeamFragment" />
+    <dialog
+        android:id="@+id/addTaskDialog"
+        android:name="com.eric.startupmatching.project.edit.dialog.AddTaskDialog"
+        android:label="AddTaskDialog" /><action android:id="@+id/action_global_addTaskDialog" app:destination="@id/addTaskDialog"/>
 </navigation>

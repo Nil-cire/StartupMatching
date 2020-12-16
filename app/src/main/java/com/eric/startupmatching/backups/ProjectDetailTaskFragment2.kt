@@ -1,4 +1,7 @@
-package com.eric.startupmatching.project.detail.childfragment
+package com.eric.startupmatching.backups
+
+import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskViewModel
+import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskViewModelFactory
 
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +24,7 @@ import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 
-class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListener {
+class ProjectDetailTaskFragment2(val arg: Project): Fragment(), OnStartDragListener {
     private var mItemTouchHelper: ItemTouchHelper? = null
 
     override fun onCreateView(
@@ -36,10 +39,10 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListen
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+
         val adapter = MultiTypeAdapter2(this)
         adapter.register(TaskParentModel::class.java, TaskParentViewBinder())
         adapter.register(TaskChildModel::class.java, TaskChildViewBinder())
-
         val recyclerView = binding.recyclerView
         binding.recyclerView.adapter = adapter
         val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)

@@ -3,6 +3,7 @@ package com.eric.startupmatching
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -65,6 +66,7 @@ class RecyclerListAdapter(context: Context, dragStartListener: OnStartDragListen
 
     override fun onItemDismiss(position: Int) {
         mItems.removeAt(position)
+        Log.d("listOnItemReMoved", mItems.toString())
         notifyItemRemoved(position)
     }
 
@@ -78,6 +80,7 @@ class RecyclerListAdapter(context: Context, dragStartListener: OnStartDragListen
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
                 Collections.swap(mItems, i, i + 1)
+                Log.d("listOnItemMoved", mItems.toString())
             }
         } else {
             for (i in fromPosition downTo toPosition + 1) {

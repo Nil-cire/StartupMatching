@@ -1,4 +1,4 @@
-package com.eric.startupmatching.project.detail.childfragment.adapter.task
+package com.eric.startupmatching.project.edit
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +8,19 @@ import com.drakeet.multitype.ItemViewBinder
 import com.eric.startupmatching.OnExpandAndHideListener
 import com.eric.startupmatching.R
 import com.eric.startupmatching.TreeViewUtil
-import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
+import com.eric.startupmatching.databinding.ItemProjectEditTaskBinding
+import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskParentViewBinder
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
+import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 import kotlinx.android.synthetic.main.item_parent.view.*
 
-class TaskParentViewBinder : ItemViewBinder<TaskParentModel, TaskParentViewBinder.ViewHolder>() {
+
+
+class ProjectEditTeamAdapter : ItemViewBinder<TaskParentModel, ProjectEditTeamAdapter.ViewHolder>() {
     private lateinit var mExpandAndHideListener: OnExpandAndHideListener
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
+        val binding = ItemProjectEditTaskBinding.inflate(inflater, conta)
         val root = inflater.inflate(R.layout.item_parent, parent, false)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
         return ViewHolder(
