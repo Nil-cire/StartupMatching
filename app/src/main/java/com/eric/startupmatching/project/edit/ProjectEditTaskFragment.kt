@@ -15,8 +15,7 @@ import com.eric.startupmatching.OnStartDragListener
 import com.eric.startupmatching.RecyclerListAdapter
 import com.eric.startupmatching.SimpleItemTouchHelperCallback
 import com.eric.startupmatching.databinding.FragmentProjectEditTaskBinding
-
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
@@ -37,15 +36,23 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
         mItemTouchHelper = ItemTouchHelper(callback)
         mItemTouchHelper!!.attachToRecyclerView(recyclerView)
+
+        requireActivity().project_edit_task.setOnClickListener {
+
+        }
+
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        @Nullable savedInstanceState: Bundle?
-    ) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
+        requireActivity().project_edit_task.visibility = View.VISIBLE
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireActivity().project_edit_task.visibility = View.GONE
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

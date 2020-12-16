@@ -313,18 +313,18 @@ class BackStageFragment: Fragment() {
         }
 
         val tasks = mutableListOf<Task>(
-            Task(id="00001", serial = 0, members = mutableListOf("00001"), name = "Write a song",
-                chatRoom = "00003", todo = mutableListOf("00001"), status = "proposal",
+            Task(id="001", serial = 0, members = mutableListOf("000", "001", "004"), name = "1st task",
+                chatRoom = "003", todo = mutableListOf(), status = "proposal",
                 startTime = null, endTime = null, preTask = null, deadline=null),
-            Task(id="00002", serial = 1, members = mutableListOf("00001, 00002"), name = "Record",
-                chatRoom = "00004", todo = mutableListOf("00002", "00003"), status = "proposal",
-                startTime = null, endTime = null, preTask = "00001", deadline=null)
+            Task(id="002", serial = 1, members = mutableListOf("001", "004"), name = "2nd task",
+                chatRoom = "004", todo = mutableListOf(), status = "proposal",
+                startTime = null, endTime = null, preTask = "001", deadline=null)
         )
 
         addTask.setOnClickListener {
             try {
                 for (task in tasks) {
-                    db.collection("Task")
+                    db.collection("Project").document("m4eORfGbZIchw1zfE1m0").collection("Task")
                         .add(task)
                 }
                 Log.d("add task:", "Success")
@@ -335,18 +335,21 @@ class BackStageFragment: Fragment() {
 
 
         val todos = mutableListOf<Todo>(
-            Todo(id = "00001", serial = 0, members = mutableListOf("00001"), name = "Construct",
-                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = ""),
-            Todo(id = "00002", serial = 0, members = mutableListOf("00001, 00002"), name = "record it",
-                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = ""),
-            Todo(id = "00003", serial = 1, members = mutableListOf("00001, 00002"), name = "CM",
-                status = "proposal", startTime = null, endTime = null, preTodo = "00002", deadline = null, description = "")
+            Todo(id = "005", serial = 0, members = mutableListOf("004"), name = "1st todo",
+                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = "111"),
+            Todo(id = "006", serial = 1, members = mutableListOf("000", "004"), name = "2nd todo",
+                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = "222"),
+            Todo(id = "007", serial = 2, members = mutableListOf("000", "004"), name = "3rd todo",
+                status = "proposal", startTime = null, endTime = null, preTodo = "00002", deadline = null, description = "333")
         )
 
         addTodo.setOnClickListener {
             try {
                 for (todo in todos) {
-                    db.collection("Todo")
+                    db.collection("Project").document("m4eORfGbZIchw1zfE1m0")
+                        .collection("Task")
+                        .document("3U9m6ud4OkE4lY3He9pJ")
+                        .collection("Todo")
                         .add(todo)
                 }
                 Log.d("add todo:", "Success")

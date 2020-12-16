@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.drakeet.multitype.MultiTypeAdapter
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.eric.startupmatching.MultiTypeAdapter2
+import com.eric.startupmatching.OnStartDragListener
+import com.eric.startupmatching.SimpleItemTouchHelperCallback
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.databinding.FragmentProjectDetailTaskBinding
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskChildViewBinder
@@ -17,7 +21,9 @@ import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 
-class ProjectDetailTaskFragment(val arg: Project): Fragment() {
+class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListener {
+    private var mItemTouchHelper: ItemTouchHelper? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,11 +37,14 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment() {
         binding.viewModel = viewModel
 
 
-        val adapter = MultiTypeAdapter()
+        val adapter = MultiTypeAdapter2(this)
         adapter.register(TaskParentModel::class.java, TaskParentViewBinder())
         adapter.register(TaskChildModel::class.java, TaskChildViewBinder())
-
+        val recyclerView = binding.recyclerView
         binding.recyclerView.adapter = adapter
+        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
+        mItemTouchHelper = ItemTouchHelper(callback)
+        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
 
         viewModel.taskList.observe(viewLifecycleOwner, Observer {
             Log.d("projectTaskListObsv", it.toString())
@@ -70,5 +79,9 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment() {
         val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
         viewModel.getProjectTasks(arg)
+    }
+
+    override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {
+        mItemTouchHelper!!.startDrag(viewHolder!!)
     }
 }

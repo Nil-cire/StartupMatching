@@ -27,7 +27,7 @@ class SocialMediaMainViewModel: ViewModel() {
         coroutineScope.launch {
             db.collection("Post")
                 .whereNotEqualTo("poster", userId)
-//            .orderBy("timeDate")
+//                .orderBy("timeDate")
                 .get()
                 .addOnSuccessListener { it2 ->
                     Log.d("postLista", it2.toString())

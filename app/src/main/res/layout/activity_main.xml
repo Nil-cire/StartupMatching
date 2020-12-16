@@ -59,6 +59,34 @@
                 android:layout_marginEnd="@dimen/regular_margin"
                 android:visibility="gone"/>
 
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:text="新增任務"
+                android:id="@+id/project_edit_task"
+                style="@style/center_text_font_noto"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="@dimen/regular_margin"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:text="新增團隊"
+                android:id="@+id/project_edit_team"
+                style="@style/center_text_font_noto"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="@dimen/regular_margin"
+                android:visibility="gone"/>
+
 
             <ImageView
                 android:id="@+id/social_media_post_btn"
