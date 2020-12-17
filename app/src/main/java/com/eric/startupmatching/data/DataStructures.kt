@@ -140,13 +140,13 @@ data class Todo( //adjust while crafting project manage page
     val id: String? = null,
     var serial: Int? = null,
     val members: List<String?>? = mutableListOf(),
-    val name: String? = null,
+    var name: String? = null,
     val status: String? = null, //proposal, await, doing, done
-    val startTime: Date? = null,
-    val endTime: Date? = null,
+    var startTime: Date? = null,
+    var endTime: Date? = null,
     val preTodo: String? = null,
-    val deadline: Date? = null,
-    val description: String? = null
+    var task: String? = null,
+    var description: String? = null
 ): Parcelable
 
 @Parcelize

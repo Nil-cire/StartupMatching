@@ -336,11 +336,11 @@ class BackStageFragment: Fragment() {
 
         val todos = mutableListOf<Todo>(
             Todo(id = "005", serial = 0, members = mutableListOf("004"), name = "1st todo",
-                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = "111"),
+                status = "proposal", startTime = null, endTime = null, preTodo = null, task = null, description = "111"),
             Todo(id = "006", serial = 1, members = mutableListOf("000", "004"), name = "2nd todo",
-                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = "222"),
+                status = "proposal", startTime = null, endTime = null, preTodo = null, task = null, description = "222"),
             Todo(id = "007", serial = 2, members = mutableListOf("000", "004"), name = "3rd todo",
-                status = "proposal", startTime = null, endTime = null, preTodo = "00002", deadline = null, description = "333")
+                status = "proposal", startTime = null, endTime = null, preTodo = "00002", task = null, description = "333")
         )
 
         addTodo.setOnClickListener {

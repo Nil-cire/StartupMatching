@@ -20,6 +20,7 @@ import com.eric.startupmatching.databinding.FragmentProjectEditTaskBinding
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskChildViewBinder
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskParentViewBinder
 import com.eric.startupmatching.project.edit.dialog.AddTaskDialog
+import com.eric.startupmatching.project.edit.dialog.AddTodoDialog
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -43,7 +44,12 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         binding.lifecycleOwner = this
 
         val adapter = MultiTypeAdapter2(this)
-        adapter.register(TaskParentModel::class.java, TaskParentViewBinder())
+        adapter.register(TaskParentModel::class.java, ProjectEditTaskAdapter(viewModel, ProjectEditTaskAdapter.OnClickListener{
+            var task = it.content
+            viewModel.todoTask.value = task
+            viewModel.getTodoSize(task)
+            Log.d("addTodoBtn", "Add")
+        }))
         adapter.register(TaskChildModel::class.java, TaskChildViewBinder())
         val recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
@@ -70,6 +76,11 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
             fragmentManager?.let { it1 -> AddTaskDialog(viewModel).show(it1, "show") }
         }
 
+        // add todoo
+        viewModel.todoSize.observe(viewLifecycleOwner, Observer {
+            fragmentManager?.let { it1 -> AddTodoDialog(viewModel).show(it1, "show") }
+        })
+
         return binding.root
     }
 
@@ -81,7 +92,7 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         val viewModelFactory = ProjectEditTaskViewModelFactory(project)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTaskViewModel::class.java)
         viewModel.getTaskByProject(project)
-        viewModel.observeTaskDataChanged()
+//        viewModel.observeTaskDataChanged()
 
     }
 

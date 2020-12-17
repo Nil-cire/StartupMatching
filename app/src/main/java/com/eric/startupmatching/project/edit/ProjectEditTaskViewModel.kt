@@ -53,6 +53,15 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
     val taskListGet: LiveData<Boolean>
         get() = _taskListGet
 
+    //todo val
+    private val _todoSize = MutableLiveData<Int>()
+    val todoSize: LiveData<Int>
+        get() = _todoSize
+
+    val todoTask = MutableLiveData<Task>()
+
+    var todoInstance = Todo()
+
     val db = FirebaseFirestore.getInstance()
 
     fun getTaskByProject(project: Project) {
@@ -104,13 +113,6 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         }
     }
 
-    fun getNewTaskState() {
-        var taskCount = taskList.value?.size
-        taskInstance.serial = taskCount
-        Log.d("taskCount", taskList.value?.size.toString())
-        Log.d("taskInstance", taskInstance.serial.toString())
-    }
-
     fun addTask(task: Task) {
         Log.d("fuked up", projectArgs.id.toString())
         coroutineScope.launch {
@@ -131,8 +133,30 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
 //        treeChildList[0] = s
     }
 
-    fun addTodo(project: Project) {
+    fun getTodoSize(task: Task) {
+        coroutineScope.launch {
+            db.collection("Project").document(projectArgs.id!!)
+                .collection("Task").document(task.id!!)
+                .collection("Todo")
+                .get()
+                .addOnSuccessListener {
+                    _todoSize.value = it.size()
+                    Log.d("todoSize", it.size().toString())
+                }
+        }
+    }
 
+    fun addTodo(todo: Todo) {
+        coroutineScope.launch {
+            db.collection("Project").document(projectArgs.id!!)
+                .collection("Task").document(todoTask.value?.id.toString())
+                .collection("Todo")
+                .add(todo)
+                .addOnSuccessListener {
+                    it.update("id", it.id)
+                    Log.d("todoAdded", "Success")
+                }
+        }
     }
 
     fun reArrangeTaskAndTodo() {
@@ -155,6 +179,7 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
 
     init {
         _getTodoCount.value = 0
+        observeTaskDataChanged()
     }
 }
 
