@@ -10,6 +10,10 @@ class MultiTypeAdapter2(dragStartListener: OnStartDragListener):
 //    private val mItems: MutableList<String> = ArrayList()
     private val mDragStartListener: OnStartDragListener
 
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+    }
+
     override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {

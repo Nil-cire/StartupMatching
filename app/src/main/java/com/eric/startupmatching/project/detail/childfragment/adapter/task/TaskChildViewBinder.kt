@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.item_child.view.*
  */
 class TaskChildViewBinder : ItemViewBinder<TaskChildModel, TaskChildViewBinder.ViewHolder>() {
 
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
         val root = inflater.inflate(R.layout.item_child, parent, false)
@@ -25,6 +28,4 @@ class TaskChildViewBinder : ItemViewBinder<TaskChildModel, TaskChildViewBinder.V
     override fun onBindViewHolder(holder: ViewHolder, child: TaskChildModel) {
         holder.itemView.tvContent.text = child.content.name
     }
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

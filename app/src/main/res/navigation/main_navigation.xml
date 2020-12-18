@@ -115,10 +115,28 @@
     <fragment
         android:id="@+id/projectEditTeamFragment"
         android:name="com.eric.startupmatching.project.edit.ProjectEditTeamFragment"
-        android:label="ProjectEditTeamFragment" />
+        android:label="ProjectEditTeamFragment" >
+        <argument
+            android:name="projectArgs"
+            app:argType="com.eric.startupmatching.data.Project" />
+    </fragment>
     <action android:id="@+id/action_global_projectEditTeamFragment" app:destination="@id/projectEditTeamFragment" />
     <dialog
         android:id="@+id/addTaskDialog"
         android:name="com.eric.startupmatching.project.edit.dialog.AddTaskDialog"
-        android:label="AddTaskDialog" /><action android:id="@+id/action_global_addTaskDialog" app:destination="@id/addTaskDialog"/>
+        android:label="AddTaskDialog" />
+    <action android:id="@+id/action_global_addTaskDialog" app:destination="@id/addTaskDialog" />
+    <fragment
+        android:id="@+id/personDetailFragment"
+        android:name="com.eric.startupmatching.person.detail.PersonDetailFragment"
+        android:label="PersonDetailFragment" >
+        <argument
+            android:name="userArgs"
+            app:argType="com.eric.startupmatching.data.User" />
+    </fragment>
+    <action android:id="@+id/action_global_personDetailFragment" app:destination="@id/personDetailFragment" />
+    <fragment
+        android:id="@+id/personMainFragment"
+        android:name="com.eric.startupmatching.person.PersonMainFragment"
+        android:label="PersonMainFragment" /><action android:id="@+id/action_global_personMainFragment" app:destination="@id/personMainFragment"/>
 </navigation>

@@ -53,6 +53,11 @@
     <string name="add_task">新增任務</string>
     <string name="cancel">取消</string>
     <string name="addTodo">新增細項</string>
+    <string name="create">建立</string>
+    <string name="do_follow">+關注</string>
+    <string name="achievement">成就一覽</string>
+    <string name="chat">聊天</string>
+    <string name="change">更動</string>
 
     <array name="dummy_items">
         <item>One</item>

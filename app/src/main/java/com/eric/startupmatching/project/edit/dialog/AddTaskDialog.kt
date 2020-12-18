@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.eric.startupmatching.R
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.databinding.DialogAddTaskBinding
 import com.eric.startupmatching.project.edit.ProjectEditTaskViewModel
@@ -21,6 +22,11 @@ import kotlinx.android.synthetic.main.item_project_edit_task.view.*
 import java.util.*
 
 class AddTaskDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.custom_dialog)
+    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(

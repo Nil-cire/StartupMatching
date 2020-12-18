@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.databinding.FragmentProjectDetailBinding
@@ -19,6 +21,8 @@ import com.eric.startupmatching.team.information.TeamInformationFragment
 import com.eric.startupmatching.team.teamstatus.TeamStatusFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_team_main.*
+import kotlinx.android.synthetic.main.item_project_edit_task.view.*
 
 class ProjectDetailFragment: Fragment() {
     override fun onCreateView(
@@ -29,9 +33,9 @@ class ProjectDetailFragment: Fragment() {
         val binding = FragmentProjectDetailBinding.inflate(inflater, container, false)
 
         val arg = ProjectDetailFragmentArgs.fromBundle(requireArguments()).projectArgs
-        val viewModelFractory = ProjectDetailViewModelFractory(arg)
+        val viewModelFactory = ProjectDetailViewModelFractory(arg)
 
-        val viewModel = ViewModelProvider(this, viewModelFractory).get(ProjectDetailViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -54,8 +58,27 @@ class ProjectDetailFragment: Fragment() {
 
         tabs.setupWithViewPager(viewPager)
 
-        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        class MViewPagerAdapter(tabLayout: TabLayout) : TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                when (position) {
+                    0 -> requireActivity().project_detail_edit.text = "編輯任務"
+                    1 -> requireActivity().project_detail_edit.text = "編輯團隊"
+                }
+            }
+        }
+
+        viewPager.addOnPageChangeListener(MViewPagerAdapter(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
+
+        requireActivity().project_detail_edit.setOnClickListener {
+            if(it.text.toString() == "編輯任務") {
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment(arg))
+            } else {
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTeamFragment(arg))
+            }
+
+        }
 
         return binding.root
     }
@@ -64,9 +87,7 @@ class ProjectDetailFragment: Fragment() {
         super.onResume()
         val arg = ProjectDetailFragmentArgs.fromBundle(requireArguments()).projectArgs
         requireActivity().project_detail_edit.visibility = View.VISIBLE
-        requireActivity().project_detail_edit.setOnClickListener {
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment(arg))
-        }
+
 
     }
 

@@ -4,7 +4,9 @@ import android.graphics.Canvas
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-
+import com.eric.startupmatching.project.edit.ProjectEditTaskChildAdapter
+import com.eric.startupmatching.project.edit.ProjectEditTaskParentAdapter
+import java.lang.Exception
 
 
 class SimpleItemTouchHelperCallback(private val mAdapter: ItemTouchHelperAdapter) :
@@ -46,6 +48,13 @@ class SimpleItemTouchHelperCallback(private val mAdapter: ItemTouchHelperAdapter
         target: RecyclerView.ViewHolder
     ): Boolean {
         if (source.itemViewType != target.itemViewType) {
+            return false
+        }
+
+        if (source is ProjectEditTaskParentAdapter.ViewHolder && target is ProjectEditTaskChildAdapter.ViewHolder) {
+            return false
+        }
+        if (source is ProjectEditTaskChildAdapter.ViewHolder && target is ProjectEditTaskParentAdapter.ViewHolder) {
             return false
         }
 

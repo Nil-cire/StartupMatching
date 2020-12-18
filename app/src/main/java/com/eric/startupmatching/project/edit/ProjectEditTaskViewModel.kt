@@ -164,6 +164,40 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         //upload to db
     }
 
+    fun updateTodos(todo: Todo, task: Task) {
+        coroutineScope.launch {
+            db.collection("Project").document(projectArgs.id.toString())
+                .collection("Task").document(task.id.toString())
+                .collection("Todo").document(todo.id.toString())
+                .set(todo)
+        }
+    }
+
+    fun updateTasks(task: Task) {
+        coroutineScope.launch {
+            db.collection("Project").document(projectArgs.id.toString())
+                .collection("Task").document(task.id.toString())
+                .set(task)
+        }
+    }
+
+    fun editTaskDescription(task: Task , description: String) {
+        coroutineScope.launch {
+            db.collection("Project").document(projectArgs.id.toString())
+                .collection("Task").document(task.id.toString())
+                .update("description", description)
+        }
+    }
+
+    fun editTodoDescription(todo: Todo , description: String) {
+        coroutineScope.launch {
+            db.collection("Project").document(projectArgs.id.toString())
+                .collection("Task").document(todo.task.toString())
+                .collection("Todo").document(todo.id.toString())
+                .update("description", description)
+        }
+    }
+
     //snapShotListener
     fun observeTaskDataChanged() {
         if (taskListGet.value == true) {

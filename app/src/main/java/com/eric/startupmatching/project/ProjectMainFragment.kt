@@ -56,6 +56,11 @@ class ProjectMainFragment: Fragment() {
             binding.chipRun.isChecked = false
         }
 
+        requireActivity().project_main_add.setOnClickListener {
+            Log.d("project_main_add", "pressed")
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
+        }
+
         // filter projects on chip selected
         binding.chipsGroup.setOnCheckedChangeListener { view, isChecked ->
             if (view.chip_po.isChecked && view.chip_run.isChecked) {
@@ -92,10 +97,7 @@ class ProjectMainFragment: Fragment() {
         viewModel.getUserTeam()
 
         requireActivity().project_main_add.visibility = View.VISIBLE
-        requireActivity().project_main_add.setOnClickListener {
-            Log.d("project_main_add", "pressed")
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
-        }
+
     }
 
     override fun onStop() {

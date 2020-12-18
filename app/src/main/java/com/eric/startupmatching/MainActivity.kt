@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         projectBtn.setOnClickListener {
             projectPageIconSetup()
-            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalMatchMainFragment())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalPersonMainFragment())
         }
 
         chatBtn.setOnClickListener {
