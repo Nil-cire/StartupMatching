@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.eric.startupmatching.R
-import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.databinding.DialogAddTeamBinding
 import com.eric.startupmatching.project.edit.ProjectEditTeamViewModel
 import java.util.*
