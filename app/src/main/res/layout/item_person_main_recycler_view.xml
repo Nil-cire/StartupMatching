@@ -10,14 +10,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/person_background"
@@ -48,14 +47,14 @@
                 android:fontFamily="@font/noto_sans"
                 android:textColor="@color/black"
                 android:text="@{user.name}"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_icon"
                 tools:text="用戶名稱" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/text_position"
+                android:id="@+id/recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
@@ -64,15 +63,11 @@
                 android:layout_marginEnd="@dimen/regular_margin"
                 android:fontFamily="@font/noto_sans"
                 android:textColor="@color/black"
-                android:textSize="18sp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:foregroundGravity="center"
-                android:text="@{user.skills.toString()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/person_user_name"
-                tools:text="技能" />
+                app:layout_constraintTop_toBottomOf="@+id/person_user_name" />
 
             <TextView
                 android:id="@+id/co_friends"
@@ -82,28 +77,27 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/noto_sans"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                app.setFollower="@{user.follower.size()}"
-                app:layout_constraintTop_toBottomOf="@+id/text_position"
+                android:textSize="16sp"
+                app:setFollower="@{user.follower.size()}"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="共同好友" />
+                tools:text="追蹤人數" />
 
             <TextView
                 android:id="@+id/icon_pin"
                 android:layout_width="64dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 style="@style/center_text_font_noto"
                 android:background="@drawable/round_corner_light_blue"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:text="邀請"
-                android:tag="empty"
                 app:layout_constraintEnd_toEndOf="@+id/person_background"
-                app:layout_constraintTop_toBottomOf="@+id/person_background"/>
+                app:layout_constraintTop_toTopOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

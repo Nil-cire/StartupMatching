@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemPersonMainRecyclerViewBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 
@@ -17,6 +19,16 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
         fun bind(user: User) {
             binding.user = user
             binding.executePendingBindings()
+            val adapter = ItemPersonSkillRecyclerViewAdapter(ItemPersonSkillRecyclerViewAdapter.OnClickListener{})
+            binding.recyclerView.adapter = adapter
+            adapter.submitList(user.skills)
+//            val db = FirebaseFirestore.getInstance()
+//            db.collection("User").document(user.id!!)
+//                .get()
+//                .addOnSuccessListener {
+//                    val userData = it.toObject(User::class.java)
+//                    adapter.submitList(user.skills)
+//                }
         }
     }
 

@@ -37,11 +37,11 @@ fun ImageView.setImage(imageUrl: String?) {
     }
 }
 
-@SuppressLint("SetTextI18n")
+@BindingAdapter("setFollower")
 fun TextView.setFollower(follower: Int?) {
-    if (follower == null) {
-        text = "追蹤者 0 人"
+    text = if (follower == null) {
+        "追蹤者 0 人"
     } else {
-        text = "追蹤者 $follower 人"
+        "追蹤者 $follower 人"
     }
 }
