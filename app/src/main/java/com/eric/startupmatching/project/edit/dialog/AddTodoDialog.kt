@@ -78,6 +78,10 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
             }
         }
 
+        binding.submit.setOnClickListener {
+            dismiss()
+        }
+
         return binding.root
     }
     private fun setDateFormat(year: Int, month: Int, day: Int): String {

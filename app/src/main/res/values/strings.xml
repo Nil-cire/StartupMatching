@@ -58,6 +58,7 @@
     <string name="achievement">成就一覽</string>
     <string name="chat">聊天</string>
     <string name="change">更動</string>
+    <string name="add_team">新增團隊</string>
 
     <array name="dummy_items">
         <item>One</item>

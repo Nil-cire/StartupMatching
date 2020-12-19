@@ -43,7 +43,8 @@ data class Team(
     val image: String? = "",
     val members: List<String?>? = mutableListOf(), //TeamMember id
     val hiringPosition: List<String?>? = mutableListOf(), //Position id
-    val teamLeader: String = "" // User id
+    val teamLeader: String = "", // User id
+    val description: String? = null
 ): Parcelable
 
 @Parcelize

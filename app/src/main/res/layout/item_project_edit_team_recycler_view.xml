@@ -1,79 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/half_regular_margin"
-    android:paddingStart="@dimen/regular_margin"
-    android:paddingEnd="@dimen/regular_margin">
-
-    <androidx.cardview.widget.CardView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="model"
+            type="com.eric.startupmatching.project.treeview.model.team.TeamParentModel" />
+        <variable
+            name="viewHolder"
+            type="com.eric.startupmatching.project.edit.ProjectEditTeamParentAdapter.ViewHolder" />
+        <import type="android.view.View"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="1dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:cardBackgroundColor="@color/light_blue"
-        app:cardCornerRadius="8dp">
+        android:paddingStart="@dimen/regular_margin"
+        android:paddingEnd="@dimen/regular_margin"
+        android:paddingTop="8dp"
+        android:paddingBottom="0dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#d2d2d2"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:gravity="center_vertical"
             android:layout_height="match_parent"
-            android:padding="8dp">
+            android:background="@drawable/round_corner">
 
-            <TextView
-                android:id="@+id/item"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="48dp"
+            <ImageView
+                android:id="@+id/imgExpand"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="15dp"
+                android:src="@drawable/arrow_bottom"
+                android:layout_height="15dp"/>
+
+<!--            <TextView-->
+<!--                android:id="@+id/itemCount"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/imgExpand"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/imgExpand"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/imgExpand"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
 
             <TextView
                 android:id="@+id/tvContent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/item"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgExpand"
+                app:layout_constraintTop_toTopOf="@+id/imgExpand"
+                app:layout_constraintBottom_toBottomOf="@+id/imgExpand"
+                android:layout_marginStart="32dp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="@dimen/regular_margin"
+                android:gravity="start|center_vertical"
                 android:textSize="16sp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:id="@+id/icon_left1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/addTodo"
+                app:layout_constraintTop_toTopOf="@+id/imgExpand"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/regular_margin"/>
-
-            <ImageView
+                app:layout_constraintBottom_toBottomOf="@+id/imgExpand"
+                android:layout_marginEnd="@dimen/regular_margin"
+                android:textColor="@color/black"
+                android:background="@drawable/baseline_add_black_48"
                 android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:id="@+id/icon_left2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/icon_left1"
-                android:layout_marginEnd="@dimen/half_regular_margin"/>
+                android:layout_height="16dp"/>
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:id="@+id/icon_left3"
-                app:layout_constraintTop_toTopOf="parent"
+<!--            <TextView-->
+<!--                android:id="@+id/chat"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/imgExpand"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/addTodo"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/imgExpand"-->
+<!--                android:layout_marginEnd="@dimen/regular_margin"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="@drawable/round_corner_light_blue"-->
+<!--                android:text="@string/chat"-->
+<!--                android:textSize="12sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="24dp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/time"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/tvContent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/tvContent"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="時間"-->
+<!--                style="@style/center_text_font_noto" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/start_time"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/time"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/time"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/time"-->
+<!--                android:layout_marginStart="@dimen/regular_margin"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@{model.content.startTime.toString()}"-->
+<!--                style="@style/center_text_font_noto" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/to"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/start_time"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/start_time"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/start_time"-->
+<!--                android:layout_marginStart="@dimen/regular_margin"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="~"-->
+<!--                style="@style/center_text_font_noto" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/end_time"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/to"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/to"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/to"-->
+<!--                android:layout_marginStart="@dimen/regular_margin"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@{model.content.endTime.toString()}"-->
+<!--                style="@style/center_text_font_noto" />-->
+
+            <TextView
+                android:id="@+id/member"
+                app:layout_constraintStart_toStartOf="@+id/tvContent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContent"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成員"
+                android:visibility="visible"
+                style="@style/center_text_font_noto" />
+            <!--        android:visibility="@{model.content.members == null ? View.GONE : model.content.members.size() == 0 ? View.GONE : View.VISIBLE}"-->
+
+            <TextView
+                android:id="@+id/detail"
+                app:layout_constraintStart_toStartOf="@+id/tvContent"
+                app:layout_constraintTop_toBottomOf="@+id/member"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="@string/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/center_text_font_noto" />
+
+            <EditText
+                android:id="@+id/detail_text"
+                style="@style/center_text_font_noto"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginEnd="@dimen/regular_margin"
+                android:background="@null"
+                android:gravity="start|top"
+                android:hint="@string/enter_message"
+                android:lines="1"
+                android:text="@{model.content.description == null ? null : model.content.description}"
+                android:maxLines="5"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/icon_left2"
-                android:layout_marginEnd="@dimen/half_regular_margin"/>
+                app:layout_constraintStart_toEndOf="@+id/detail"
+                app:layout_constraintTop_toTopOf="@+id/detail" />
+
+            <TextView
+                android:id="@+id/confirm_button"
+                app:layout_constraintStart_toEndOf="@+id/detail_text"
+                app:layout_constraintTop_toTopOf="@+id/detail_text"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_text"
+                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/twox_regular_margin"
+                android:textSize="12sp"
+                android:background="@drawable/round_corner_light_blue"
+                android:text="@string/change"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/center_text_font_noto" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/member"
+                app:layout_constraintBottom_toBottomOf="@+id/member"
+                app:layout_constraintStart_toEndOf="@+id/member"
+                android:layout_marginStart="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/twox_regular_margin"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

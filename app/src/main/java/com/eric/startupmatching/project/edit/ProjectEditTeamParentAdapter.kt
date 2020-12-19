@@ -17,28 +17,29 @@ import com.eric.startupmatching.databinding.ItemProjectEditTeamRecyclerViewBindi
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
+import com.eric.startupmatching.project.treeview.model.team.TeamParentModel
 import kotlinx.android.synthetic.main.item_parent.view.*
 import kotlinx.android.synthetic.main.item_parent.view.imgExpand
 import kotlinx.android.synthetic.main.item_parent.view.tvContent
 import kotlinx.android.synthetic.main.item_project_edit_task_recycler_view.view.*
 
-class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val onClickListener: OnClickListener) : ItemViewBinder<TaskChildModel, ProjectEditTeamParentAdapter.ViewHolder>() {
+class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val onClickListener: OnClickListener) : ItemViewBinder<TeamParentModel, ProjectEditTeamParentAdapter.ViewHolder>() {
     private lateinit var mExpandAndHideListener: OnExpandAndHideListener
 
-    class ViewHolder(var binding: ItemProjectEditTaskRecyclerViewBinding,
-                     var viewModel: ProjectEditTaskViewModel,
+    class ViewHolder(var binding: ItemProjectEditTeamRecyclerViewBinding,
+                     var viewModel: ProjectEditTeamViewModel,
                      var onClickListener: OnClickListener,
                      var holderType: Int) : RecyclerView.ViewHolder(binding.root) {
 
         val description = MutableLiveData<String>()
-        fun bind(model: TaskParentModel) {
+        fun bind(model: TeamParentModel) {
 
             holderType = 0
             binding.model = model
             binding.addTodo.setOnClickListener { onClickListener.onClick(model) }
             binding.confirmButton.setOnClickListener {
                 var description = binding.detailText.text.toString()
-                viewModel.editTaskDescription(model.content, description)
+//                viewModel.editTaskDescription(model.content, description)
                 binding.detailText.text= null}
 
         }
@@ -47,7 +48,7 @@ class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
 
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemProjectEditTaskRecyclerViewBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemProjectEditTeamRecyclerViewBinding.inflate(layoutInflater, parent, false)
 
 //        val root = inflater.inflate(R.layout.item_parent, parent, false)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
@@ -55,9 +56,9 @@ class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val 
         return ViewHolder(binding, viewModel, onClickListener, 0)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, model: TaskParentModel) {
-        holder.itemView.itemCount.text = (model.content.serial?.plus(1)).toString()
-        holder.itemView.tvContent.text = model.content.name
+    override fun onBindViewHolder(holder: ViewHolder, model: TeamParentModel) {
+//        holder.itemView.itemCount.text = (model.content.serial?.plus(1)).toString()
+        holder.itemView.tvContent.text = model.content.teamName
         holder.bind(model)
         holder.itemView.detail_text.addTextChangedListener {
             if (it.isNullOrEmpty()) {
@@ -83,7 +84,8 @@ class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val 
         }
     }
 
-    class OnClickListener(val clickListener: (model: TaskParentModel) -> Unit) {
-        fun onClick(model: TaskParentModel) = clickListener(model)
+    class OnClickListener(val clickListener: (model: TeamParentModel) -> Unit) {
+        fun onClick(model: TeamParentModel) = clickListener(model)
     }
+
 }
