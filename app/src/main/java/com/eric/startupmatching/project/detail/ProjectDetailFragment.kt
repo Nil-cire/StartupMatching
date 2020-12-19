@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -62,8 +63,8 @@ class ProjectDetailFragment: Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 when (position) {
-                    0 -> requireActivity().project_detail_edit.text = "編輯任務"
                     1 -> requireActivity().project_detail_edit.text = "編輯團隊"
+                    else -> requireActivity().project_detail_edit.text = "編輯任務"
                 }
             }
         }
@@ -72,12 +73,11 @@ class ProjectDetailFragment: Fragment() {
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
         requireActivity().project_detail_edit.setOnClickListener {
-            if(it.text.toString() == "編輯任務") {
+            if(it is TextView && it.text == "編輯任務") {
                 this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment(arg))
             } else {
                 this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTeamFragment(arg))
             }
-
         }
 
         return binding.root

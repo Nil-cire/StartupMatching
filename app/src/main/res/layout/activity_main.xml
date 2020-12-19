@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:text="MViewPagerAdapter"
+                android:text="編輯任務"
                 android:id="@+id/project_detail_edit"
                 style="@style/center_text_font_noto"
                 android:textColor="@color/white"
