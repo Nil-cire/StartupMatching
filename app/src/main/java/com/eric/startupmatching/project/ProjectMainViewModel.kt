@@ -68,9 +68,9 @@ class ProjectMainViewModel: ViewModel() {
 
 
     fun getAllProject() {
+        var list = mutableListOf<Project>()
         var cont = 0
         coroutineScope.launch {
-            var list = mutableListOf<Project>()
             for (team in teamList.value!!) {
                 db.collection("Project")
                     .whereArrayContains("teams", team.id.toString())
