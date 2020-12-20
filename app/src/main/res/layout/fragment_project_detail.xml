@@ -75,7 +75,7 @@
                         android:textColor="@color/white"
                         android:layout_marginEnd="@dimen/regular_margin"
                         android:layout_marginStart="@dimen/regular_margin"
-                        android:text="@{viewModel.arg.projectName}"
+                        android:text="@{viewModel.projectArgs.projectName}"
                         app:layout_constraintEnd_toStartOf="@+id/schedule_image"
                         app:layout_constraintStart_toEndOf="@+id/project_name"
                         app:layout_constraintTop_toTopOf="@+id/project_name" />

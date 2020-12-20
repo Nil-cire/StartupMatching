@@ -48,37 +48,46 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListen
 
         viewModel.taskList.observe(viewLifecycleOwner, Observer {
             Log.d("projectTaskListObsv", it.toString())
-            viewModel.getProjectTodos(it)
+            for (task in it) {
+                viewModel.getTodoByTask(task)
+            }
         })
 
-        viewModel.todoList.observe(viewLifecycleOwner, Observer {
-            val items = mutableListOf<Any>()
-            for (i in it.indices) {
-                var member = mutableListOf<TreeViewModel>()
-                val team = viewModel.taskList2.value?.get(i)?.let { it1 ->
-                    TaskParentModel(it1)
-                }
-                for (j in it[i]) {
-                    member.add(TaskChildModel(j))
-                }
-                if (team != null) {
-                    team.children = member as ArrayList<TreeViewModel>
-                    items.add(team)
-                }
-            }
-            adapter.items = items
+        viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
+            val x = list as ArrayList<TaskParentModel>
+            x.sortBy { it.content.serial }
+            adapter.items = x
             adapter.notifyDataSetChanged()
-            Log.d("adapteritems", items.toString())
         })
+
+//        viewModel.todoList.observe(viewLifecycleOwner, Observer {
+//            val items = mutableListOf<Any>()
+//            for (i in it.indices) {
+//                var member = mutableListOf<TreeViewModel>()
+//                val team = viewModel.taskList2.value?.get(i)?.let { it1 ->
+//                    TaskParentModel(it1)
+//                }
+//                for (j in it[i]) {
+//                    member.add(TaskChildModel(j))
+//                }
+//                if (team != null) {
+//                    team.children = member as ArrayList<TreeViewModel>
+//                    items.add(team)
+//                }
+//            }
+//            adapter.items = items
+//            adapter.notifyDataSetChanged()
+//            Log.d("adapteritems", items.toString())
+//        })
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         val arg = arg
         val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
-        viewModel.getProjectTasks(arg)
+        viewModel.getTasks()
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

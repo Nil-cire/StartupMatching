@@ -38,50 +38,50 @@ class ProjectDetailTaskFragment2(val arg: Project): Fragment(), OnStartDragListe
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-
-        val adapter = MultiTypeAdapter2(this)
-        adapter.register(TaskParentModel::class.java, TaskParentViewBinder())
-        adapter.register(TaskChildModel::class.java, TaskChildViewBinder())
-        val recyclerView = binding.recyclerView
-        binding.recyclerView.adapter = adapter
-        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
-        mItemTouchHelper = ItemTouchHelper(callback)
-        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
-
-        viewModel.taskList.observe(viewLifecycleOwner, Observer {
-            Log.d("projectTaskListObsv", it.toString())
-            viewModel.getProjectTodos(it)
-        })
-
-        viewModel.todoList.observe(viewLifecycleOwner, Observer {
-            val items = mutableListOf<Any>()
-            for (i in it.indices) {
-                var member = mutableListOf<TreeViewModel>()
-                val team = viewModel.taskList2.value?.get(i)?.let { it1 ->
-                    TaskParentModel(it1)
-                }
-                for (j in it[i]) {
-                    member.add(TaskChildModel(j))
-                }
-                if (team != null) {
-                    team.children = member as ArrayList<TreeViewModel>
-                    items.add(team)
-                }
-            }
-            adapter.items = items
-            adapter.notifyDataSetChanged()
-            Log.d("adapteritems", items.toString())
-        })
+//
+//
+//        val adapter = MultiTypeAdapter2(this)
+//        adapter.register(TaskParentModel::class.java, TaskParentViewBinder())
+//        adapter.register(TaskChildModel::class.java, TaskChildViewBinder())
+//        val recyclerView = binding.recyclerView
+//        binding.recyclerView.adapter = adapter
+//        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
+//        mItemTouchHelper = ItemTouchHelper(callback)
+//        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
+//
+//        viewModel.taskList.observe(viewLifecycleOwner, Observer {
+//            Log.d("projectTaskListObsv", it.toString())
+//            viewModel.getProjectTodos(it)
+//        })
+//
+//        viewModel.todoList.observe(viewLifecycleOwner, Observer {
+//            val items = mutableListOf<Any>()
+//            for (i in it.indices) {
+//                var member = mutableListOf<TreeViewModel>()
+//                val team = viewModel.taskList2.value?.get(i)?.let { it1 ->
+//                    TaskParentModel(it1)
+//                }
+//                for (j in it[i]) {
+//                    member.add(TaskChildModel(j))
+//                }
+//                if (team != null) {
+//                    team.children = member as ArrayList<TreeViewModel>
+//                    items.add(team)
+//                }
+//            }
+//            adapter.items = items
+//            adapter.notifyDataSetChanged()
+//            Log.d("adapteritems", items.toString())
+//        })
         return binding.root
     }
 
     override fun onStart() {
-        super.onStart()
-        val arg = arg
-        val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
-        viewModel.getProjectTasks(arg)
+//        super.onStart()
+//        val arg = arg
+//        val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
+//        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
+//        viewModel.getProjectTasks(arg)
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

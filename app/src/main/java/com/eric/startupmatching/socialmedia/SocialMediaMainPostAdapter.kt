@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.data.Post
+import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemSocialmediaPostRecyclerViewBinding
+import com.eric.startupmatching.setImage
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SocialMediaMainPostAdapter(val onClickListener: OnClickListener) : ListAdapter<Post, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 
@@ -18,6 +21,14 @@ class SocialMediaMainPostAdapter(val onClickListener: OnClickListener) : ListAda
             binding.post = post
             binding.executePendingBindings()
 
+            val db = FirebaseFirestore.getInstance()
+            db.collection("User").document(post.poster)
+                .get()
+                .addOnSuccessListener {
+                    var user = it.toObject(User::class.java)
+                    binding.userIcon.setImage(user!!.image)
+                    binding.userName.text = user.name
+                }
         }
     }
 
