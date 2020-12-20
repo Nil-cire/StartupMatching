@@ -15,7 +15,7 @@ class ProjectDetailViewModel(arg: Project): ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    var arg = arg
+    var projectArgs = arg
 
     val db = FirebaseFirestore.getInstance()
 

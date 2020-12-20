@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         //setup bottom navigation buttons
         teamBtn.setOnClickListener {
             assistantPageIconSetup()
-            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalTeamMainFragment())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalSocialMediaMainFragment())
         }
 
         matchingBtn.setOnClickListener {
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         socialmediaBtn.setOnClickListener {
             socialMediaPageIconSetup()
-            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalSocialMediaMainFragment())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalTeamMainFragment())
         }
 
         //tool bar button functions

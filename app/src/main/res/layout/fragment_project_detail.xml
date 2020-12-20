@@ -61,6 +61,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/project_name"
                         android:text="名稱"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginTop="@dimen/regular_margin"
                         app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +72,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="start"
+                        android:textColor="@color/white"
                         android:layout_marginEnd="@dimen/regular_margin"
                         android:layout_marginStart="@dimen/regular_margin"
                         android:text="@{viewModel.arg.projectName}"
@@ -83,6 +85,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/project_status"
                         android:text="狀態"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/project_name_content"
                         android:layout_marginTop="@dimen/half_regular_margin"
                         app:layout_constraintStart_toStartOf="@+id/project_name"/>
@@ -91,7 +94,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/project_status_content"
-                        android:text="狀態"
+                        android:text="@{viewModel.projectArgs.startupStatus}"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="@+id/project_status"
                         app:layout_constraintStart_toEndOf="@+id/project_status"
                         android:layout_marginStart="@dimen/regular_margin"/>
@@ -101,6 +105,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/project_time"
                         android:text="時間"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/project_status"
                         android:layout_marginTop="@dimen/half_regular_margin"
                         app:layout_constraintStart_toStartOf="@+id/project_status"/>
@@ -109,7 +114,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/project_time_content"
-                        android:text="時間"
+                        setTimeWithFormat="@{viewModel.projectArgs.startTime}"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="@+id/project_time"
                         app:layout_constraintStart_toEndOf="@+id/project_time"
                         android:layout_marginStart="@dimen/regular_margin"/>
@@ -117,8 +123,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/to"
+                        android:text="~"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_time"
+                        app:layout_constraintStart_toEndOf="@+id/project_time_content"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/end_time"
+                        setTimeWithFormat="@{viewModel.projectArgs.endTime}"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_time"
+                        app:layout_constraintStart_toEndOf="@+id/to"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/project_description"
                         android:text="說明"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/project_time"
                         android:layout_marginTop="@dimen/half_regular_margin"
                         app:layout_constraintStart_toStartOf="@+id/project_time"/>
@@ -127,7 +154,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/project_description_content"
-                        android:text="@{viewModel.arg.description}"
+                        android:text="@{viewModel.projectArgs.description}"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="@+id/project_description"
                         app:layout_constraintStart_toEndOf="@+id/project_description"
                         android:layout_marginStart="@dimen/regular_margin"/>
@@ -137,6 +165,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/project_bulletinBoard"
                         android:text="公告"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/project_description_content"
                         android:layout_marginTop="@dimen/half_regular_margin"
                         app:layout_constraintStart_toStartOf="@+id/project_description"/>
@@ -145,7 +174,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/project_bulletinBoard_content"
-                        android:text="@{viewModel.arg.bulletinBoard}"
+                        android:text="@{viewModel.projectArgs.bulletinBoard}"
+                        android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="@+id/project_bulletinBoard"
                         app:layout_constraintStart_toEndOf="@+id/project_bulletinBoard"
                         app:layout_constraintEnd_toEndOf="parent"
