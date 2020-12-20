@@ -18,8 +18,8 @@ object UserInfo {
         currentProject = mutableListOf("001"),
         applyProject = null,
         achievements = null,
-        following = null,
-        follower = null,
+        following = mutableListOf("000", "001", "002", "005"),
+        follower = mutableListOf("000", "001", "002", "003", "005"),
         blacklist = null,
         briefIntro = "Will be on vacation on 12/10 ~ 1/2",
         time = Calendar.getInstance().time

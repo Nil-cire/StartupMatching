@@ -40,8 +40,26 @@ fun ImageView.setImage(imageUrl: String?) {
 @BindingAdapter("setFollower")
 fun TextView.setFollower(follower: Int?) {
     text = if (follower == null) {
-        "追蹤者 0 人"
+        "追蹤數 : 0 人"
     } else {
-        "追蹤者 $follower 人"
+        "追蹤數: $follower 人"
+    }
+}
+
+@BindingAdapter("setFollowing")
+fun TextView.setFollowing(following: Int?) {
+    text = if (following == null) {
+        "被追蹤數: 0 人"
+    } else {
+        "被追蹤數 $following 人"
+    }
+}
+
+@BindingAdapter("setAchievementCount")
+fun TextView.setAchievementCount(achievement: Int?) {
+    text = if (achievement == null) {
+        "成就: 0 個"
+    } else {
+        "成就: $achievement 個"
     }
 }

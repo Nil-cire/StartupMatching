@@ -84,7 +84,8 @@ data class Achievement(
     val id: String? = null,
     val project: String? = null,
     val team: String? = null,
-    val position: String? = null
+    val position: String? = null,
+    val time: Date? = Calendar.getInstance().time
 ): Parcelable
 
 @Parcelize
