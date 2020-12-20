@@ -21,48 +21,126 @@
         app:srcCompat="@drawable/project_main" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_chip_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/image"
-        android:id="@+id/constraint_chip_group">
+        android:padding="@dimen/half_regular_margin">
 
-        <com.google.android.material.chip.ChipGroup
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:id="@+id/chips_group"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            app:singleSelection="false">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_po"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我是PO"/>
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/project_owner"
+            style="@style/center_text_font_noto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.projectOwnerBtnChecked == true ? @drawable/round_corner_light_blue : @drawable/round_corner}"
+            android:textColor="@{viewModel.projectOwnerBtnChecked == true ? @color/white : @color/black}"
+            android:fontFamily="@font/noto_sans"
+            android:text="案件主持人"
+            app:layout_constraintEnd_toStartOf="@+id/team_leader"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_tl"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我是TL"/>
+        <TextView
+            android:id="@+id/team_leader"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/center_text_font_noto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.teamLeaderBtnChecked == true ? @drawable/round_corner_light_blue : @drawable/round_corner}"
+            android:textColor="@{viewModel.teamLeaderBtnChecked == true ? @color/white : @color/black}"
+            android:fontFamily="@font/noto_sans"
+            android:text="團隊負責人"
+            app:layout_constraintEnd_toStartOf="@+id/preparing"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/project_owner" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_run"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="進行中"/>
+        <TextView
+            android:id="@+id/preparing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/center_text_font_noto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.preparingBtnChecked == true ? @drawable/round_corner_light_blue : @drawable/round_corner}"
+            android:textColor="@{viewModel.preparingBtnChecked == true ? @color/white : @color/black}"
+            android:fontFamily="@font/noto_sans"
+            android:text="準備中"
+            app:layout_constraintEnd_toStartOf="@+id/processing"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/team_leader" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_end"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="已完成"/>
+        <TextView
+            android:id="@+id/processing"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/center_text_font_noto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.processBtnChecked == true ? @drawable/round_corner_light_blue : @drawable/round_corner}"
+            android:textColor="@{viewModel.processBtnChecked == true ? @color/white : @color/black}"
+            android:fontFamily="@font/noto_sans"
+            android:text="進行中"
+            app:layout_constraintEnd_toStartOf="@+id/history"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/preparing" />
 
-        </com.google.android.material.chip.ChipGroup>
+        <TextView
+            android:id="@+id/history"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/center_text_font_noto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@{viewModel.historyBtnChecked == true ? @drawable/round_corner_light_blue : @drawable/round_corner}"
+            android:textColor="@{viewModel.historyBtnChecked == true ? @color/white : @color/black}"
+            android:fontFamily="@font/noto_sans"
+            android:text="歷史紀錄"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/processing" />
+
+
+        <!--        <com.google.android.material.chip.ChipGroup-->
+        <!--            style="@style/Widget.MaterialComponents.Chip.Filter"-->
+        <!--            android:id="@+id/chips_group"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:padding="16dp"-->
+        <!--            app:singleSelection="false">-->
+
+        <!--            <com.google.android.material.chip.Chip-->
+        <!--                android:id="@+id/chip_po"-->
+        <!--                style="@style/Widget.MaterialComponents.Chip.Filter"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="我是PO"/>-->
+
+        <!--            <com.google.android.material.chip.Chip-->
+        <!--                android:id="@+id/chip_tl"-->
+        <!--                style="@style/Widget.MaterialComponents.Chip.Filter"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="我是TL"/>-->
+
+        <!--            <com.google.android.material.chip.Chip-->
+        <!--                android:id="@+id/chip_run"-->
+        <!--                style="@style/Widget.MaterialComponents.Chip.Filter"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="進行中"/>-->
+
+        <!--            <com.google.android.material.chip.Chip-->
+        <!--                android:id="@+id/chip_end"-->
+        <!--                style="@style/Widget.MaterialComponents.Chip.Filter"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="已完成"/>-->
+
+        <!--        </com.google.android.material.chip.ChipGroup>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

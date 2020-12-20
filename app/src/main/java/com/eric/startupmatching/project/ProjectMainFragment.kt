@@ -38,54 +38,141 @@ class ProjectMainFragment: Fragment() {
             adapter.submitList(it)
         })
 
-        // chip select logic setup
+        val asProjectOwnerBtn = binding.projectOwner
+        val asTeamLeaderBtn = binding.teamLeader
+        val preparingBtn = binding.preparing
+        val processBtn = binding.processing
+        val historyBtn = binding.history
 
-        binding.chipPo.setOnCheckedChangeListener { view, isChecked ->
-            binding.chipTl.isChecked = false
-        }
-
-        binding.chipTl.setOnCheckedChangeListener { view, isChecked ->
-            binding.chipPo.isChecked = false
-        }
-
-        binding.chipRun.setOnCheckedChangeListener { view, isChecked ->
-            binding.chipEnd.isChecked = false
-        }
-
-        binding.chipEnd.setOnCheckedChangeListener { view, isChecked ->
-            binding.chipRun.isChecked = false
-        }
-
-        requireActivity().project_main_add.setOnClickListener {
-            Log.d("project_main_add", "pressed")
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
-        }
-
-        // filter projects on chip selected
-        binding.chipsGroup.setOnCheckedChangeListener { view, isChecked ->
-            if (view.chip_po.isChecked && view.chip_run.isChecked) {
-                TODO()
-            } else if (view.chip_po.isChecked && view.chip_end.isChecked) {
-                TODO()
-            } else if (view.chip_tl.isChecked && view.chip_run.isChecked) {
-                TODO()
-            } else if (view.chip_tl.isChecked && view.chip_end.isChecked) {
-                TODO()
-            } else if (view.chip_po.isChecked) {
-                viewModel.getProjectAsOwner()
-                adapter.submitList(viewModel.projectList.value)
-                Log.d("chip_po clicked", "success")
-            } else if (view.chip_tl.isChecked) {
-                TODO()
-            } else if (view.chip_run.isChecked) {
-                TODO()
-            } else if (view.chip_end.isChecked) {
-                TODO()
+        // filter logic
+        asProjectOwnerBtn.setOnClickListener {
+            if (!viewModel.projectOwnerBtnChecked.value!!) {
+                viewModel.projectOwnerBtnSelect()
+                viewModel.teamLeaderBtnUnSelect()
             } else {
-                viewModel.getAllProject()
-                adapter.submitList(viewModel.projectList.value)
+                viewModel.projectOwnerBtnUnSelect()
+            }
+
+        }
+
+        asTeamLeaderBtn.setOnClickListener {
+            if (!viewModel.teamLeaderBtnChecked.value!!) {
+                viewModel.projectOwnerBtnUnSelect()
+                viewModel.teamLeaderBtnSelect()
+            } else {
+                viewModel.teamLeaderBtnUnSelect()
             }
         }
+
+        preparingBtn.setOnClickListener {
+            if (!viewModel.preparingBtnChecked.value!!) {
+                viewModel.preparingBtnSelect()
+                viewModel.processBtnUnSelect()
+                viewModel.historyBtnUnSelect()
+            } else {
+                viewModel.preparingBtnUnSelect()
+            }
+        }
+
+        processBtn.setOnClickListener {
+            if (!viewModel.processBtnChecked.value!!) {
+                viewModel.preparingBtnUnSelect()
+                viewModel.processBtnSelect()
+                viewModel.historyBtnUnSelect()
+            } else {
+                viewModel.processBtnUnSelect()
+            }
+        }
+
+        historyBtn.setOnClickListener {
+            if (!viewModel.historyBtnChecked.value!!) {
+                viewModel.preparingBtnUnSelect()
+                viewModel.processBtnUnSelect()
+                viewModel.historyBtnSelect()
+            } else {
+                viewModel.historyBtnUnSelect()
+            }
+        }
+
+        // observe click status
+
+        viewModel.projectOwnerBtnChecked.observe(viewLifecycleOwner, Observer {
+            var list = viewModel.projectFilter()
+            adapter.submitList(list)
+        })
+
+        viewModel.teamLeaderBtnChecked.observe(viewLifecycleOwner, Observer {
+            var list = viewModel.projectFilter()
+            adapter.submitList(list)
+        })
+
+        viewModel.preparingBtnChecked.observe(viewLifecycleOwner, Observer {
+            var list = viewModel.projectFilter()
+            adapter.submitList(list)
+        })
+
+        viewModel.processBtnChecked.observe(viewLifecycleOwner, Observer {
+            var list = viewModel.projectFilter()
+            adapter.submitList(list)
+        })
+
+        viewModel.historyBtnChecked.observe(viewLifecycleOwner, Observer {
+            var list = viewModel.projectFilter()
+            adapter.submitList(list)
+        })
+
+
+
+
+
+        // chip select logic setup
+
+//        binding.chipPo.setOnCheckedChangeListener { view, isChecked ->
+//            binding.chipTl.isChecked = false
+//        }
+//
+//        binding.chipTl.setOnCheckedChangeListener { view, isChecked ->
+//            binding.chipPo.isChecked = false
+//        }
+//
+//        binding.chipRun.setOnCheckedChangeListener { view, isChecked ->
+//            binding.chipEnd.isChecked = false
+//        }
+//
+//        binding.chipEnd.setOnCheckedChangeListener { view, isChecked ->
+//            binding.chipRun.isChecked = false
+//        }
+//
+//        requireActivity().project_main_add.setOnClickListener {
+//            Log.d("project_main_add", "pressed")
+//            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
+//        }
+//
+//        // filter projects on chip selected
+//        binding.chipsGroup.setOnCheckedChangeListener { view, isChecked ->
+//            if (view.chip_po.isChecked && view.chip_run.isChecked) {
+//                TODO()
+//            } else if (view.chip_po.isChecked && view.chip_end.isChecked) {
+//                TODO()
+//            } else if (view.chip_tl.isChecked && view.chip_run.isChecked) {
+//                TODO()
+//            } else if (view.chip_tl.isChecked && view.chip_end.isChecked) {
+//                TODO()
+//            } else if (view.chip_po.isChecked) {
+//                viewModel.getProjectAsOwner()
+//                adapter.submitList(viewModel.projectList.value)
+//                Log.d("chip_po clicked", "success")
+//            } else if (view.chip_tl.isChecked) {
+//                TODO()
+//            } else if (view.chip_run.isChecked) {
+//                TODO()
+//            } else if (view.chip_end.isChecked) {
+//                TODO()
+//            } else {
+//                viewModel.getAllProject()
+//                adapter.submitList(viewModel.projectList.value)
+//            }
+//        }
 
 
         return binding.root
