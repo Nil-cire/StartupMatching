@@ -24,7 +24,7 @@ class PersonDetailFragment: Fragment() {
         val viewModelFactory = PersonDetailViewModelFactory(userArgs)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(PersonDetailViewModel::class.java)
         val adapter = ItemPersonSkillRecyclerViewAdapter(ItemPersonSkillRecyclerViewAdapter.OnClickListener{})
-        val adapter2 = PersonMainAdapter(PersonMainAdapter.OnClickListener{
+        val adapter2 = PersonDetailAchievementAdapter(PersonDetailAchievementAdapter.OnClickListener{
 //            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatroomDetailFragment(it))
         })
         binding.lifecycleOwner = this

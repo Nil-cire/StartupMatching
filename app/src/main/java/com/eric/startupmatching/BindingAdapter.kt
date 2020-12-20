@@ -8,22 +8,9 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.util.*
 
 @BindingAdapter("setImages")
-
-//fun ImageView.setCircularImage(imageUrl: String?) {
-//    imageUrl?.let {
-//        val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
-//        Glide.with(this.context)
-//            .load(imageUrl)
-//            .apply(
-//                RequestOptions()
-//                    .placeholder(R.drawable.icons_abstract)
-//                    .error(R.drawable.icons_abstract))
-//            .into(this)
-//    }
-//}
-
 fun ImageView.setImage(imageUrl: String?) {
     imageUrl?.let {
         val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
@@ -33,6 +20,20 @@ fun ImageView.setImage(imageUrl: String?) {
                 RequestOptions()
                     .placeholder(R.drawable.icons_abstract)
                     .error(R.drawable.icons_abstract))
+            .into(this)
+    }
+}
+
+@BindingAdapter("setTrophyImages")
+fun ImageView.setTrophyImages(imageUrl: String?) {
+    imageUrl?.let {
+        val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
+        Glide.with(this.context)
+            .load(imgUri)
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.trophy)
+                    .error(R.drawable.trophy))
             .into(this)
     }
 }
@@ -61,5 +62,14 @@ fun TextView.setAchievementCount(achievement: Int?) {
         "成就: 0 個"
     } else {
         "成就: $achievement 個"
+    }
+}
+
+@BindingAdapter("setTimeWithFormat")
+fun TextView.setTimeWithFormat(date: Date?) {
+    text = if (date == null) {
+        "超過5年以前"
+    } else {
+        "${date.year} - ${date.month} - ${date.day}"
     }
 }

@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.data.Achievement
-import com.eric.startupmatching.data.Post
-import com.eric.startupmatching.databinding.ItemSocialmediaPostRecyclerViewBinding
-
+import com.eric.startupmatching.databinding.ItemPersonDetailAchievementBinding
 class PersonDetailAchievementAdapter(val onClickListener: OnClickListener) : ListAdapter<Achievement, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 
-    class ViewHolder(var binding: ItemSocialmediaPostRecyclerViewBinding):
+    class ViewHolder(var binding: ItemPersonDetailAchievementBinding):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(achievement: Achievement) {
@@ -24,7 +22,7 @@ class PersonDetailAchievementAdapter(val onClickListener: OnClickListener) : Lis
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemSocialmediaPostRecyclerViewBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemPersonDetailAchievementBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
