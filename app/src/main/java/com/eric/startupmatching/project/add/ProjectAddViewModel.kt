@@ -61,6 +61,7 @@ class ProjectAddViewModel: ViewModel() {
                 .addOnSuccessListener {
                     it.update("id", it.id)
                     it.update("teams", mutableListOf(_addTeamId.value))
+                    project.id = it.id
                     _addSuccess.value = project
                 }
         }

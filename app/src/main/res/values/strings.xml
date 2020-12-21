@@ -61,6 +61,7 @@
     <string name="add_team">新增團隊</string>
     <string name="positoin">擔任職務</string>
     <string name="finish_date">完成時間</string>
+    <string name="friend_list">好友清單</string>
 
     <array name="dummy_items">
         <item>One</item>

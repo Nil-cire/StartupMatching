@@ -115,6 +115,7 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
     override fun onResume() {
         super.onResume()
         requireActivity().project_edit_task.visibility = View.VISIBLE
+        requireActivity().project_edit_task.text = "新增任務"
         val project = ProjectEditTaskFragmentArgs.fromBundle(requireArguments()).projectArgs
         val viewModelFactory = ProjectEditTaskViewModelFactory(project)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTaskViewModel::class.java)

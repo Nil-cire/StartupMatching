@@ -1,5 +1,6 @@
 package com.eric.startupmatching.project.edit
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.eric.startupmatching.OnStartDragListener
 import com.eric.startupmatching.SimpleItemTouchHelperCallback
 import com.eric.startupmatching.databinding.FragmentProjectEditTeamBinding
 import com.eric.startupmatching.project.edit.dialog.AddTeamDialog
+import com.eric.startupmatching.project.edit.dialog.SelectMemberDialog
 import com.eric.startupmatching.project.treeview.model.team.TeamChildModel
 import com.eric.startupmatching.project.treeview.model.team.TeamParentModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -37,7 +39,8 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
         val binding = FragmentProjectEditTeamBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        val adapter = ProjectEditTeamAdapter(ProjectEditTeamAdapter.OnClickListener{})
+        val adapter = ProjectEditTeamAdapter(ProjectEditTeamAdapter.OnClickListener{},
+            viewModel, ProjectEditTeamAdapter.OnClickListener2{})
         binding.recyclerView.adapter = adapter
 
 //        val adapter = MultiTypeAdapter2(this)
@@ -76,6 +79,10 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
 //            for (team in it) {
 //                viewModel.getUserByTeam(team)
 //            }
+        })
+
+        viewModel.editTeam.observe(viewLifecycleOwner, Observer {
+            fragmentManager?.let { it1 -> SelectMemberDialog(viewModel).show(it1, "addMember") }
         })
 
 

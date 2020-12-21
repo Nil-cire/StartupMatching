@@ -143,10 +143,10 @@ class ProjectMainFragment: Fragment() {
 //            binding.chipRun.isChecked = false
 //        }
 //
-//        requireActivity().project_main_add.setOnClickListener {
-//            Log.d("project_main_add", "pressed")
-//            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
-//        }
+        requireActivity().project_main_add.setOnClickListener {
+            Log.d("project_main_add", "pressed")
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
+        }
 //
 //        // filter projects on chip selected
 //        binding.chipsGroup.setOnCheckedChangeListener { view, isChecked ->

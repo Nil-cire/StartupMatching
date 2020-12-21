@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.*
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
@@ -66,6 +67,46 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
         get() = _getTeamCount
 
     var addTeamId = MutableLiveData<String>()
+
+    val editTeam = MutableLiveData<Team>()
+
+    private val _followList = MutableLiveData<List<User>>()
+    val followList: LiveData<List<User>>
+        get() = _followList
+
+//    private val _selectedFollowList = MutableLiveData<List<User>>()
+//    val selectedFollowList: LiveData<List<User>>
+//        get() = _selectedFollowList
+
+    var selectedFollowList = mutableListOf<String>()
+
+    var selectedTeam: Team? = null
+
+    fun resetSelectedFollowList() {
+        selectedFollowList = mutableListOf()
+    }
+
+    fun addSelectedFollowList(team: Team) {
+        var count = 0
+        coroutineScope.launch {
+            db.collection("Team").document(team.id.toString())
+                .get()
+                .addOnSuccessListener {
+                    var members = it.toObject(Team::class.java)?.members as MutableList
+                    if (!members.isNullOrEmpty()) {
+                        for (member in selectedFollowList) {
+                            if (!members.contains(member)) {
+                                members.add(member)
+                            }
+                            count += 1
+                        }
+                    }
+                    if (count == selectedFollowList.size) {
+                        it.reference.update("members", members)
+                    }
+                }
+        }
+    }
 
 
     val todoTask = MutableLiveData<Task>()
@@ -185,6 +226,27 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
                         Log.d("listToSubmit", listToSubmit.value.toString())
                     }
                 }
+        }
+    }
+
+    fun getFriendList() {
+        var followList = mutableListOf<User>()
+        var count = 0
+        if (!UserInfo.currentUser.value?.following.isNullOrEmpty()) {
+            for (userId in UserInfo.currentUser.value?.following!!) {
+                db.collection("User").whereEqualTo("id", userId)
+                    .get()
+                    .addOnSuccessListener {
+                        if (!it.toObjects(User::class.java).isNullOrEmpty()) {
+                            var user = it.toObjects(User::class.java)[0]
+                            followList.add(user)
+                            count += 1
+                        }
+                        if (count == UserInfo.currentUser.value?.following!!.size){
+                            _followList.value = followList
+                        }
+                    }
+            }
         }
     }
 

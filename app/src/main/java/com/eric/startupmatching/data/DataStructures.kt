@@ -49,7 +49,7 @@ data class Team(
 
 @Parcelize
 data class Project(
-    val id: String? = "",
+    var id: String? = "",
     val projectName: String? = "",
     val description: String? = "",
     val tasks: List<String?>? = mutableListOf(), //Task id
