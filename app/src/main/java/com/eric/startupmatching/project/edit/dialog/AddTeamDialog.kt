@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.eric.startupmatching.R
+import com.eric.startupmatching.data.Team
 import com.eric.startupmatching.databinding.DialogAddTeamBinding
 import com.eric.startupmatching.project.edit.ProjectEditTeamViewModel
 import java.util.*
@@ -31,13 +32,14 @@ class AddTeamDialog(val viewModel: ProjectEditTeamViewModel) : DialogFragment() 
         val binding = DialogAddTeamBinding.inflate(inflater, container, false)
 
         binding.submit.setOnClickListener {
-            // set task value
-//            viewModel.taskInstance.serial = viewModel.taskList.value?.size ?: 0
-//            viewModel.taskInstance.name = binding.editTextTextPersonName.text.toString()
-//            viewModel.taskInstance.description = binding.editTextTextPersonName6.text.toString()
-//            Log.d("taskInstance", viewModel.taskInstance.toString())
-//            viewModel.addTask(viewModel.taskInstance)
-//            dismiss()
+
+            val teamName = binding.editTextTextPersonName.text.toString()
+            val description = binding.editTextTextPersonName6.text.toString()
+
+            var teamToAdd = Team(teamName = teamName, description = description)
+            viewModel.addTeam(teamToAdd)
+            Log.d("teamToAdd", teamToAdd.toString())
+            dismiss()
         }
 
         binding.cancel.setOnClickListener {

@@ -65,7 +65,8 @@ data class Project(
     val startTime: Date? = Calendar.getInstance().time,
     val endTime: Date? = Calendar.getInstance().time,
     val taskEditable: String? = null,
-    val teamEditable: String? = null
+    val teamEditable: String? = null,
+    val projectMembers: List<String?>? = mutableListOf()
 ): Parcelable
 
 @Parcelize

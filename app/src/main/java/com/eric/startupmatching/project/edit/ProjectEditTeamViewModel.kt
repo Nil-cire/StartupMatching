@@ -65,6 +65,9 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
     val getTeamCount: LiveData<Int>
         get() = _getTeamCount
 
+    var addTeamId = MutableLiveData<String>()
+
+
     val todoTask = MutableLiveData<Task>()
 
     var todoInstance = User()
@@ -107,12 +110,48 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
 //                        teamListHolderCount += 1
                         if (teamListHolderCount == teamIdList.value?.size ?: 0) {
                             _teamList.value = teamListHolder
-                            Log.d("teamList", teamListHolder.toString())
+                            Log.d("teamListXXXX", teamList.value.toString())
+                            teamListHolder = mutableListOf()
                             teamListHolderCount = 0
                         }
                     }
 //            }
         }
+    }
+
+    fun addTeam(team: Team) {
+        coroutineScope.launch {
+            db.collection("Team")
+                .add(team)
+                .addOnSuccessListener {
+                    it.update("id", it.id)
+                    addTeamId.value = it.id
+                }.addOnSuccessListener {
+                    db.collection("Project").document(projectArgs.id.toString())
+                        .get()
+                        .addOnSuccessListener {
+                            val project = it.toObject(Project::class.java)
+                            var list = mutableListOf<String>()
+                            if (!project!!.teams.isNullOrEmpty()) {
+                                for (teamId in project.teams!!) {
+                                    if (teamId != null) {
+                                        list.add(teamId)
+                                    }
+                                }
+                            }
+                            list.add(addTeamId.value.toString()!!)
+                            Log.d("addTeamId", list.toString())
+                            it.reference.update("teams", list)
+                        }
+                }
+        }
+    }
+
+    fun observeTeamDataChanged() {
+        db.collection("Project").document(projectArgs.id.toString())
+            .addSnapshotListener { value, error ->
+                getTeamsByProject(projectArgs)
+            }
     }
 
 

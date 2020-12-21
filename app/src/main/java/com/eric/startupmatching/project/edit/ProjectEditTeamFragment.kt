@@ -37,25 +37,27 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
         val binding = FragmentProjectEditTeamBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        val adapter = ProjectEditTeamAdapter(ProjectEditTeamAdapter.OnClickListener{})
+        binding.recyclerView.adapter = adapter
 
-        val adapter = MultiTypeAdapter2(this)
-        adapter.register(
-            TeamParentModel::class.java, ProjectEditTeamParentAdapter(
-            viewModel, ProjectEditTeamParentAdapter.OnClickListener{
-//                var task = it.content
-//                viewModel.todoTeam.value = task
-//                viewModel.getTodoSize(task)
-//                Log.d("addTodoBtn", "Add")
-            }))
+//        val adapter = MultiTypeAdapter2(this)
+//        adapter.register(
+//            TeamParentModel::class.java, ProjectEditTeamParentAdapter(
+//            viewModel, ProjectEditTeamParentAdapter.OnClickListener{
+////                var task = it.content
+////                viewModel.todoTeam.value = task
+////                viewModel.getTodoSize(task)
+////                Log.d("addTodoBtn", "Add")
+//            }))
 
-        adapter.register(TeamChildModel::class.java, ProjectEditTeamChildAdapter(viewModel))
-        val recyclerView = binding.recyclerView
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
-        mItemTouchHelper = ItemTouchHelper(callback)
-        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
+//        adapter.register(TeamChildModel::class.java, ProjectEditTeamChildAdapter(viewModel))
+//        val recyclerView = binding.recyclerView
+//        recyclerView.setHasFixedSize(true)
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(activity)
+//        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
+//        mItemTouchHelper = ItemTouchHelper(callback)
+//        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
 
         viewModel.teamIdList.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
@@ -66,23 +68,27 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
             }
         })
 
-        viewModel.teamList.observe(viewLifecycleOwner, Observer {
-            for (team in it) {
-                viewModel.getUserByTeam(team)
-            }
-        })
-
-
-
-        viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
-            adapter.items = list
+        viewModel.teamList.observe(viewLifecycleOwner, Observer { list ->
+            list.sortedBy { it.teamLeader }
+            adapter.submitList(list)
+            Log.d("listSubmitxx", list.toString())
             adapter.notifyDataSetChanged()
-//            Log.d("listToSubmit", it.toString())
+//            for (team in it) {
+//                viewModel.getUserByTeam(team)
+//            }
         })
+
+
+
+//        viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
+//            adapter.items = list
+//            adapter.notifyDataSetChanged()
+////            Log.d("listToSubmit", it.toString())
+//        })
 
         requireActivity().project_edit_task.setOnClickListener {
             fragmentManager?.let { it1 -> AddTeamDialog(viewModel).show(it1, "show") }
-            Log.d("listToSubmit2222", adapter.items.toString())
+//            Log.d("listToSubmit2222", adapter.items.toString())
         }
 
         // add todoo
@@ -123,12 +129,13 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
     override fun onResume() {
         super.onResume()
         requireActivity().project_edit_task.visibility = View.VISIBLE
+        requireActivity().project_edit_task.text = "新增團隊"
         val project = ProjectEditTeamFragmentArgs.fromBundle(requireArguments()).projectArgs
         val viewModelFactory = ProjectEditTeamViewModelFactory(project)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTeamViewModel::class.java)
         viewModel.getTeamsByProject(project)
         Log.d("ProjectResume", "Resume")
-//        viewModel.observeTeamDataChanged()
+        viewModel.observeTeamDataChanged()
 
         var backBtn = requireActivity().back_button
         backBtn.visibility = View.VISIBLE
