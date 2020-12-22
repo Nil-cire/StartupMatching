@@ -42,7 +42,7 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
 
     // Firebase query functions
     fun getProjectTeams(project: Project) {
-        var cont3 = 0
+        var count3 = 0
         coroutineScope.launch {
             var teamList = mutableListOf<Team>()
             if (!project.teams.isNullOrEmpty()) {
@@ -50,10 +50,10 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
                     db.collection("Team")
                         .whereEqualTo("id", teamId)
                         .get()
-                        .addOnSuccessListener {
-                            teamList.addAll(it.toObjects(Team::class.java))
-                            cont3 += 1
-                            if (cont3 == project.teams.size) {
+                        .addOnSuccessListener {qs ->
+                            teamList.addAll(qs.toObjects(Team::class.java))
+                            count3 += 1
+                            if (count3 == project.teams.size) {
                                 teamList.sortBy { it.id }
                                 _teamList.value = teamList
                                 Log.d("ProjectTeams", _teamList.value.toString())
@@ -110,5 +110,18 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
                 }
             }
         }
+    }
+
+    fun observeTeamChanges() {
+        coroutineScope.launch {
+            db.collection("Project").document(arg.id.toString())
+                .addSnapshotListener { value, error ->
+                    getProjectTeams(arg)
+                }
+        }
+    }
+
+    init {
+        observeTeamChanges()
     }
 }

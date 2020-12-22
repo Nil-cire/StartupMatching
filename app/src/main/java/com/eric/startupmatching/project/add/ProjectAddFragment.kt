@@ -71,7 +71,7 @@ class ProjectAddFragment: Fragment() {
                 id = null,
                 projectName = binding.editTextTextPersonName.text.toString(),
                 description = binding.editTextTextPersonName6.text.toString(),
-                startupStatus = "planning",
+                startupStatus = "preparing",
                 projectLeader = UserInfo.currentUser.value?.id,
                 startTime = startTime.time,
                 endTime = endTime.time

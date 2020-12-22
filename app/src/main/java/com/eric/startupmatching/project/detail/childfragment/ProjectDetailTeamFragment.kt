@@ -32,14 +32,8 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
 
 
         val adapter = MultiTypeAdapter()
-        adapter.register(
-            TeamParentModel::class.java,
-            TeamParentViewBinder()
-        )
-        adapter.register(
-            TeamChildModel::class.java,
-            TeamChildViewBinder()
-        )
+        adapter.register(TeamParentModel::class.java, TeamParentViewBinder())
+        adapter.register(TeamChildModel::class.java, TeamChildViewBinder())
 
         binding.recyclerView.adapter = adapter
 
@@ -70,8 +64,8 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
 
         return binding.root
     }
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         val arg = arg
         val viewModelFactory = ProjectDetailTeamViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTeamViewModel::class.java)

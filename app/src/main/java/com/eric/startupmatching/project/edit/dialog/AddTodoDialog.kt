@@ -10,12 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
+import com.eric.startupmatching.R
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.databinding.DialogAddTodoBinding
 import com.eric.startupmatching.project.edit.ProjectEditTaskViewModel
 import java.util.*
 
 class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.custom_dialog)
+    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -76,10 +82,6 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
             binding.cancel.setOnClickListener {
                 dismiss()
             }
-        }
-
-        binding.submit.setOnClickListener {
-            dismiss()
         }
 
         return binding.root

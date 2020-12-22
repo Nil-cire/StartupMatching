@@ -9,6 +9,7 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -108,6 +109,12 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
                 viewModel.updateTasks(task)
             }
         }
+
+        binding.create.setOnClickListener {
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
+        }
+
+
         return binding.root
     }
 
@@ -133,8 +140,12 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
 
     override fun onPause() {
         super.onPause()
+        val project = ProjectEditTaskFragmentArgs.fromBundle(requireArguments()).projectArgs
+        val viewModelFactory = ProjectEditTaskViewModelFactory(project)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTaskViewModel::class.java)
         requireActivity().project_edit_task.visibility = View.GONE
         requireActivity().back_button.visibility = View.GONE
+        viewModel.resetTaskListGet()
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

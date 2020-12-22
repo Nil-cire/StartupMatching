@@ -63,6 +63,27 @@ class ProjectEditTeamAdapter(val onClickListener: OnClickListener, var viewModel
 //            binding.addMember.setOnClickListener {
 //                SelectMemberDialogAdapter(viewModel).showsDialog
 //            }
+            db.collection("Team").document(team.id.toString())
+                .addSnapshotListener { value, error ->
+                    val list = value?.toObject(Team::class.java)?.members
+                    if (!list.isNullOrEmpty()) {
+                        for (userId in list) {
+                            db.collection("User")
+                                .whereEqualTo("id", userId)
+                                .get()
+                                .addOnSuccessListener {
+                                    userList.add(it.toObjects(User::class.java)[0])
+                                    memberCount += 1
+                                    if(memberCount == list.size) {
+                                        adapter.submitList(userList)
+                                        userList = mutableListOf()
+                                        memberCount = 0
+                                    }
+                                }
+                        }
+                    }
+
+                }
         }
     }
 

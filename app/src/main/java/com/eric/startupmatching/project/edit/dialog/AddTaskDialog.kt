@@ -90,9 +90,6 @@ class AddTaskDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
             }
         }
 
-        binding.submit.setOnClickListener {
-            dismiss()
-        }
 
         return binding.root
     }

@@ -69,48 +69,74 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         coroutineScope.launch {
             db.collection("Project").document(project.id!!)
                 .collection("Task")
-                .orderBy("serial", Query.Direction.ASCENDING)
-                .get()
-                .addOnSuccessListener { qs ->
-                    list.addAll(qs.toObjects(Task::class.java))
+//                .orderBy("serial", Query.Direction.ASCENDING)
+//                .get()
+                .addSnapshotListener { value, error ->
+                    if (value != null) {
+                        list.addAll(value.toObjects(Task::class.java))
+                        list.sortBy { it.serial }
+                    }
 //                    list.sortBy { it.serial }
                     Log.d("editTaskList", list.toString())
                     _taskList.value = list
                     Log.d("getTaskByProject", taskList.value.toString())
                 }
+
+
         }
     }
+
+//    fun getTaskByProject(project: Project) {
+//        var list = mutableListOf<Task>()
+//        coroutineScope.launch {
+//            db.collection("Project").document(project.id!!)
+//                .collection("Task")
+//                .orderBy("serial", Query.Direction.ASCENDING)
+//                .get()
+//                .addOnSuccessListener { qs ->
+//                    list.addAll(qs.toObjects(Task::class.java))
+////                    list.sortBy { it.serial }
+//                    Log.d("editTaskList", list.toString())
+//                    _taskList.value = list
+//                    Log.d("getTaskByProject", taskList.value.toString())
+//                }
+//        }
+//    }
 
     fun getTodoByTask(task: Task) {
         var list = mutableListOf<Todo>()
         var treeChildList = mutableListOf<TreeViewModel>()
-        coroutineScope.launch {
-            db.collection("Project").document(projectArgs.id!!)
-                .collection("Task").document(task.id!!)
-                .collection("Todo")
-                .get()
-                .addOnSuccessListener {qs ->
-                    list.addAll(qs.toObjects(Todo::class.java))
-                    list.sortBy { it.serial }
-                    Log.d("editTodoList", list.toString())
-                    for (todo in list) {
-                        treeChildList.add(TaskChildModel(todo))
+        task.id?.let {
+            coroutineScope.launch {
+                db.collection("Project").document(projectArgs.id!!)
+                    .collection("Task").document(task.id!!)
+                    .collection("Todo")
+                    .get()
+                    .addOnSuccessListener {qs ->
+                        list.addAll(qs.toObjects(Todo::class.java))
+                        list.sortBy { it.serial }
+                        Log.d("editTodoList", list.toString())
+                        for (todo in list) {
+                            treeChildList.add(TaskChildModel(todo))
+                        }
+                        val treeParent = TaskParentModel(task)
+                        treeParent.children = treeChildList as ArrayList<TreeViewModel>
+                        listToSubmitHolder.add(treeParent)
+                        _getTodoCount.value = _getTodoCount.value?.plus(1)
+                        if (getTodoCount.value == taskList.value?.size) {
+                            var a = listToSubmitHolder as MutableList<TaskParentModel>
+                            a.sortBy { it.content.serial }
+                            _listToSubmit.value = a
+                            listToSubmitHolder = mutableListOf()
+                            _getTodoCount.value = 0
+                            _taskListGet.value = true
+                            Log.d("getTaskByProject2", listToSubmit.value.toString())
+                            Log.d("listToSubmitHolder", listToSubmitHolder.toString())
+                        }
                     }
-                    val treeParent = TaskParentModel(task)
-                    treeParent.children = treeChildList as ArrayList<TreeViewModel>
-                    listToSubmitHolder.add(treeParent)
-                    _getTodoCount.value = _getTodoCount.value?.plus(1)
-                    if (getTodoCount.value == taskList.value?.size) {
-                        var a = listToSubmitHolder as MutableList<TaskParentModel>
-                        a.sortBy { it.content.serial }
-                        _listToSubmit.value = a
-                        listToSubmitHolder = mutableListOf()
-                        _getTodoCount.value = 0
-                        _taskListGet.value = true
-                        Log.d("getTaskByProject2", listToSubmit.value.toString())
-                    }
-                }
+            }
         }
+
     }
 
     fun addTask(task: Task) {
@@ -134,16 +160,19 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
     }
 
     fun getTodoSize(task: Task) {
-        coroutineScope.launch {
-            db.collection("Project").document(projectArgs.id!!)
-                .collection("Task").document(task.id!!)
-                .collection("Todo")
-                .get()
-                .addOnSuccessListener {
-                    _todoSize.value = it.size()
-                    Log.d("todoSize", it.size().toString())
-                }
+        task.id?.let {
+            coroutineScope.launch {
+                db.collection("Project").document(projectArgs.id!!)
+                    .collection("Task").document(task.id!!)
+                    .collection("Todo")
+                    .get()
+                    .addOnSuccessListener {
+                        _todoSize.value = it.size()
+                        Log.d("todoSize", it.size().toString())
+                    }
+            }
         }
+
     }
 
     fun addTodo(todo: Todo) {
@@ -211,9 +240,13 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         }
     }
 
+    fun resetTaskListGet() {
+        _taskListGet.value = false
+    }
+
     init {
         _getTodoCount.value = 0
-        observeTaskDataChanged()
+//        observeTaskDataChanged()
     }
 }
 

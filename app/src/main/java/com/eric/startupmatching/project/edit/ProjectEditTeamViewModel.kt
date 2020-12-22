@@ -101,10 +101,21 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
                             count += 1
                         }
                     }
+                    if (members.isNullOrEmpty()) {
+                        members = mutableListOf()
+                        for (member in selectedFollowList) {
+                            if (!members.contains(member)) {
+                                members.add(member)
+                            }
+                            count += 1
+                    }
+
+                }
                     if (count == selectedFollowList.size) {
                         it.reference.update("members", members)
+                        Log.d("getTeamIdByProject", teamIdList.value.toString())
                     }
-                }
+            }
         }
     }
 

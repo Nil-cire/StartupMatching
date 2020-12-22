@@ -10,9 +10,11 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.MultiTypeAdapter2
 import com.eric.startupmatching.OnStartDragListener
 import com.eric.startupmatching.SimpleItemTouchHelperCallback
@@ -82,6 +84,7 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
         })
 
         viewModel.editTeam.observe(viewLifecycleOwner, Observer {
+            viewModel.selectedTeam = it
             fragmentManager?.let { it1 -> SelectMemberDialog(viewModel).show(it1, "addMember") }
         })
 
@@ -96,6 +99,10 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
         requireActivity().project_edit_task.setOnClickListener {
             fragmentManager?.let { it1 -> AddTeamDialog(viewModel).show(it1, "show") }
 //            Log.d("listToSubmit2222", adapter.items.toString())
+        }
+
+        binding.create.setOnClickListener {
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
         }
 
         // add todoo

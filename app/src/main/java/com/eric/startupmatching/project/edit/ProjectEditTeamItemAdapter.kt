@@ -6,11 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.data.User
-import com.eric.startupmatching.databinding.ItemProjectEditTeamBinding
 import com.eric.startupmatching.databinding.ItemProjectEditTeamMembericonRecyclerViewBinding
-import com.eric.startupmatching.databinding.ItemProjectMainRecyclerViewBinding
 
 class ProjectEditTeamItemAdapter(val onClickListener: OnClickListener) : ListAdapter<User, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 

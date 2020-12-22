@@ -33,9 +33,10 @@ class SelectMemberDialog(val viewModel: ProjectEditTeamViewModel) : DialogFragme
         val binding = DialogSelectMemberBinding.inflate(inflater, container, false)
         val adapter = SelectMemberDialogAdapter(SelectMemberDialogAdapter.OnClickListener{
             viewModel.selectedFollowList.add(it.id.toString())
+            Log.d("addOneMember", viewModel.selectedFollowList.toString())
         })
         binding.recyclerView.adapter = adapter
-
+        viewModel.resetSelectedFollowList()
         viewModel.getFriendList()
 
         viewModel.followList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {list ->
@@ -43,14 +44,15 @@ class SelectMemberDialog(val viewModel: ProjectEditTeamViewModel) : DialogFragme
             adapter.submitList(list)
         })
 
-            binding.cancel.setOnClickListener {
-                viewModel.resetSelectedFollowList()
-                dismiss()
-            }
+        binding.cancel.setOnClickListener {
+            viewModel.resetSelectedFollowList()
+            dismiss()
+        }
 
 
         binding.submit.setOnClickListener {
             viewModel.selectedTeam?.let { it1 -> viewModel.addSelectedFollowList(it1) }
+            Log.d("addTeamMember", viewModel.selectedTeam.toString())
             dismiss()
         }
 
