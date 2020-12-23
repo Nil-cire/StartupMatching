@@ -20,7 +20,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/constraint_project_info"
             android:layout_marginBottom="@dimen/regular_margin"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/project_detail" />
+            app:srcCompat="@drawable/tools" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

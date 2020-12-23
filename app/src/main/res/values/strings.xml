@@ -64,6 +64,7 @@
     <string name="friend_list">好友清單</string>
     <string name="finish">完成</string>
     <string name="current_no_data">尚無資料</string>
+    <string name="running">進行中</string>
 
     <array name="dummy_items">
         <item>One</item>

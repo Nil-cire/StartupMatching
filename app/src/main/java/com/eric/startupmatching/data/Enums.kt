@@ -14,3 +14,8 @@ enum class ProjectStage(val stage: String) {
     Running("running"),
     Done("done")
 }
+
+enum class ViewPagerType(val type: String) {
+    Task("任務"),
+    Team("團隊")
+}

@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.eric.startupmatching.MainNavigationDirections
-import com.eric.startupmatching.databinding.FragmentProjectDetailBinding
+import com.eric.startupmatching.data.ViewPagerType
+import com.eric.startupmatching.databinding.FragmentProjectRunningBinding
 import com.eric.startupmatching.project.detail.ProjectDetailFragmentArgs
-import com.eric.startupmatching.project.detail.ProjectDetailViewModel
-import com.eric.startupmatching.project.detail.ProjectDetailViewModelFractory
-import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskFragment
 import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTeamFragment
+import com.eric.startupmatching.project.running.child.ProjectRunningTaskFragment
 import com.eric.startupmatching.team.TeamMainAdapter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,12 +21,12 @@ class ProjectRunningFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentProjectDetailBinding.inflate(inflater, container, false)
+        val binding = FragmentProjectRunningBinding.inflate(inflater, container, false)
 
         val arg = ProjectDetailFragmentArgs.fromBundle(requireArguments()).projectArgs
-        val viewModelFactory = ProjectDetailViewModelFractory(arg)
+        val viewModelFactory = ProjectRunningViewModelFactory(arg)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailViewModel::class.java)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectRunningViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -41,38 +37,20 @@ class ProjectRunningFragment: Fragment() {
 
         binding.lifecycleOwner = this
 
-        viewpagerAdapter.addFragment(ProjectDetailTaskFragment(arg),"任務")
-        viewpagerAdapter.addFragment(ProjectDetailTeamFragment(arg),"團隊")
+        viewpagerAdapter.addFragment(ProjectRunningTaskFragment(arg), ViewPagerType.Task.type)
+        viewpagerAdapter.addFragment(ProjectDetailTeamFragment(arg),ViewPagerType.Team.type)
 
         viewPager.adapter = viewpagerAdapter
 
-        val titleList = listOf("任務", "團隊")
+        val titleList = listOf(ViewPagerType.Task.type, ViewPagerType.Team.type)
         for (title in titleList) {
             tabs.addTab((tabs.newTab().setText(title)))
         }
 
         tabs.setupWithViewPager(viewPager)
 
-        class MViewPagerAdapter(tabLayout: TabLayout) : TabLayout.TabLayoutOnPageChangeListener(tabLayout) {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                when (position) {
-                    1 -> requireActivity().project_detail_edit.text = "編輯團隊"
-                    else -> requireActivity().project_detail_edit.text = "編輯任務"
-                }
-            }
-        }
-
-        viewPager.addOnPageChangeListener(MViewPagerAdapter(tabs))
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
-
-        requireActivity().project_detail_edit.setOnClickListener {
-            if(it is TextView && it.text == "編輯任務") {
-                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTaskFragment(arg))
-            } else {
-                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTeamFragment(arg))
-            }
-        }
 
         return binding.root
     }

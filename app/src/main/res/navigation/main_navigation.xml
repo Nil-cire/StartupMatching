@@ -139,4 +139,13 @@
         android:id="@+id/personMainFragment"
         android:name="com.eric.startupmatching.person.PersonMainFragment"
         android:label="PersonMainFragment" /><action android:id="@+id/action_global_personMainFragment" app:destination="@id/personMainFragment"/>
+    <fragment
+        android:id="@+id/projectRunningFragment"
+        android:name="com.eric.startupmatching.project.running.ProjectRunningFragment"
+        android:label="ProjectRunningFragment" >
+        <argument
+            android:name="projectArgs"
+            app:argType="com.eric.startupmatching.data.Project" />
+    </fragment>
+    <action android:id="@+id/action_global_projectRunningFragment" app:destination="@id/projectRunningFragment" />
 </navigation>
