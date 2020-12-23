@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.eric.startupmatching.MainNavigationDirections
+import com.eric.startupmatching.data.ProjectStage
 import com.eric.startupmatching.databinding.FragmentProjectMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_project_main.view.*
@@ -25,7 +26,11 @@ class ProjectMainFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         val adapter = ProjectMainAdapter(ProjectMainAdapter.OnClickListener{
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
+            when (it.startupStatus) {
+                ProjectStage.Preparing.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
+                ProjectStage.Running.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
+                ProjectStage.Done.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
+            }
         })
         binding.recyclerView.adapter = adapter
 

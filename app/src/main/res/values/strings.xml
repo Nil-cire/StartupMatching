@@ -63,6 +63,7 @@
     <string name="finish_date">完成時間</string>
     <string name="friend_list">好友清單</string>
     <string name="finish">完成</string>
+    <string name="current_no_data">尚無資料</string>
 
     <array name="dummy_items">
         <item>One</item>

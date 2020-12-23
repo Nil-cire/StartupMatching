@@ -8,3 +8,9 @@ enum class WorkStatus(val chineses_translation: String){
 enum class EditTask(val message: String) {
     EnterMessage("輸入訊息...")
 }
+
+enum class ProjectStage(val stage: String) {
+    Preparing("preparing"),
+    Running("running"),
+    Done("done")
+}
