@@ -19,3 +19,8 @@ enum class ViewPagerType(val type: String) {
     Task("任務"),
     Team("團隊")
 }
+
+enum class TodoStatus(val status: String) {
+    Running("running"),
+    Done("done")
+}

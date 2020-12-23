@@ -28,7 +28,7 @@ class ProjectMainFragment: Fragment() {
         val adapter = ProjectMainAdapter(ProjectMainAdapter.OnClickListener{
             when (it.startupStatus) {
                 ProjectStage.Preparing.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
-                ProjectStage.Running.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
+                ProjectStage.Running.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectRunningFragment(it))
                 ProjectStage.Done.stage -> this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(it))
             }
         })

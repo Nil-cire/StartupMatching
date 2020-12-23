@@ -11,7 +11,7 @@ class ProjectRunningViewModelFactory (
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ProjectEditTeamViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ProjectRunningViewModel::class.java)) {
             return ProjectRunningViewModel(arg) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

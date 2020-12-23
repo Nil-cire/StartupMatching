@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eric.startupmatching.data.Project
-import com.eric.startupmatching.data.Task
-import com.eric.startupmatching.data.Team
-import com.eric.startupmatching.data.Todo
+import com.eric.startupmatching.data.*
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
@@ -41,6 +38,48 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
     private val _todoList = MutableLiveData<List<List<Todo>>>()
     val todoList: LiveData<List<List<Todo>>>
         get() = _todoList
+
+    //// Chat Room Navigation /////
+    private val _chatRoomId = MutableLiveData<String>()
+    val chatRoomId: LiveData<String>
+        get() = _chatRoomId
+
+    fun setChatRoomId(chatRoomId: String) {
+        _chatRoomId.value = chatRoomId
+    }
+
+    //// update to-do status from "running" -> "done" in Firebase
+
+    private val _sendDoneTodoInfo = MutableLiveData<Todo>()
+    val sendDoneTodoInfo: LiveData<Todo>
+        get() = _sendDoneTodoInfo
+
+    fun updateTodoStatusToDone(todo: Todo) {
+        coroutineScope.launch {
+            db.collection("Project").document(arg.id.toString())
+                .collection("Task").document(todo.task!!)
+                .collection("Todo").document(todo.id.toString())
+                .update("status", TodoStatus.Done.status)
+                .addOnSuccessListener {
+                    _sendDoneTodoInfo.value = todo
+                }
+        }
+    }
+
+    fun updateTodoStatusToRunning(todo: Todo) {
+        coroutineScope.launch {
+            db.collection("Project").document(arg.id.toString())
+                .collection("Task").document(todo.task!!)
+                .collection("Todo").document(todo.id.toString())
+                .update("status", TodoStatus.Running.status)
+                .addOnSuccessListener {
+                    _sendDoneTodoInfo.value = todo
+                }
+        }
+    }
+
+    //// --
+
 
 //    private val _processTaskCount = MutableLiveData<Int>()
 //    val processTaskCount: LiveData<Int>
@@ -85,6 +124,7 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
                 .addOnSuccessListener {
                     var todoList = it.toObjects(Todo::class.java)
                     if (!todoList.isNullOrEmpty()) {
+                        todoList.sortBy { it.serial }
                         for (todo in todoList) {
                             member.add(TaskChildModel(todo))
                         }

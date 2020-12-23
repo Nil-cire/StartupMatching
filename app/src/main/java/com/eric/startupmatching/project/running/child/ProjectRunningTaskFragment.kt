@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.drakeet.multitype.MultiTypeAdapter
 import com.eric.startupmatching.MultiTypeAdapter2
 import com.eric.startupmatching.OnStartDragListener
 import com.eric.startupmatching.SimpleItemTouchHelperCallback
@@ -20,6 +21,8 @@ import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskVi
 import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskViewModelFactory
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskChildViewBinder
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskParentViewBinder
+import com.eric.startupmatching.project.running.child.viewbinder.RunTaskChildViewBinder
+import com.eric.startupmatching.project.running.child.viewbinder.RunTaskParentViewBinder
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 
@@ -38,15 +41,16 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val adapter = MultiTypeAdapter2(this)
-        adapter.register(TaskParentModel::class.java, TaskParentViewBinder())
-        adapter.register(TaskChildModel::class.java, TaskChildViewBinder())
+        val adapter = MultiTypeAdapter()
+        adapter.register(TaskParentModel::class.java, RunTaskParentViewBinder(viewModel))
+        adapter.register(TaskChildModel::class.java, RunTaskChildViewBinder(viewModel))
 
-        val recyclerView = binding.recyclerView
+//        val recyclerView = binding.recyclerView
         binding.recyclerView.adapter = adapter
-        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
-        mItemTouchHelper = ItemTouchHelper(callback)
-        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
+//        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
+//        mItemTouchHelper = ItemTouchHelper(callback)
+//        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
+        binding.noData.visibility = View.GONE
 
         viewModel.taskList.observe(viewLifecycleOwner, Observer {
             Log.d("projectTaskListObsv", it.toString())
@@ -56,10 +60,19 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         })
 
         viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
+            Log.d("listToSubmit2", list.toString())
             val x = list as ArrayList<TaskParentModel>
-            x.sortBy { it.content.serial }
-            adapter.items = x
-            adapter.notifyDataSetChanged()
+            if (list.isNullOrEmpty()) {
+                binding.noData.visibility = View.VISIBLE
+            } else {
+                x.sortBy { it.content.serial }
+                adapter.items = x
+                adapter.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.sendDoneTodoInfo.observe(viewLifecycleOwner, Observer{
+            //TODO create info with to-do and send it to all users in project
         })
 
 //        viewModel.todoList.observe(viewLifecycleOwner, Observer {
@@ -87,8 +100,8 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
     override fun onResume() {
         super.onResume()
         val arg = arg
-        val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
+        val viewModelFactory = ProjectRunningTaskViewModelFactory(arg)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectRunningTaskViewModel::class.java)
         viewModel.getTasks()
     }
 

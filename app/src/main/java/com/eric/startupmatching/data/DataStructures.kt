@@ -145,7 +145,7 @@ data class Todo( //adjust while crafting project manage page
     var serial: Int? = null,
     val members: List<String?>? = mutableListOf(),
     var name: String? = null,
-    val status: String? = null, //proposal, await, doing, done
+    var status: String? = null, //running, done
     var startTime: Date? = null,
     var endTime: Date? = null,
     val preTodo: String? = null,

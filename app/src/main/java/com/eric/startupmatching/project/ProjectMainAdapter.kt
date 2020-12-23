@@ -22,7 +22,6 @@ class ProjectMainAdapter(val onClickListener: OnClickListener) : ListAdapter<Pro
         fun bind(project: Project) {
             binding.project = project
             binding.executePendingBindings()
-
         }
     }
 
