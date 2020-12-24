@@ -29,7 +29,7 @@ class ProjectDoneMainFragment: Fragment() {
 
         binding.lifecycleOwner = this
 
-        binding.sendPost.setOnClickListener {
+        binding.postIt.setOnClickListener {
             var content = binding.shareText.text.toString()
             var imageUrl = "" // await for image function
             viewModel.postProject(content, imageUrl)
@@ -45,6 +45,11 @@ class ProjectDoneMainFragment: Fragment() {
         // create achievement when users in profile get and set userId in achievement
         viewModel.userIdList.observe(viewLifecycleOwner, Observer {
             viewModel.createAchievementForProject(projectArgs, it)
+        })
+
+        // add achievement to all users
+        viewModel.achievementId.observe(viewLifecycleOwner, Observer {
+            viewModel.addAchievementIdToUsers(viewModel.userIdList.value!!, it)
         })
 
         return binding.root

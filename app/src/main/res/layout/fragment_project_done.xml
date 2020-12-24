@@ -247,6 +247,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="@string/send_post"
+                android:id="@+id/post_it"
                 android:background="@drawable/round_corner_light_blue"
                 style="@style/center_text_font_noto"
                 android:textColor="@color/white"

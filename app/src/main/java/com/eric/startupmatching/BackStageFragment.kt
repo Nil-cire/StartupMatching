@@ -230,22 +230,22 @@ class BackStageFragment: Fragment() {
             }
         }
 
-        val allPost = mutableListOf<Post>(
-            Post("001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
-            Post("002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
-        )
+//        val allPost = mutableListOf<Post>(
+//            Post("001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
+//            Post("002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
+//        )
 
-        addPosts.setOnClickListener {
-            try {
-                for (post in allPost) {
-                    db.collection("Post")
-                        .add(post)
-                }
-                Log.d("add position:", "Success")
-            } catch (e:Exception) {
-                Log.d("add position fail:", e.message ?: null.toString())
-            }
-        }
+//        addPosts.setOnClickListener {
+//            try {
+//                for (post in allPost) {
+//                    db.collection("Post")
+//                        .add(post)
+//                }
+//                Log.d("add position:", "Success")
+//            } catch (e:Exception) {
+//                Log.d("add position fail:", e.message ?: null.toString())
+//            }
+//        }
 
         val teamMembers = mutableListOf(
             TeamMember("singer", "00001",
