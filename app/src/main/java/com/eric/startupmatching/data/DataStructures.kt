@@ -71,6 +71,7 @@ data class Project(
 
 @Parcelize
 data class Post(
+    val id: String = "", // Post id
     val poster: String = "", // User id
     val content: String = "",
     val image: String? = null,
@@ -83,6 +84,7 @@ data class Post(
 @Parcelize
 data class Achievement(
     val id: String? = null,
+    val postId: String? = null,
     val project: String? = null,
     val team: String? = null,
     val position: String? = null,

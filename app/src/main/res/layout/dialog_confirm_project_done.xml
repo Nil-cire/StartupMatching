@@ -68,7 +68,8 @@
         android:textColor="@color/white"
         android:background="@drawable/round_corner_light_blue"
         app:layout_constraintTop_toTopOf="@+id/confirm"
-        app:layout_constraintEnd_toEndOf="parent"android:layout_marginEnd="@dimen/regular_margin"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/regular_margin"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

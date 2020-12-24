@@ -138,6 +138,16 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
 //        }
 //    }
 
+    //// Confirm project done
+
+    private val _confirmProjectDone = MutableLiveData<Boolean>()
+    val confirmProjectDone: LiveData<Boolean>
+        get() = _confirmProjectDone
+
+    fun confirmProjectDone() {
+        _confirmProjectDone.value = true
+    }
+
     fun checkAllDone(taskList: List<Task>) {
         var taskCount = 0
         for (task in taskList) {
@@ -161,7 +171,6 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
                                 }
                             }
                         }
-
                         if (taskCount == taskList.size) {
                             _projectDone.value = true
                         }
@@ -173,8 +182,6 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
     private val _projectDone = MutableLiveData<Boolean>()
     val projectDone: LiveData<Boolean>
         get() = _projectDone
-
-
 
     fun getTasks() {
         coroutineScope.launch {

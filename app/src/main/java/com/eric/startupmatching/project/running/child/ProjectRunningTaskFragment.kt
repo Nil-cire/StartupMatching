@@ -25,6 +25,7 @@ import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskCh
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskParentViewBinder
 import com.eric.startupmatching.project.running.child.viewbinder.RunTaskChildViewBinder
 import com.eric.startupmatching.project.running.child.viewbinder.RunTaskParentViewBinder
+import com.eric.startupmatching.project.running.dialog.ProjectDoneConfirmDialog
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 
@@ -83,11 +84,18 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
             //TODO create info with to-do and send it to all users in project
         })
 
-        //// Check if to-dos are all done, if so, show project done page
+        //// Check if to-dos are all done, if so, show project done confirm dialog
         viewModel.projectDone.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 Log.d("ProjectAllDone", "DONE")
-                //TODO navigate to project Done Page
+                fragmentManager?.let { it1 -> ProjectDoneConfirmDialog(viewModel).show(it1, "confirmDialog") }
+            }
+        })
+
+        //// Navigate to project done page if confirmed
+        viewModel.confirmProjectDone.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                //TODO navigate to project Done
             }
         })
 
