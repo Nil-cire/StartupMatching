@@ -29,6 +29,7 @@
         android:layout_marginStart="@dimen/regular_margin"
         android:text="@string/user_name"
         android:textSize="16sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/user_icon"
         app:layout_constraintStart_toEndOf="@id/user_icon"
         app:layout_constraintTop_toTopOf="@id/user_icon" />
@@ -69,11 +70,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/post_time"
-        app:layout_constraintTop_toBottomOf="@id/post_image"
+        app:layout_constraintTop_toBottomOf="@id/description"
         android:layout_marginTop="@dimen/half_regular_margin"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/regular_margin"
-        android:text="@string/post_time"
+        android:textColor="@color/black"
+        setTimeWithFormat="@{post.timeDate}"
         style="@style/center_text_font_noto"/>
 
     <ImageView
@@ -104,20 +106,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/description"
         style="@style/center_text_font_noto"
-        app:layout_constraintTop_toBottomOf="@id/post_time"
+        app:layout_constraintTop_toBottomOf="@id/post_image"
         android:layout_marginTop="@dimen/half_regular_margin"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/regular_margin"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/regular_margin"
-        android:text="@string/description"
+        android:hint="@string/description"
+        android:textColor="@color/black"
+        android:text="@{post.content}"
         android:gravity="start"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:id="@+id/separate_line"
-        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintTop_toBottomOf="@id/post_time"
         android:layout_marginTop="@dimen/regular_margin"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/regular_margin"

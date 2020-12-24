@@ -135,7 +135,7 @@ class ProjectDoneMainViewModel(arg: Project): ViewModel() {
         get() = _addPostComplete
 
     fun postProject(content: String, imageUrl: String?) {
-        val post = Post(content = content, image = imageUrl, poster = UserInfo.currentUser.value?.id!!, timeDate = Calendar.getInstance().time)
+        val post = Post(content = content, image = imageUrl, poster = UserInfo.currentUser.value?.id!!, timeDate = Calendar.getInstance().time, achievementId = achievementId.value)
         coroutineScope.launch {
             db.collection("Post")
                 .add(post)

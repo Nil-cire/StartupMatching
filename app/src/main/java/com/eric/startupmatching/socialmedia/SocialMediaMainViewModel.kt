@@ -22,11 +22,12 @@ class SocialMediaMainViewModel: ViewModel() {
 
     val db = FirebaseFirestore.getInstance()
 
+    //// get all Posts, User's included
     fun getPosts(userId: String) {
         var list = mutableListOf<Post>()
         coroutineScope.launch {
             db.collection("Post")
-                .whereNotEqualTo("poster", userId)
+//                .whereNotEqualTo("poster", userId)
 //                .orderBy("timeDate")
                 .get()
                 .addOnSuccessListener { it2 ->
