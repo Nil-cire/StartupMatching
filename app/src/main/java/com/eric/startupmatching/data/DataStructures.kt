@@ -87,6 +87,7 @@ data class Achievement(
     val postId: String? = null,
     val project: String? = null,
     val team: String? = null,
+    val members: List<String?>? = mutableListOf(),
     val position: String? = null,
     val time: Date? = Calendar.getInstance().time,
     val name: String? = ""
