@@ -17,7 +17,7 @@ class ChatRoomDetailFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentChatRoomDetailBinding.inflate(inflater, container, false)
-        val argument = ChatRoomDetailFragmentArgs.fromBundle(requireArguments()).chatRoomArgs
+        val argument = ChatRoomDetailFragmentArgs.fromBundle(requireArguments()).chatRoomIdArgs
         val viewModelProvider = ChatRoomDetailViewModelFactory(argument)
         val viewModel = ViewModelProvider(this, viewModelProvider).get(ChatRoomDetailViewModel::class.java)
         binding.lifecycleOwner = this

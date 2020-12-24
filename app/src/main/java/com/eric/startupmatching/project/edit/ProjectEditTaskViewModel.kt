@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.eric.startupmatching.data.Post
-import com.eric.startupmatching.data.Project
-import com.eric.startupmatching.data.Task
-import com.eric.startupmatching.data.Todo
+import com.eric.startupmatching.data.*
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
@@ -141,6 +138,7 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
 
     fun addTask(task: Task) {
         Log.d("fuked up", projectArgs.id.toString())
+        var taskId = ""
         coroutineScope.launch {
                 try {
                     db.collection("Project").document(projectArgs.id!!)
@@ -148,6 +146,15 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
                         .add(task)
                         .addOnSuccessListener {dc ->
                             dc.update("id", dc.id)
+                            taskId = dc.id
+                        }
+                        .addOnSuccessListener {
+                            var chatRoom = ChatRoom(id = taskId)
+                            db.collection("ChatRoom")
+                                .add(chatRoom)
+                                .addOnSuccessListener {chatRoom->
+                                    chatRoom.update("id", it.id)
+                                }
                         }
                 } catch (e: Exception) {
                     Log.d("fuked", projectArgs.id.toString())

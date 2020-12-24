@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.MultiTypeAdapter
+import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.MultiTypeAdapter2
 import com.eric.startupmatching.OnStartDragListener
 import com.eric.startupmatching.SimpleItemTouchHelperCallback
@@ -61,7 +63,7 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
 
         viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
             Log.d("listToSubmit2", list.toString())
-            val x = list as ArrayList<TaskParentModel>
+            var x = list as ArrayList<TaskParentModel>
             if (list.isNullOrEmpty()) {
                 binding.noData.visibility = View.VISIBLE
             } else {
@@ -71,29 +73,25 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
             }
         })
 
+
+        //// Jump to Chat Room on clicking chat-btn ////
+        viewModel.chatRoomId.observe(viewLifecycleOwner, Observer {
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
+        })
+
         viewModel.sendDoneTodoInfo.observe(viewLifecycleOwner, Observer{
             //TODO create info with to-do and send it to all users in project
         })
 
-//        viewModel.todoList.observe(viewLifecycleOwner, Observer {
-//            val items = mutableListOf<Any>()
-//            for (i in it.indices) {
-//                var member = mutableListOf<TreeViewModel>()
-//                val team = viewModel.taskList2.value?.get(i)?.let { it1 ->
-//                    TaskParentModel(it1)
-//                }
-//                for (j in it[i]) {
-//                    member.add(TaskChildModel(j))
-//                }
-//                if (team != null) {
-//                    team.children = member as ArrayList<TreeViewModel>
-//                    items.add(team)
-//                }
-//            }
-//            adapter.items = items
-//            adapter.notifyDataSetChanged()
-//            Log.d("adapteritems", items.toString())
-//        })
+        //// Check if to-dos are all done, if so, show project done page
+        viewModel.projectDone.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                Log.d("ProjectAllDone", "DONE")
+                //TODO navigate to project Done Page
+            }
+        })
+
+//        viewModel.observeTaskDataChanges(arg)
         return binding.root
     }
 

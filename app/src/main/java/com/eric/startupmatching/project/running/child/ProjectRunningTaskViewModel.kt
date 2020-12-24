@@ -48,6 +48,7 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
         _chatRoomId.value = chatRoomId
     }
 
+
     //// update to-do status from "running" -> "done" in Firebase
 
     private val _sendDoneTodoInfo = MutableLiveData<Todo>()
@@ -62,6 +63,7 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
                 .update("status", TodoStatus.Done.status)
                 .addOnSuccessListener {
                     _sendDoneTodoInfo.value = todo
+                    checkAllDone(taskList.value!!)
                 }
         }
     }
@@ -78,8 +80,30 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
         }
     }
 
-    //// --
+    //// observe if all to-dos are done in project (data on Firebase)
+    fun observeTodoStatusIfDone(project: Project, task: Task) {
+        coroutineScope.launch {
+            db.collection("Project").document(project.id!!)
+                .collection("Task").document(task.id!!)
+                .collection("Todo")
+                .addSnapshotListener { value, error ->
+//                    var todoList = it.toObjects(Todo::class.java)
+//                    for (todo in todoList) {
 
+                    }
+
+        }
+    }
+
+    fun observeTaskDataChanges(project: Project) {
+        coroutineScope.launch {
+            db.collection("Project").document(project.id!!)
+                .collection("Task")
+                .addSnapshotListener { value, error ->
+                    getTasks()
+                }
+        }
+    }
 
 //    private val _processTaskCount = MutableLiveData<Int>()
 //    val processTaskCount: LiveData<Int>
@@ -93,26 +117,94 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
     val listToSubmit: LiveData<List<Any>>
         get() = _listToSubmit
 
-    init {
-//        _processTaskCount.value = 0
+//    init {
+////        _processTaskCount.value = 0
+//    }
+
+//    fun getTasks() {
+//        coroutineScope.launch {
+//            db.collection("Project").document(arg.id.toString())
+//                .collection("Task")
+//                .get()
+//                .addOnSuccessListener {qs ->
+//                    var taskList = qs.toObjects(Task::class.java)
+//                    if (!taskList.isNullOrEmpty()) {
+//                        taskList.sortBy { it.serial }
+//                        _taskList.value = taskList
+//                        Log.d("_taskList", _taskList.value.toString())
+//
+//                    }
+//                }
+//        }
+//    }
+
+    fun checkAllDone(taskList: List<Task>) {
+        var taskCount = 0
+        for (task in taskList) {
+            coroutineScope.launch {
+                db.collection("Project").document(arg.id!!)
+                    .collection("Task").document(task.id!!)
+                    .collection("Todo")
+                    .get()
+                    .addOnSuccessListener {
+                        var todos = it.toObjects(Todo::class.java)
+                        var todoCount = 0
+                        if (todos.isNullOrEmpty()) {
+                            taskCount += 1
+                        } else {
+                            for (todo in todos) {
+                                if (todo.status == TodoStatus.Done.status) {
+                                    todoCount += 1
+                                }
+                                if (todoCount == todos.size) {
+                                    taskCount += 1
+                                }
+                            }
+                        }
+
+                        if (taskCount == taskList.size) {
+                            _projectDone.value = true
+                        }
+                    }
+            }
+        }
     }
+
+    private val _projectDone = MutableLiveData<Boolean>()
+    val projectDone: LiveData<Boolean>
+        get() = _projectDone
+
+
 
     fun getTasks() {
         coroutineScope.launch {
             db.collection("Project").document(arg.id.toString())
                 .collection("Task")
-                .get()
-                .addOnSuccessListener {qs ->
-                    var taskList = qs.toObjects(Task::class.java)
+                .addSnapshotListener { value, error ->
+                    var taskList = value?.toObjects(Task::class.java)
                     if (!taskList.isNullOrEmpty()) {
                         taskList.sortBy { it.serial }
                         _taskList.value = taskList
                         Log.d("_taskList", _taskList.value.toString())
-
                     }
+//                    if (checkAllDone()) {
+//                        _projectDone.value = true
+//                    }
                 }
         }
     }
+
+//    fun observeTaskDataChangeForTodoStatusCheck() {
+//        coroutineScope.launch {
+//            db.collection("Project").document(arg.id.toString())
+//                .collection("Task")
+//                .addSnapshotListener { value, error ->
+//                    if (!taskList.value.isNullOrEmpty()) {
+//                        checkAllDone(taskList.value!!)
+//                    }
+//                }
+//        }
+//    }
 
     fun getTodoByTask(task: Task) {
         var member = mutableListOf<TreeViewModel>()

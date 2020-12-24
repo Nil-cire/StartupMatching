@@ -24,3 +24,9 @@ enum class TodoStatus(val status: String) {
     Running("running"),
     Done("done")
 }
+
+enum class ChatRoomType(val type: String) {
+    User("User"),
+    Task("Task"),
+    Team("Team")
+}

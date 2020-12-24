@@ -6,7 +6,7 @@ import com.eric.startupmatching.data.ChatRoom
 import com.eric.startupmatching.project.detail.ProjectDetailViewModel
 
 class ChatRoomDetailViewModelFactory (
-    private val arg: ChatRoom
+    private val arg: String
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

@@ -86,8 +86,8 @@
         android:name="com.eric.startupmatching.chat.detail.ChatRoomDetailFragment"
         android:label="ChatRoomDetailFragment" >
         <argument
-            android:name="chatRoomArgs"
-            app:argType="com.eric.startupmatching.data.ChatRoom" />
+            android:name="chatRoomIdArgs"
+            app:argType="string" />
     </fragment>
     <action android:id="@+id/action_global_chatRoomDetailFragment" app:destination="@id/chatRoomDetailFragment" />
     <fragment

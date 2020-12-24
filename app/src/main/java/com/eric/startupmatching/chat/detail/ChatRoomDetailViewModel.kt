@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ChatRoomDetailViewModel(arg: ChatRoom): ViewModel() {
+class ChatRoomDetailViewModel(arg: String): ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -35,7 +35,7 @@ class ChatRoomDetailViewModel(arg: ChatRoom): ViewModel() {
     val messageAdded: LiveData<Int>
         get() = _messageAdded
 
-    var chatRoom = arg
+    var chatRoomId = arg
 
     val db = FirebaseFirestore.getInstance()
 
@@ -43,7 +43,7 @@ class ChatRoomDetailViewModel(arg: ChatRoom): ViewModel() {
         var list = mutableListOf<String>()
         coroutineScope.launch {
             db.collection("ChatRoom")
-                .whereEqualTo("id", chatRoom.id)
+                .whereEqualTo("id", chatRoomId)
                 .get()
                 .addOnSuccessListener {
                     Log.d("Geta ChatRoomList", it.toString())
@@ -107,7 +107,7 @@ class ChatRoomDetailViewModel(arg: ChatRoom): ViewModel() {
 
     fun addMessageToChatRoomFitebase() {
         db.collection("ChatRoom")
-            .whereEqualTo("id", chatRoom.id)
+            .whereEqualTo("id", chatRoomId)
             .get()
             .addOnSuccessListener {
                 var messageList = mutableListOf<String>()
@@ -126,7 +126,7 @@ class ChatRoomDetailViewModel(arg: ChatRoom): ViewModel() {
 
     fun observeNewMessage() {
         db.collection("ChatRoom")
-            .whereEqualTo("id", chatRoom.id)
+            .whereEqualTo("id", chatRoomId)
             .addSnapshotListener { value, error ->
                 value?.let {
                     UserInfo.currentUser.value?.id.let { it1 -> getMessagesId(it1!!) }

@@ -22,7 +22,7 @@ class ChatRoomTaskFragment:Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         val adapter = ChatRoomPersonAdapter(ChatRoomPersonAdapter.OnClickListener{
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it.id!!))
         })
         binding.recyclerView.adapter = adapter
 

@@ -25,7 +25,7 @@ class ChatRoomTeamFragment:Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         val adapter = ChatRoomTeamAdapter(ChatRoomTeamAdapter.OnClickListener{
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it.id!!))
         })
         binding.recyclerView.adapter = adapter
 
