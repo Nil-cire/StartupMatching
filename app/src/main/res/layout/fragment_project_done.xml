@@ -71,7 +71,7 @@
                         android:layout_marginStart="@dimen/regular_margin"/>
 
                     <TextView
-                        android:id="@+id/project_name_content"
+                        android:id="@+id/send_post"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:gravity="start"
@@ -175,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="辛苦啦 ! 分享喜悅出去吧 ! "
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:id="@+id/share_title"
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="parent"
@@ -187,8 +187,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:layout_marginTop="@dimen/twox_regular_margin"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/regular_margin"
                 android:layout_marginStart="@dimen/twox_regular_margin"
                 app:layout_constraintTop_toBottomOf="@+id/share_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -199,15 +199,17 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="16dp"
+                android:background="@null"
                 android:textColor="@color/black"
                 android:id="@+id/share_text"
+                android:maxLines="4"
                 android:layout_marginTop="@dimen/regular_margin"
                 app:layout_constraintStart_toStartOf="@+id/share_text_title"
                 app:layout_constraintTop_toBottomOf="@+id/share_text_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/twox_regular_margin"
-                android:hint="分享些什麼吧"/>
+                android:hint="分享些什麼吧..."/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -216,7 +218,7 @@
                 app:layout_constraintStart_toStartOf="@+id/share_text_title"
                 android:id="@+id/share_image_title"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:layout_marginTop="@dimen/twox_regular_margin"
                 android:text="分享照片"
                 />
@@ -237,6 +239,18 @@
                 android:layout_marginTop="@dimen/regular_margin"
                 android:layout_marginEnd="@dimen/twox_regular_margin"
                 />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/send_post"
+                android:background="@drawable/round_corner_light_blue"
+                style="@style/center_text_font_noto"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

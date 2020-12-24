@@ -95,7 +95,7 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         //// Navigate to project done page if confirmed
         viewModel.confirmProjectDone.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                //TODO navigate to project Done
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDoneMainFragment(arg))
             }
         })
 

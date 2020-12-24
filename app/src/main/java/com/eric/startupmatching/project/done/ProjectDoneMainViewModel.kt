@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eric.startupmatching.UserInfo
+import com.eric.startupmatching.data.Post
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.data.Team
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import java.util.*
 
 class ProjectDoneMainViewModel(arg: Project): ViewModel() {
     private var viewModelJob = Job()
@@ -23,9 +26,7 @@ class ProjectDoneMainViewModel(arg: Project): ViewModel() {
     val team: LiveData<Team>
         get() = _team
 
-    private val _teamAsTeamleader = MutableLiveData<List<Team>>()
-    val teamAsTeamleader: LiveData<List<Team>>
-        get() = _teamAsTeamleader
+
 
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>
@@ -36,4 +37,23 @@ class ProjectDoneMainViewModel(arg: Project): ViewModel() {
         get() = _projectList
 
     val user = UserInfo.currentUser
+
+    //// creating a post by comment and photo -> then create achievement for each member with postId included
+
+    private val _addPostComplete = MutableLiveData<Boolean>()
+    val addPostComplete: LiveData<Boolean>
+        get() = _addPostComplete
+
+    fun postProject(content: String, imageUrl: String?) {
+        val post = Post(content = content, image = imageUrl, poster = UserInfo.currentUser.value?.id!!, timeDate = Calendar.getInstance().time)
+        coroutineScope.launch {
+            db.collection("Post")
+                .add(post)
+                .addOnSuccessListener {
+                    it.update("id", it.id)
+                }.addOnSuccessListener {
+                    _addPostComplete.value = true
+                }
+        }
+    }
 }

@@ -71,6 +71,7 @@
     <string name="complete">已完成</string>
     <string name="share_my_thought">我想說</string>
     <string name="sharing">我要分享</string>
+    <string name="send_post">發佈</string>
 
     <array name="dummy_items">
         <item>One</item>

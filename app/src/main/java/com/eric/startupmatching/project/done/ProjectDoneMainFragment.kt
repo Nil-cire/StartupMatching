@@ -5,17 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.eric.startupmatching.data.ViewPagerType
 import com.eric.startupmatching.databinding.FragmentProjectDoneBinding
-import com.eric.startupmatching.databinding.FragmentProjectRunningBinding
-import com.eric.startupmatching.project.detail.ProjectDetailFragmentArgs
-import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTeamFragment
-import com.eric.startupmatching.project.running.ProjectRunningViewModel
-import com.eric.startupmatching.project.running.ProjectRunningViewModelFactory
-import com.eric.startupmatching.project.running.child.ProjectRunningTaskFragment
-import com.eric.startupmatching.team.TeamMainAdapter
-import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ProjectDoneMainFragment: Fragment() {
@@ -34,6 +26,19 @@ class ProjectDoneMainFragment: Fragment() {
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
+
+        binding.sendPost.setOnClickListener {
+            var content = binding.shareText.text.toString()
+            var imageUrl = "" // await for image function
+            viewModel.postProject(content, imageUrl)
+        }
+
+        // observe post added on firebase -> navigate to social media post detail page
+        viewModel.addPostComplete.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                // TODO do navigation
+            }
+        })
 
         return binding.root
     }
