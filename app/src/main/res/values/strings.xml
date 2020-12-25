@@ -72,6 +72,7 @@
     <string name="share_my_thought">我想說</string>
     <string name="sharing">我要分享</string>
     <string name="send_post">發佈</string>
+    <string name="preparing">規劃中</string>
 
     <array name="dummy_items">
         <item>One</item>

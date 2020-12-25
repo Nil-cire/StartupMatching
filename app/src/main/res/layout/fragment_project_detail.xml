@@ -46,15 +46,17 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/constraint_in_card">
 
-                    <ImageView
-                        android:layout_width="24dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="24dp"
+                        android:text="@string/preparing"
                         android:id="@+id/schedule_image"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="@dimen/regular_margin"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginEnd="@dimen/twox_regular_margin"
-                        android:background="@drawable/round_date_range_black_18dp"/>
+                        android:layout_marginEnd="@dimen/regular_margin"
+                        android:background="@drawable/round_corner"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -85,6 +87,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/project_status"
                         android:text="狀態"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/project_name_content"
                         android:layout_marginTop="@dimen/half_regular_margin"
@@ -95,6 +98,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/project_status_content"
                         android:text="@{viewModel.projectArgs.startupStatus}"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="@+id/project_status"
                         app:layout_constraintStart_toEndOf="@+id/project_status"
@@ -158,6 +162,8 @@
                         android:textColor="@color/white"
                         app:layout_constraintTop_toTopOf="@+id/project_description"
                         app:layout_constraintStart_toEndOf="@+id/project_description"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="@dimen/regular_margin"
                         android:layout_marginStart="@dimen/regular_margin"/>
 
                     <TextView
@@ -168,7 +174,8 @@
                         android:textColor="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/project_description_content"
                         android:layout_marginTop="@dimen/half_regular_margin"
-                        app:layout_constraintStart_toStartOf="@+id/project_description"/>
+                        app:layout_constraintStart_toStartOf="@+id/project_description"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -182,7 +189,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginEnd="@dimen/regular_margin"
                         android:layout_marginStart="@dimen/regular_margin"
-                        android:layout_marginBottom="@dimen/regular_margin"/>
+                        android:layout_marginBottom="@dimen/regular_margin"
+                        android:visibility="gone"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -194,7 +202,7 @@
             android:id="@+id/viewpager_assistant"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/done_prepare"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -212,6 +220,24 @@
             </com.google.android.material.tabs.TabLayout>
 
         </androidx.viewpager.widget.ViewPager>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="準備完成"
+            android:id="@+id/done_prepare"
+            android:background="@drawable/round_corner_light_blue"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager_assistant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/center_text_font_noto"
+            android:layout_marginStart="@dimen/threex_regular_margin"
+            android:layout_marginEnd="@dimen/threex_regular_margin"
+            android:layout_marginBottom="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:textSize="16sp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

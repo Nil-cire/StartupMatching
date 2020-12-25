@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
@@ -79,6 +80,18 @@ class ProjectDetailFragment: Fragment() {
                 this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectEditTeamFragment(arg))
             }
         }
+
+        //// change project status : preparing -> running
+        binding.donePrepare.setOnClickListener {
+            viewModel.updateProjectStatus(arg)
+        }
+
+        viewModel.projectUpdate.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectRunningFragment(arg))
+            }
+        })
+        ///// --
 
         return binding.root
     }

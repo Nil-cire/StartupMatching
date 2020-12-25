@@ -62,12 +62,13 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                         db.collection("User").document(userId)
                             .get()
                             .addOnSuccessListener { doc ->
-                                var followerList = doc.toObject(User::class.java)?.follower as MutableList<String?>?
-                                followerList?.add(UserInfo.currentUser.value!!.id.toString())
-                                doc.reference.update("follower", followList)
-                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
-                                list.add(userId)
-                                UserInfo.currentUser.value!!.following = list
+                                var followerList = doc.toObject(User::class.java)?.follower as MutableList<String>
+                                followerList.add(UserInfo.currentUser.value!!.id.toString())
+                                doc.reference.update("follower", followerList)
+//                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
+//                                list.add(userId)
+//                                UserInfo.currentUser.value!!.following = list
+                                UserInfo.setFollowerList(followerList)
                             }
                             .addOnSuccessListener { followed = true }
                     }
@@ -84,12 +85,14 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                         db.collection("User").document(userId)
                             .get()
                             .addOnSuccessListener { doc ->
-                                var followerList = doc.toObject(User::class.java)?.follower as MutableList<String?>?
-                                followerList?.filter { it != UserInfo.currentUser.value?.id!! }
-                                doc.reference.update("follower", followerList)
-                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
-                                list.filter { it != userId }
-                                UserInfo.currentUser.value!!.following = list
+                                var followerList = doc.toObject(User::class.java)?.follower as MutableList<String>
+                                var followerList2 = mutableListOf<String>()
+                                followerList.filterTo(followerList2, { it != UserInfo.currentUser.value?.id!! })
+                                doc.reference.update("follower", followerList2)
+//                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
+//                                list.filter { it != userId }
+//                                UserInfo.currentUser.value!!.following = list
+                                UserInfo.setFollowerList(followList2)
                             }
                             .addOnSuccessListener { followed = false }
                     }

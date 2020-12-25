@@ -57,7 +57,7 @@ class PersonDetailViewModel(user: User): ViewModel() {
                         doc.reference.update("follower", followerList)
                         var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
                         list.add(userId)
-                        UserInfo.setFollowerList(followerList) // might not be needed, update UserInfo by getting new data
+                        UserInfo.setFollowerList(followerList)
                     }
                     .addOnSuccessListener { _followed.value = true }
             }

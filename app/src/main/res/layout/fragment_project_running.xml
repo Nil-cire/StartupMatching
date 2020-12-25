@@ -52,6 +52,7 @@
                         android:layout_height="24dp"
                         android:text="@string/running"
                         android:id="@+id/schedule_image"
+                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginTop="@dimen/regular_margin"
                         app:layout_constraintTop_toTopOf="parent"
