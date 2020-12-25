@@ -38,6 +38,8 @@ class PersonMainFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val viewModel = ViewModelProvider(this).get(PersonMainViewModel::class.java)
+        viewModel.getAllUser()
         requireActivity().header.visibility = View.GONE
     }
 

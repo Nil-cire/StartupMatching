@@ -37,7 +37,7 @@ class SocialMediaMainViewModel: ViewModel() {
                             list.add(post)
                             Log.d("postList", list.toString())
                         }
-                        list.sortedBy { it.timeDate }
+                        list.sortByDescending { it.timeDate } // New Posts on Top Of screen
                         _postList.value = list
                         Log.d("postListaa", _postList.value.toString())
                     }

@@ -20,6 +20,19 @@
             android:paddingStart="@dimen/half_regular_margin"
             android:paddingEnd="@dimen/half_regular_margin"
             android:background="@color/light_blue">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="28dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/round_corner"
+                android:layout_marginStart="24dp"/>
+
+
+
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
@@ -28,8 +41,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/round_corner"
-                android:layout_marginStart="@dimen/regular_margin"
+                android:layout_marginStart="44dp"
                 android:layout_marginEnd="@dimen/regular_margin"/>
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="28dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/baseline_search_black_48dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="@dimen/regular_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@drawable/round_corner"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -57,7 +81,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/project_edit_task"
+                    android:src="@drawable/profile_main1"
                     android:scaleType="centerCrop"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

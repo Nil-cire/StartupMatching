@@ -42,7 +42,7 @@ class PersonMainViewModel: ViewModel() {
     }
 
     init {
-       getAllUser()
+
     }
 
 }

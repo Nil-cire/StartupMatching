@@ -37,7 +37,7 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
 //                    adapter.submitList(user.skills)
 //                }
             var followed = true
-            fun followBtnTextListener() {
+            fun followBtnTexChecker() {
                 if (UserInfo.currentUser.value?.following?.contains(user.id)!!) {
                     binding.iconPin.text = "取消關注"
                     binding.iconPin.setBackgroundResource(R.drawable.round_corner)
@@ -62,9 +62,10 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                             .get()
                             .addOnSuccessListener { doc ->
                                 var followerList = doc.toObject(User::class.java)?.follower as MutableList<String?>?
-                                followList?.add(UserInfo.currentUser.value!!.id.toString())
+                                followerList?.add(UserInfo.currentUser.value!!.id.toString())
                                 doc.reference.update("follower", followList)
                             }
+                            .addOnSuccessListener { followed = true }
                     }
             }
 
@@ -83,10 +84,11 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                                 followerList?.filter { it != UserInfo.currentUser.value?.id!! }
                                 doc.reference.update("follower", followerList)
                             }
+                            .addOnSuccessListener { followed = false }
                     }
             }
 
-            followBtnTextListener()
+            followBtnTexChecker()
 
             binding.iconPin.setOnClickListener {
                 if (!followed) {

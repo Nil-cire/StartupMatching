@@ -15,6 +15,9 @@ import kotlinx.coroutines.launch
 class PersonDetailViewModel(user: User): ViewModel() {
 
     val userArgs = user
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User>
+        get() = _user
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -49,7 +52,9 @@ class PersonDetailViewModel(user: User): ViewModel() {
                                 .document(achievementId!!)
                                 .get()
                                 .addOnSuccessListener {doc ->
-                                    list.add(doc.toObject(Achievement::class.java)!!)
+                                    if (doc != null) {
+                                        list.add(doc.toObject(Achievement::class.java)!!)
+                                    }
                                     count += 1
                                     if(count == userAchievementsId.size) {
                                         _achievementListSubmit.value = list
@@ -63,6 +68,7 @@ class PersonDetailViewModel(user: User): ViewModel() {
 
     init {
         getAchievements(userArgs)
+        _user.value = userArgs
     }
 
 
