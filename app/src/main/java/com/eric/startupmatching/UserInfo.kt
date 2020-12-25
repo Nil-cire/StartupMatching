@@ -9,7 +9,7 @@ object UserInfo {
     private const val USER_DATA = "user_data"
     private const val USER_TOKEN = "user_token"
 
-    private val userA = User(
+    var userA = User(
         id = "004",
         name = "D",
         image = null,
@@ -26,4 +26,7 @@ object UserInfo {
     )
 
     var currentUser = MutableLiveData<User>(userA)
+    fun setFollowerList(followerList: MutableList<String>) {
+        userA.following = followerList
+    }
 }

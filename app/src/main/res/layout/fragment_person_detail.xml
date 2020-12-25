@@ -106,6 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/do_follow"
+                    android:id="@+id/follow_btn_text"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 

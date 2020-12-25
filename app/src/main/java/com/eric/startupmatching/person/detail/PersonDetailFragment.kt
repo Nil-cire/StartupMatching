@@ -1,12 +1,16 @@
 package com.eric.startupmatching.person.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.eric.startupmatching.R
+import com.eric.startupmatching.data.FollowStatus
 import com.eric.startupmatching.databinding.FragmentPeopleSearchBinding
 import com.eric.startupmatching.databinding.FragmentPersonDetailBinding
 import com.eric.startupmatching.person.ItemPersonSkillRecyclerViewAdapter
@@ -14,6 +18,7 @@ import com.eric.startupmatching.person.PersonMainAdapter
 import com.eric.startupmatching.person.PersonMainViewModel
 
 class PersonDetailFragment: Fragment() {
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +39,36 @@ class PersonDetailFragment: Fragment() {
 
         adapter.submitList(userArgs.skills)
 
+        viewModel.followBtnTexChecker()
+
+        binding.followBtnText.setOnClickListener {
+            if (!viewModel.followed.value!!) {
+                viewModel.follow(userArgs.id!!)
+//                binding.followBtnText.text = FollowStatus.Followed.type
+//                binding.followBtn.setBackgroundResource(R.drawable.round_corner)
+//                binding.followBtnText.setTextColor(R.color.black)
+                Log.d("follow", "follow")
+            } else {
+                viewModel.unFollow(userArgs.id!!)
+//                binding.followBtnText.text = FollowStatus.Follow.type
+//                binding.followBtn.setBackgroundResource(R.drawable.round_corner_light_blue)
+//                binding.followBtnText.setTextColor(R.color.white)
+                Log.d("unFollow", "unFollow")
+            }
+        }
+
+        viewModel.followed.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.followBtnText.text = FollowStatus.Followed.type
+                binding.followBtn.setBackgroundResource(R.drawable.round_corner)
+                binding.followBtnText.setTextColor(R.color.black)
+            } else {
+                binding.followBtnText.text = FollowStatus.Follow.type
+                binding.followBtn.setBackgroundResource(R.drawable.round_corner_light_blue)
+                binding.followBtnText.setTextColor(R.color.white)
+            }
+        })
+
 //        UserInfo.currentUser.id?.let { viewModel.observeNewMessage(it) }
 
         viewModel.achievementListSubmit.observe(viewLifecycleOwner, Observer {
@@ -42,4 +77,5 @@ class PersonDetailFragment: Fragment() {
 
         return binding.root
     }
+
 }

@@ -3,8 +3,8 @@ package com.eric.startupmatching.person.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.Achievement
-import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.data.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -24,9 +24,9 @@ class PersonDetailViewModel(user: User): ViewModel() {
 
     val db = FirebaseFirestore.getInstance()
 
-    private val _team = MutableLiveData<Project>()
-    val team: LiveData<Project>
-        get() = _team
+    private val _followed = MutableLiveData<Boolean>()
+    val followed: LiveData<Boolean>
+        get() = _followed
 
     private val _achievementList = MutableLiveData<List<Achievement>>()
     val achievementList: LiveData<List<Achievement>>
@@ -35,6 +35,56 @@ class PersonDetailViewModel(user: User): ViewModel() {
     private val _achievementListSubmit = MutableLiveData<List<Achievement>>()
     val achievementListSubmit: LiveData<List<Achievement>>
         get() = _achievementListSubmit
+
+
+    //// follow and unfollow new user
+    fun followBtnTexChecker() {
+        _followed.value = UserInfo.currentUser.value?.following?.contains(user.value?.id)!!
+    }
+
+    fun follow(userId: String) {
+        db.collection("User").document(UserInfo.currentUser.value?.id!!)
+            .get()
+            .addOnSuccessListener {
+                var followList = it.toObject(User::class.java)?.following as MutableList<String?>?
+                followList?.add(userId)
+                it.reference.update("following", followList)
+                db.collection("User").document(userId)
+                    .get()
+                    .addOnSuccessListener { doc ->
+                        var followerList = doc.toObject(User::class.java)?.follower as MutableList<String>
+                        followerList.add(UserInfo.currentUser.value!!.id.toString())
+                        doc.reference.update("follower", followerList)
+                        var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
+                        list.add(userId)
+                        UserInfo.setFollowerList(followerList) // might not be needed, update UserInfo by getting new data
+                    }
+                    .addOnSuccessListener { _followed.value = true }
+            }
+    }
+
+    fun unFollow(userId: String) {
+        db.collection("User").document(UserInfo.currentUser.value?.id!!)
+            .get()
+            .addOnSuccessListener {doc ->
+                var followList = doc.toObject(User::class.java)?.following as MutableList<String>?
+                var followList2 = mutableListOf<String>()
+                followList?.filterTo(followList2, {it != userId})
+                doc.reference.update("following", followList2)
+                db.collection("User").document(userId)
+                    .get()
+                    .addOnSuccessListener { doc ->
+                        var followerList = doc.toObject(User::class.java)?.follower as MutableList<String>
+                        var followerList2 = mutableListOf<String>()
+                        followerList.filterTo(followerList2, { it != UserInfo.currentUser.value?.id!! })
+                        doc.reference.update("follower", followerList2)
+//                        var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
+//                        list.filter { it != userId }
+                        UserInfo.setFollowerList(followList2)
+                    }
+                    .addOnSuccessListener { _followed.value = false }
+            }
+    }
 
 
     fun getAchievements(user: User) {
