@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.R
 import com.eric.startupmatching.UserInfo
+import com.eric.startupmatching.data.FollowStatus
 import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemPersonMainRecyclerViewBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,12 +40,12 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
             var followed = true
             fun followBtnTexChecker() {
                 if (UserInfo.currentUser.value?.following?.contains(user.id)!!) {
-                    binding.iconPin.text = "取消關注"
+                    binding.iconPin.text = FollowStatus.Followed.type
                     binding.iconPin.setBackgroundResource(R.drawable.round_corner)
                     binding.iconPin.setTextColor(R.color.white)
                     followed = true
                 } else {
-                    binding.iconPin.text = "+關注"
+                    binding.iconPin.text = FollowStatus.Follow.type
                     binding.iconPin.setBackgroundResource(R.drawable.round_corner_light_blue)
                     binding.iconPin.setTextColor(R.color.black)
                     followed = false
@@ -99,13 +100,13 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
             binding.iconPin.setOnClickListener {
                 if (!followed) {
                     follow(user.id!!)
-                    binding.iconPin.text = "取消關注"
+                    binding.iconPin.text = FollowStatus.Followed.type
                     binding.iconPin.setBackgroundResource(R.drawable.round_corner)
                     binding.iconPin.setTextColor(R.color.white)
                     Log.d("follow", "follow")
                 } else {
                     unFollow(user.id!!)
-                    binding.iconPin.text = "+關注"
+                    binding.iconPin.text = FollowStatus.Follow.type
                     binding.iconPin.setBackgroundResource(R.drawable.round_corner_light_blue)
                     binding.iconPin.setTextColor(R.color.black)
                     Log.d("unFollow", "unFollow")

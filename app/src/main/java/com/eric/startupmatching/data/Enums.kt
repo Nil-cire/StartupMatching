@@ -30,3 +30,8 @@ enum class ChatRoomType(val type: String) {
     Task("Task"),
     Team("Team")
 }
+
+enum class FollowStatus(val type: String) {
+    Follow("+關注"),
+    Followed("已關注")
+}
