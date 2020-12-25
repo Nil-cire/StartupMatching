@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eric.startupmatching.databinding.FragmentChatRoomDetailBinding
+import kotlinx.android.synthetic.main.fragment_chat_room_detail.*
 
 class ChatRoomDetailFragment: Fragment() {
     override fun onCreateView(
@@ -35,9 +36,12 @@ class ChatRoomDetailFragment: Fragment() {
             adapter.submitList(it)
         })
 
+
+        //// send text and upload to firebase
         binding.sendBtn.setOnClickListener {
             var text = binding.inputMessage.text.toString()
             viewModel.sendText(text)
+            send_btn.text = ""
         }
 
         viewModel.messageAdded.observe(viewLifecycleOwner, Observer {

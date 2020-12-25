@@ -8,17 +8,33 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.Message
+import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemChatRoomDetailRecyclerViewBinding
 import com.eric.startupmatching.databinding.ItemChatRoomDetailRecyclerViewUserBinding
+import com.eric.startupmatching.setImage
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<Message, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 
     class ViewHolder(var binding: ItemChatRoomDetailRecyclerViewBinding):
         RecyclerView.ViewHolder(binding.root) {
 
+        val db = FirebaseFirestore.getInstance()
+
         fun bind(message: Message) {
             binding.message = message
             binding.executePendingBindings()
+
+            //get user image and user name with message
+
+            db.collection("User").document(message.poster)
+                .get()
+                .addOnSuccessListener {
+                    val user = it.toObject(User::class.java)
+                    binding.userIcon.setImage(user?.image)
+                    binding.userName.text = user?.name
+                }
+            
         }
     }
 
