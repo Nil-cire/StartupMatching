@@ -8,9 +8,12 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/regular_margin">
+    android:paddingStart="@dimen/regular_margin"
+    android:paddingEnd="@dimen/regular_margin"
+    android:paddingTop="@dimen/regular_margin"
+    android:paddingBottom="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -14,7 +14,7 @@ data class User(
     val currentProject: List<String?>? = null, // project id
     val applyProject: List<String?>? = null, //ProjectApply id
     val achievements: List<String?>? = null, // Achievement id
-    val following: List<String?>? = null, // user id
+    var following: List<String?>? = null, // user id
     val follower: List<String?>? = null,
     val blacklist: List<String?>? = null, // user id
     val briefIntro: String? = null,
