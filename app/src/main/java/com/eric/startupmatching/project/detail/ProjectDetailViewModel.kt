@@ -25,9 +25,15 @@ class ProjectDetailViewModel(arg: Project): ViewModel() {
     val projectUpdate: LiveData<Boolean>
         get() = _projectUpdate
 
-    private val _teamAsTeamleader = MutableLiveData<List<Team>>()
-    val teamAsTeamleader: LiveData<List<Team>>
-        get() = _teamAsTeamleader
+    //// Project ready check dialog (double check)
+    private val _confirmProjectDone = MutableLiveData<Boolean>()
+    val confirmProjectDone: LiveData<Boolean>
+        get() = _confirmProjectDone
+
+    fun confirmProjectReady() {
+        _confirmProjectDone.value = true
+    }
+    //// --
 
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>

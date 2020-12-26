@@ -17,6 +17,7 @@ import com.eric.startupmatching.databinding.FragmentProjectDetailBinding
 import com.eric.startupmatching.databinding.FragmentTeamMainBinding
 import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskFragment
 import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTeamFragment
+import com.eric.startupmatching.project.detail.dialog.ProjectDetailDoneConfirmDialog
 import com.eric.startupmatching.team.TeamMainAdapter
 import com.eric.startupmatching.team.TeamMainViewModel
 import com.eric.startupmatching.team.information.TeamInformationFragment
@@ -81,10 +82,18 @@ class ProjectDetailFragment: Fragment() {
             }
         }
 
-        //// change project status : preparing -> running
+        //// change project status : preparing -> running (double check with a dialog
         binding.donePrepare.setOnClickListener {
+            fragmentManager?.let { it1 -> ProjectDetailDoneConfirmDialog(viewModel).show(it1, "project ready dialog") }
             viewModel.updateProjectStatus(arg)
         }
+
+        //// true if confirm at dialog
+        viewModel.confirmProjectDone.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                viewModel.updateProjectStatus(arg)
+            }
+        })
 
         viewModel.projectUpdate.observe(viewLifecycleOwner, Observer {
             if (it == true) {
