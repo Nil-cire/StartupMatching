@@ -56,14 +56,12 @@ class ProjectDetailTaskViewModel(arg: Project): ViewModel() {
         coroutineScope.launch {
             db.collection("Project").document(arg.id.toString())
                 .collection("Task")
-                .get()
-                .addOnSuccessListener {qs ->
-                    var taskList = qs.toObjects(Task::class.java)
+                .addSnapshotListener { value, error ->
+                    var taskList = value?.toObjects(Task::class.java)
                     if (!taskList.isNullOrEmpty()) {
                         taskList.sortBy { it.serial }
                         _taskList.value = taskList
                         Log.d("_taskList", _taskList.value.toString())
-
                     }
                 }
         }

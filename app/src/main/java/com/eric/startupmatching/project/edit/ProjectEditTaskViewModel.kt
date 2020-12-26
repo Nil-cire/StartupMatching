@@ -76,6 +76,7 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
 //                    list.sortBy { it.serial }
                     Log.d("editTaskList", list.toString())
                     _taskList.value = list
+                    list = mutableListOf()
                     Log.d("getTaskByProject", taskList.value.toString())
                 }
 

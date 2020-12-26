@@ -54,8 +54,12 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListen
         })
 
         viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
+
+            Log.d("001xxx", list.toString())
             val x = list as ArrayList<TaskParentModel>
+            Log.d("002xxx", x.toString())
             x.sortBy { it.content.serial }
+            Log.d("003xxx", x.toString())
             adapter.items = x
             adapter.notifyDataSetChanged()
         })
@@ -79,6 +83,7 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListen
 //            adapter.notifyDataSetChanged()
 //            Log.d("adapteritems", items.toString())
 //        })
+        viewModel.getTasks()
         return binding.root
     }
 
@@ -87,7 +92,7 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListen
         val arg = arg
         val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
-        viewModel.getTasks()
+
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

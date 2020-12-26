@@ -109,7 +109,7 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
                 viewModel.updateTasks(task)
             }
         }
-
+        viewModel.getTaskByProject(project)
         binding.create.setOnClickListener {
             this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
         }
@@ -126,7 +126,7 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         val project = ProjectEditTaskFragmentArgs.fromBundle(requireArguments()).projectArgs
         val viewModelFactory = ProjectEditTaskViewModelFactory(project)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTaskViewModel::class.java)
-        viewModel.getTaskByProject(project)
+
         Log.d("ProjectResume", "Resume")
 //        viewModel.observeTaskDataChanged()
 

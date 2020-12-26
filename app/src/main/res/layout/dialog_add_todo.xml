@@ -220,7 +220,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/submit"
                 android:layout_marginStart="@dimen/twox_regular_margin"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/cancel">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -228,7 +229,6 @@
                     android:layout_margin="@dimen/regular_margin"
                     android:textColor="@color/white"
                     android:text="@string/cancel"
-                    android:id="@+id/cancel"
                     android:textSize="16sp"/>
             </androidx.cardview.widget.CardView>
 
