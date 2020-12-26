@@ -1,5 +1,6 @@
 package com.eric.startupmatching
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.eric.startupmatching.data.User
 import java.util.*
@@ -29,4 +30,27 @@ object UserInfo {
     fun setFollowerList(followerList: MutableList<String>) {
         userA.following = followerList
     }
+
+    var userToken: String? = null
+        get() = MyApplication.appContext
+            ?.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE)
+            ?.getString(USER_TOKEN, null)
+        set(value) {
+            field = when (value) {
+                null -> {
+                    MyApplication.appContext
+                        ?.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE)?.edit()
+                        ?.remove(USER_TOKEN)
+                        ?.apply()
+                    null
+                }
+                else -> {
+                    MyApplication.appContext
+                        ?.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE)?.edit()
+                        ?.putString(USER_TOKEN, value)
+                        ?.apply()
+                    value
+                }
+            }
+        }
 }

@@ -23,6 +23,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/user_icon"/>
 
+
+
         <TextView
             android:id="@+id/user_name"
             style="@style/center_text_font_noto"
@@ -64,6 +66,7 @@
                     style="@style/center_text_font_noto"
                     android:layout_width="0dp"
                     android:textSize="16dp"
+                    android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:text="@{message.content}"
                     app:layout_constraintStart_toStartOf="parent"

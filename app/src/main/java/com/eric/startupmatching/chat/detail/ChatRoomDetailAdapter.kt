@@ -34,7 +34,7 @@ class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<
                     binding.userIcon.setImage(user?.image)
                     binding.userName.text = user?.name
                 }
-            
+
         }
     }
 
