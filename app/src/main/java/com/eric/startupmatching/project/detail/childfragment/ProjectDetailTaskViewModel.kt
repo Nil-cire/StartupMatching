@@ -74,9 +74,10 @@ class ProjectDetailTaskViewModel(arg: Project): ViewModel() {
                 .collection("Task").document(task.id.toString())
                 .collection("Todo")
                 .get()
-                .addOnSuccessListener {
-                    var todoList = it.toObjects(Todo::class.java)
+                .addOnSuccessListener { result ->
+                    var todoList = result.toObjects(Todo::class.java)
                     if (!todoList.isNullOrEmpty()) {
+                        todoList.sortBy { it.serial }
                         for (todo in todoList) {
                             member.add(TaskChildModel(todo))
                         }
