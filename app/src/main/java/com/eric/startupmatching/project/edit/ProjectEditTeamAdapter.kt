@@ -27,39 +27,43 @@ class ProjectEditTeamAdapter(val onClickListener: OnClickListener, var viewModel
             binding.executePendingBindings()
             binding.addMember.setOnClickListener { viewModel.editTeam.value = team }
             val db = FirebaseFirestore.getInstance()
-            db.collection("User")
-                .whereEqualTo("id", team.teamLeader)
-                .get()
-                .addOnSuccessListener {
-                    var users = it.toObjects(User::class.java)
-                    if (!users.isNullOrEmpty()) {
-                        var user = users[0]
-                        binding.teamLeaderIcon.setImage(user.image)
-                    }
 
-                }
+            //TODO display teamLeader info
+//            db.collection("User")
+//                .whereEqualTo("id", team.teamLeader)
+//                .get()
+//                .addOnSuccessListener {
+//                    var users = it.toObjects(User::class.java)
+//                    if (!users.isNullOrEmpty()) {
+//                        var user = users[0]
+//                        binding.teamLeaderIcon.setImage(user.image)
+//                    }
+//
+//                }
+
             val adapter = ProjectEditTeamItemAdapter(ProjectEditTeamItemAdapter.OnClickListener{})
             binding.recyclerView.adapter = adapter
 
             var userList = mutableListOf<User>()
             var memberCount = 0
 
-            if (!team.members.isNullOrEmpty()) {
-                for (userId in team.members) {
-                    db.collection("User")
-                        .whereEqualTo("id", userId)
-                        .get()
-                        .addOnSuccessListener {
-                            userList.add(it.toObjects(User::class.java)[0])
-                            memberCount += 1
-                            if(memberCount == team.members.size) {
-                                adapter.submitList(userList)
-                                userList = mutableListOf()
-                                memberCount = 0
-                            }
-                        }
-                }
-            }
+            //// Get current users in team
+//            if (!team.members.isNullOrEmpty()) {
+//                for (userId in team.members) {
+//                    db.collection("User")
+//                        .whereEqualTo("id", userId)
+//                        .get()
+//                        .addOnSuccessListener {
+//                            userList.add(it.toObjects(User::class.java)[0])
+//                            memberCount += 1
+//                            if(memberCount == team.members.size) {
+//                                adapter.submitList(userList)
+//                                userList = mutableListOf()
+//                                memberCount = 0
+//                            }
+//                        }
+//                }
+//            }
 //            binding.addMember.setOnClickListener {
 //                SelectMemberDialogAdapter(viewModel).showsDialog
 //            }

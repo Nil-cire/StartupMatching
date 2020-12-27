@@ -66,10 +66,10 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
 
         viewModel.teamIdList.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
-                for (teamId in it) {
-                    Log.d("aTeammmm", teamId.toString())
-                    viewModel.getTeamsByIds(teamId)
-                }
+//                for (teamId in it) {
+                    Log.d("aTeammmm", it.toString())
+                    viewModel.getTeamsByIds(it)
+//                }
             }
         })
 

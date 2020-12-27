@@ -141,33 +141,35 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
         }
     }
 
-    fun getTeamsByIds(teamIds: String) {
+    fun getTeamsByIds(teamIds: List<String>) {
         var list = mutableListOf<Team>()
         var count = 0
         coroutineScope.launch {
-//            for (id in teamIds) {
+            for (id in teamIds) {
                 db.collection("Team")
 //                    .whereEqualTo("id", id)
-                    .document(teamIds)
+                    .document(id)
                     .get()
                     .addOnSuccessListener {
                         Log.d("teamListSize", (it.toObject(Team::class.java).toString()))
                         var team = it.toObject(Team::class.java)
                         Log.d("aTeam", team.toString())
                         if (team != null) {
-                            teamListHolder.add(team)
-                            teamListHolderCount += 1
+                            list.add(team)
+                            count += 1
+//                            teamListHolder.add(team)
+//                            teamListHolderCount += 1
                         }
                         Log.d("teamListHolder", teamListHolder.toString())
 //                        teamListHolderCount += 1
-                        if (teamListHolderCount == teamIdList.value?.size ?: 0) {
-                            _teamList.value = teamListHolder
+                        if (count == teamIdList.value?.size ?: 0) {
+                            _teamList.value = list
                             Log.d("teamListXXXX", teamList.value.toString())
                             teamListHolder = mutableListOf()
                             teamListHolderCount = 0
                         }
                     }
-//            }
+            }
         }
     }
 
@@ -260,6 +262,7 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
             }
         }
     }
+
 
     init {
         _getTeamCount.value = 0
