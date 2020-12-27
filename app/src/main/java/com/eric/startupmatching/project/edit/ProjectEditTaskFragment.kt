@@ -52,6 +52,7 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         }))
 
         adapter.register(TaskChildModel::class.java, ProjectEditTaskChildAdapter(viewModel))
+
         val recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
