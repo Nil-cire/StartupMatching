@@ -18,8 +18,8 @@ fun ImageView.setImage(imageUrl: String?) {
             .load(imgUri)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.icons_abstract)
-                    .error(R.drawable.icons_abstract))
+                    .placeholder(R.drawable.himym)
+                    .error(R.drawable.himym))
             .into(this)
     }
 }

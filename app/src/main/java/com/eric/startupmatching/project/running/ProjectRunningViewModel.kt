@@ -36,4 +36,14 @@ class ProjectRunningViewModel(arg: Project): ViewModel() {
         get() = _projectList
 
     val user = UserInfo.currentUser
+
+    //// Confirm project done
+
+    private val _confirmProjectDone = MutableLiveData<Boolean>()
+    val confirmProjectDone: LiveData<Boolean>
+        get() = _confirmProjectDone
+
+    fun confirmProjectDone() {
+        _confirmProjectDone.value = true
+    }
 }

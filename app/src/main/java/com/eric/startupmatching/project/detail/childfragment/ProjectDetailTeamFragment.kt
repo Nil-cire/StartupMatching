@@ -62,6 +62,8 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
             Log.d("adapteritems", items.toString())
         })
 
+        viewModel.getProjectTeams(arg)
+
         return binding.root
     }
     override fun onResume() {
@@ -69,6 +71,7 @@ class ProjectDetailTeamFragment(val arg: Project): Fragment() {
         val arg = arg
         val viewModelFactory = ProjectDetailTeamViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTeamViewModel::class.java)
-        viewModel.getProjectTeams(arg)
+
+        viewModel.observeTeamDataChanged()
     }
 }

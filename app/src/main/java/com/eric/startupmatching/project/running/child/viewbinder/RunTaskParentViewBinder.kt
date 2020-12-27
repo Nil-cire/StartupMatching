@@ -10,13 +10,14 @@ import com.eric.startupmatching.OnExpandAndHideListener
 import com.eric.startupmatching.TreeViewUtil
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.databinding.ItemProjectRunParentBinding
+import com.eric.startupmatching.project.edit.ProjectEditTaskParentAdapter
 import com.eric.startupmatching.project.running.child.ProjectRunningTaskViewModel
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
 import kotlinx.android.synthetic.main.item_parent.view.*
 
 
-class RunTaskParentViewBinder(val viewModel: ProjectRunningTaskViewModel) : ItemViewBinder<TaskParentModel, RunTaskParentViewBinder.ViewHolder>() {
+class RunTaskParentViewBinder(val viewModel: ProjectRunningTaskViewModel, val onClickListener: OnClickListener) : ItemViewBinder<TaskParentModel, RunTaskParentViewBinder.ViewHolder>() {
     private lateinit var mExpandAndHideListener: OnExpandAndHideListener
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
@@ -24,7 +25,7 @@ class RunTaskParentViewBinder(val viewModel: ProjectRunningTaskViewModel) : Item
 //        val root = inflater.inflate()
         val binding = ItemProjectRunParentBinding.inflate(layoutInflater)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
-        return ViewHolder(binding, viewModel)
+        return ViewHolder(binding, viewModel, onClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: TaskParentModel) {
@@ -45,24 +46,31 @@ class RunTaskParentViewBinder(val viewModel: ProjectRunningTaskViewModel) : Item
         }
     }
 
-    class ViewHolder(var binding: ItemProjectRunParentBinding, val viewModel: ProjectRunningTaskViewModel) : RecyclerView.ViewHolder(binding.root) {
-        class OnClickChatListener(val clickListener: (project: Project) -> Unit) {
-            fun onClick(product: Project) = clickListener(product)
-        }
+    class ViewHolder(var binding: ItemProjectRunParentBinding,
+                     val viewModel: ProjectRunningTaskViewModel,
+                     var onClickListener: OnClickListener) : RecyclerView.ViewHolder(binding.root) {
+
 
         fun bind(model: TaskParentModel) {
             binding.model = model
             binding.executePendingBindings()
             // set chat room id to viewmodel
+//            binding.chatroom.setOnClickListener {
+//                model.content.chatRoom?.let { it1 -> viewModel.setChatRoomId(it1) }
+//            }
+//            binding.chatroom.setOnClickListener {
+//                model.content.chatRoom?.let { it1 -> viewModel.setNavigationToChatRoom(it1) }
+//            }
+
             binding.chatroom.setOnClickListener {
-                model.content.chatRoom?.let { it1 -> viewModel.setChatRoomId(it1) }
+                model.content.chatRoom?.let { it1 -> onClickListener.onClick(it1) }
             }
             Log.d("binding", model.toString())
 
         }
     }
 
-    class OnClickListener(val clickListener: (teamMember: Project) -> Unit) {
-        fun onClick(project: Project) = clickListener(project)
+    class OnClickListener(val clickListener: (chatRoomId: String) -> Unit) {
+        fun onClick(chatRoomId: String) = clickListener(chatRoomId)
     }
 }

@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.eric.startupmatching.R
 import com.eric.startupmatching.data.Project
+import com.eric.startupmatching.data.TodoStatus
 import com.eric.startupmatching.databinding.DialogAddTodoBinding
 import com.eric.startupmatching.project.edit.ProjectEditTaskViewModel
 import java.util.*
@@ -74,6 +75,7 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
                 viewModel.todoInstance.endTime = endTime2
                 viewModel.todoInstance.task = viewModel.todoTask.value?.id.toString()
                 viewModel.todoInstance.description = binding.editTextTextPersonName6.text.toString()
+                viewModel.todoInstance.status = TodoStatus.Running.status
                 Log.d("todoInstance", viewModel.todoInstance.toString())
                 viewModel.addTodo(viewModel.todoInstance)
                 viewModel.todoAdded()

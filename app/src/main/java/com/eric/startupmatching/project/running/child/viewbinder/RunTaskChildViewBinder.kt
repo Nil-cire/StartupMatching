@@ -26,7 +26,7 @@ class RunTaskChildViewBinder(val viewModel: ProjectRunningTaskViewModel) : ItemV
                 "running" -> binding.imgExpand.setBackgroundResource(R.drawable.baseline_panorama_fish_eye_black_18dp)
                 "done" -> binding.imgExpand.setBackgroundResource(R.drawable.baseline_task_alt_black_18dp)
             }
-            Log.d("model", model.content.status!!)
+//            Log.d("model", model.content.status!!)
             binding.executePendingBindings()
             // check to-do list
             binding.imgExpand.setOnClickListener {

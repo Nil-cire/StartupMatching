@@ -165,8 +165,9 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
     }
 
     fun addTask(task: Task) {
-        Log.d("fuked up", projectArgs.id.toString())
+        Log.d("taskProject", projectArgs.id.toString())
         var taskId = ""
+        var chatRoomId = ""
         coroutineScope.launch {
                 try {
                     db.collection("Project").document(projectArgs.id!!)
@@ -181,7 +182,14 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
                             db.collection("ChatRoom")
                                 .add(chatRoom)
                                 .addOnSuccessListener {chatRoom->
-                                    chatRoom.update("id", it.id)
+                                    chatRoomId = chatRoom.id
+                                    chatRoom.update("id", chatRoomId)
+
+                                }
+                                .addOnSuccessListener {
+                                    db.collection("Project").document(projectArgs.id!!)
+                                        .collection("Task").document(taskId)
+                                        .update("chatRoom", chatRoomId)
                                 }
                         }
                 } catch (e: Exception) {

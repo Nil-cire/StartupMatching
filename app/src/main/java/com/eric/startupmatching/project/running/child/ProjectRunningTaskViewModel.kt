@@ -257,6 +257,16 @@ class ProjectRunningTaskViewModel(arg: Project): ViewModel() {
         }
     }
 
+    //Navigation to chat room
+
+    private val _setNavigationToChatRoom = MutableLiveData<String>()
+    val setNavigationToChatRoom: LiveData<String>
+        get() = _setNavigationToChatRoom
+
+    fun setNavigationToChatRoom(chatRoomId: String) {
+        _setNavigationToChatRoom.value = chatRoomId
+    }
+
 
 
 

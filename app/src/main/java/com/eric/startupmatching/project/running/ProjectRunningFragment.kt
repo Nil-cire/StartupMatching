@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.data.ViewPagerType
 import com.eric.startupmatching.databinding.FragmentProjectRunningBinding
 import com.eric.startupmatching.project.detail.ProjectDetailFragmentArgs
@@ -33,7 +36,7 @@ class ProjectRunningFragment: Fragment() {
         val tabs = binding.tabsAssistant
         val viewPager = binding.viewpagerAssistant
 
-        val viewpagerAdapter = TeamMainAdapter(childFragmentManager)
+        val viewpagerAdapter = ProjectRunningViewPagerAdapter(childFragmentManager)
 
         binding.lifecycleOwner = this
 
@@ -52,19 +55,26 @@ class ProjectRunningFragment: Fragment() {
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
+        //// Navigate to project done page if confirmed
+        viewModel.confirmProjectDone.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDoneMainFragment(arg))
+            }
+        })
+
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
         val arg = ProjectDetailFragmentArgs.fromBundle(requireArguments()).projectArgs
-        requireActivity().project_detail_edit.visibility = View.VISIBLE
+//        requireActivity().project_detail_edit.visibility = View.VISIBLE
 
 
     }
 
     override fun onPause() {
         super.onPause()
-        requireActivity().project_detail_edit.visibility = View.GONE
+//        requireActivity().project_detail_edit.visibility = View.GONE
     }
 }

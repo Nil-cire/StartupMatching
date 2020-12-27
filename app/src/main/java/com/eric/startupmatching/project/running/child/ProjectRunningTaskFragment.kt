@@ -23,11 +23,14 @@ import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskVi
 import com.eric.startupmatching.project.detail.childfragment.ProjectDetailTaskViewModelFactory
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskChildViewBinder
 import com.eric.startupmatching.project.detail.childfragment.adapter.task.TaskParentViewBinder
+import com.eric.startupmatching.project.running.ProjectRunningViewModel
+import com.eric.startupmatching.project.running.ProjectRunningViewModelFactory
 import com.eric.startupmatching.project.running.child.viewbinder.RunTaskChildViewBinder
 import com.eric.startupmatching.project.running.child.viewbinder.RunTaskParentViewBinder
 import com.eric.startupmatching.project.running.dialog.ProjectDoneConfirmDialog
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import com.eric.startupmatching.project.treeview.model.task.TaskParentModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListener {
     private var mItemTouchHelper: ItemTouchHelper? = null
@@ -41,11 +44,15 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         val binding = FragmentProjectRunningTaskBinding.inflate(inflater, container, false)
         val viewModelFactory = ProjectRunningTaskViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectRunningTaskViewModel::class.java)
+        val viewModelFactory2 = ProjectRunningViewModelFactory(arg)
+        val viewModel2 = ViewModelProvider(this, viewModelFactory2).get(ProjectRunningViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         val adapter = MultiTypeAdapter()
-        adapter.register(TaskParentModel::class.java, RunTaskParentViewBinder(viewModel))
+        adapter.register(TaskParentModel::class.java, RunTaskParentViewBinder(viewModel, RunTaskParentViewBinder.OnClickListener{
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
+        }))
         adapter.register(TaskChildModel::class.java, RunTaskChildViewBinder(viewModel))
 
 //        val recyclerView = binding.recyclerView
@@ -75,10 +82,10 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         })
 
 
-        //// Jump to Chat Room on clicking chat-btn ////
-        viewModel.chatRoomId.observe(viewLifecycleOwner, Observer {
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
-        })
+//        //// Jump to Chat Room on clicking chat-btn ////
+//        viewModel.setNavigationToChatRoom.observe(viewLifecycleOwner, Observer {
+//            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
+//        })
 
         viewModel.sendDoneTodoInfo.observe(viewLifecycleOwner, Observer{
             //TODO create info with to-do and send it to all users in project
@@ -99,6 +106,8 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
             }
         })
 
+
+
 //        viewModel.observeTaskDataChanges(arg)
         return binding.root
     }
@@ -109,6 +118,7 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         val viewModelFactory = ProjectRunningTaskViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectRunningTaskViewModel::class.java)
         viewModel.getTasks()
+
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

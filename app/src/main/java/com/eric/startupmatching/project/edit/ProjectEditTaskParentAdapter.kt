@@ -1,7 +1,6 @@
 package com.eric.startupmatching.project.edit
 
 import android.app.Activity
-import android.opengl.Visibility
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater

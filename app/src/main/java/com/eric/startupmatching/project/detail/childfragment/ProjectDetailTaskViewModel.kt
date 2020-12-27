@@ -95,19 +95,19 @@ class ProjectDetailTaskViewModel(arg: Project): ViewModel() {
                         _processTaskCount = 0
                     }
                 }
-                .addOnFailureListener {
-                    var parent = TaskParentModel(task)
-                    parent.children = member as ArrayList<TreeViewModel>
-                    items.add(parent)
-                    Log.d("items2", items.toString())
-                    _processTaskCount += 1
-                    if (_processTaskCount == taskList.value?.size ?: 0) {
-                        _listToSubmit.value = items
-                        Log.d("_listToSubmit2", _listToSubmit.value.toString())
-                        items = mutableListOf<Any>()
-                        _processTaskCount = 0
-                    }
-                }
+//                .addOnFailureListener {
+//                    var parent = TaskParentModel(task)
+//                    parent.children = member as ArrayList<TreeViewModel>
+//                    items.add(parent)
+//                    Log.d("items2", items.toString())
+//                    _processTaskCount += 1
+//                    if (_processTaskCount == taskList.value?.size ?: 0) {
+//                        _listToSubmit.value = items
+//                        Log.d("_listToSubmit2", _listToSubmit.value.toString())
+//                        items = mutableListOf<Any>()
+//                        _processTaskCount = 0
+//                    }
+//                }
         }
     }
 

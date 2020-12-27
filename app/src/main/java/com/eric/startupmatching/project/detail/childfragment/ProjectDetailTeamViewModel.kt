@@ -41,7 +41,36 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
 
 
     // Firebase query functions
+
     fun getProjectTeams(project: Project) {
+        var count3 = 0
+        var teamList = mutableListOf<Team>()
+        coroutineScope.launch {
+            db.collection("Project").document(project.id!!)
+                .addSnapshotListener { value, error ->
+                    var teams = value?.toObject(Project::class.java)?.teams ?: mutableListOf()
+                    if (!teams.isNullOrEmpty()) {
+                        for (teamId in teams) {
+                            db.collection("Team")
+                                .whereEqualTo("id", teamId)
+                                .get()
+                                .addOnSuccessListener {qs ->
+                                    teamList.addAll(qs.toObjects(Team::class.java))
+                                    count3 += 1
+                                    if (count3 == project.teams?.size) {
+                                        teamList.sortBy { it.id }
+                                        _teamList.value = teamList
+                                        Log.d("ProjectTeams", _teamList.value.toString())
+                                    }
+
+                                }
+                        }
+                    }
+                }
+        }
+    }
+
+    fun getProjectTeams2(project: Project) {
         var count3 = 0
         coroutineScope.launch {
             var teamList = mutableListOf<Team>()
@@ -85,8 +114,13 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
                         .get()
                         .addOnCompleteListener {
                             it.let { qs ->
-                                listc.add(qs.result!!.toObjects(User::class.java)[0])
-                                cont2 += 1
+                                var user = qs.result!!.toObjects(User::class.java)[0]
+                                if (user == null) {
+                                    cont2 += 1
+                                } else {
+                                    listc.add(qs.result!!.toObjects(User::class.java)[0])
+                                    cont2 += 1
+                                }
                                 Log.d("cont2", cont2.toString())
                                 Log.d("singleTeamUser", listc.toString())
 
@@ -121,7 +155,13 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
         }
     }
 
+    fun observeTeamDataChanged() {
+        db.collection("Project").document(arg.id.toString())
+            .addSnapshotListener { value, error ->
+                getProjectTeams(arg)
+            }
+    }
+
     init {
-        observeTeamChanges()
     }
 }

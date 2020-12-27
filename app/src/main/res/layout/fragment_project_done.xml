@@ -230,28 +230,31 @@
                 app:layout_constraintTop_toTopOf="@+id/share_image_title"
                 app:layout_constraintBottom_toBottomOf="@+id/share_image_title"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 app:layout_constraintStart_toStartOf="@+id/share_image_title"
                 app:layout_constraintTop_toBottomOf="@+id/share_image_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/regular_margin"
-                android:layout_marginEnd="@dimen/twox_regular_margin"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/gbp_gray3"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintStart_toStartOf="@+id/share_image_title"
+                app:layout_constraintTop_toBottomOf="@+id/share_image_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/send_post"
-                android:id="@+id/post_it"
-                android:background="@drawable/round_corner_light_blue"
-                style="@style/center_text_font_noto"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="@dimen/regular_margin"
+                android:layout_marginEnd="@dimen/twox_regular_margin"
+                android:src="@drawable/baseline_linked_camera_black_48dp"
+                android:background="@color/white"
+                />
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -278,6 +281,18 @@
 <!--            </com.google.android.material.tabs.TabLayout>-->
 
 <!--        </androidx.viewpager.widget.ViewPager>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/send_post"
+            android:id="@+id/post_it"
+            android:background="@drawable/round_corner_light_blue"
+            style="@style/center_text_font_noto"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
