@@ -1,14 +1,19 @@
 package com.eric.startupmatching.project.edit
 
+import android.app.Activity
+import android.text.InputType
+import android.text.InputType.TYPE_NULL
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.ItemViewBinder
 import com.eric.startupmatching.OnExpandAndHideListener
 import com.eric.startupmatching.TreeViewUtil
+import com.eric.startupmatching.data.EditTodoDescriptionBtn
 import com.eric.startupmatching.databinding.ItemProjectEditTodoRecyclerViewBinding
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import kotlinx.android.synthetic.main.item_child.view.*
@@ -23,15 +28,42 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
                      var viewModel: ProjectEditTaskViewModel,
 //                     var onClickListener: ProjectEditTaskParentAdapter.OnClickListener,
                      var holderType: Int) : RecyclerView.ViewHolder(binding.root) {
+
+        private fun hideKeyboard(view: View) {
+            val inputMethodManager = view.context.getSystemService(Activity.INPUT_METHOD_SERVICE)
+                    as InputMethodManager
+
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
         fun bind(model: TaskChildModel) {
+            binding.model = model
             holderType = 1
+
+            binding.detailText.isFocusable = true
+            binding.detailText.isFocusableInTouchMode = true
+            binding.detailText.inputType = TYPE_NULL
+
             binding.confirmButton.setOnClickListener {
                 Log.d("BTN", "Clicked")
-                binding.model = model
-                var description = binding.detailText.text.toString()
-                viewModel.editTodoDescription(model.content, description)
-                binding.detailText.text = null}
+                if (binding.confirmButton.text == EditTodoDescriptionBtn.Edit.type) {
+                    binding.confirmButton.text = EditTodoDescriptionBtn.Confirm.type
+//                    binding.detailText.isFocusable = true
+//                    binding.detailText.isFocusableInTouchMode = true
+                    binding.detailText.inputType = InputType.TYPE_CLASS_TEXT
+                } else {
+                    binding.confirmButton.text = EditTodoDescriptionBtn.Edit.type
+                    var description = binding.detailText.text.toString()
+                    viewModel.editTodoDescription(model.content, description)
+                    hideKeyboard(binding.detailText)
+//                    binding.detailText.isFocusable = true
+//                    binding.detailText.isFocusableInTouchMode = true
+                    binding.detailText.inputType = TYPE_NULL
+                }
 
+
+            }
+            binding.detailText.setText(model.content.description)
         }
     }
 
@@ -47,11 +79,11 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
         holder.itemView.tvContent.text = model.content.name
         holder.bind(model)
         holder.itemView.detail_text.addTextChangedListener {
-            if (it.isNullOrEmpty()) {
-                holder.itemView.confirm_button.visibility = View.GONE
-            } else {
-                holder.itemView.confirm_button.visibility = View.VISIBLE
-            }
+//            if (it.isNullOrEmpty()) {
+//                holder.itemView.confirm_button.visibility = View.GONE
+//            } else {
+//                holder.itemView.confirm_button.visibility = View.VISIBLE
+//            }
         }
     }
 }

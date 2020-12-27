@@ -73,6 +73,7 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
 //            Log.d("listToSubmit", it.toString())
         })
 
+        //Show add task dialog
         requireActivity().project_edit_task.setOnClickListener {
             fragmentManager?.let { it1 -> AddTaskDialog(viewModel).show(it1, "show") }
             Log.d("listToSubmit2222", adapter.items.toString())
@@ -109,7 +110,13 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
                 viewModel.updateTasks(task)
             }
         }
+        // get and snapshot data change on Firebase
         viewModel.getTaskByProject(project)
+
+        viewModel.todoAdded.observe(viewLifecycleOwner, Observer {
+            viewModel.getTaskByProjectWhenTodoAdded(project)
+        })
+
         binding.create.setOnClickListener {
             this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
         }

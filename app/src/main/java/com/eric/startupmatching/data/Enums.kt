@@ -35,3 +35,8 @@ enum class FollowStatus(val type: String) {
     Follow("+關注"),
     Followed("已關注")
 }
+
+enum class EditTodoDescriptionBtn(val type: String) {
+    Edit("更動"),
+    Confirm("確認")
+}

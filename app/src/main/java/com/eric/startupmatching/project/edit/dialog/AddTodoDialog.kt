@@ -76,6 +76,7 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
                 viewModel.todoInstance.description = binding.editTextTextPersonName6.text.toString()
                 Log.d("todoInstance", viewModel.todoInstance.toString())
                 viewModel.addTodo(viewModel.todoInstance)
+                viewModel.todoAdded()
                 dismiss()
 //            }
 

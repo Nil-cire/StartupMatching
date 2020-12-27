@@ -77,11 +77,12 @@
             android:layout_marginEnd="@dimen/regular_margin"
             android:textColor="@color/black"
             android:background="@drawable/baseline_add_black_48"
-            android:layout_width="16dp"
-            android:layout_height="16dp"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
 
         <TextView
             android:id="@+id/chat"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@+id/imgExpand"
             app:layout_constraintEnd_toStartOf="@+id/addTodo"
             app:layout_constraintBottom_toBottomOf="@+id/imgExpand"

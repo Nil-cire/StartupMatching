@@ -79,8 +79,35 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
                     list = mutableListOf()
                     Log.d("getTaskByProject", taskList.value.toString())
                 }
+        }
+    }
 
+    private val _todoAdded = MutableLiveData<Boolean>()
+    val todoAdded: LiveData<Boolean>
+        get() = _todoAdded
 
+    fun todoAdded() {
+        _todoAdded.value = true
+    }
+
+    fun getTaskByProjectWhenTodoAdded(project: Project) {
+        var list = mutableListOf<Task>()
+        coroutineScope.launch {
+            db.collection("Project").document(project.id!!)
+                .collection("Task")
+//                .orderBy("serial", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener {result ->
+                    if (result != null) {
+                        list.addAll(result.toObjects(Task::class.java))
+                        list.sortBy { it.serial }
+                    }
+//                    list.sortBy { it.serial }
+                    Log.d("editTaskList", list.toString())
+                    _taskList.value = list
+                    list = mutableListOf()
+                    Log.d("getTaskByProject", taskList.value.toString())
+                }
         }
     }
 
@@ -182,6 +209,7 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         }
 
     }
+
 
     fun addTodo(todo: Todo) {
         coroutineScope.launch {
