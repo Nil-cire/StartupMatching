@@ -12,6 +12,9 @@ import com.eric.startupmatching.TreeViewUtil
 import com.eric.startupmatching.databinding.ItemProjectEditUserRecyclerViewBinding
 import com.eric.startupmatching.project.treeview.model.team.TeamChildModel
 import kotlinx.android.synthetic.main.item_project_edit_task_recycler_view.view.*
+import kotlinx.android.synthetic.main.item_project_edit_task_recycler_view.view.confirm_button
+import kotlinx.android.synthetic.main.item_project_edit_task_recycler_view.view.detail_text
+import kotlinx.android.synthetic.main.item_project_edit_team_recycler_view.view.*
 
 
 class ProjectEditTeamChildAdapter(var viewModel: ProjectEditTeamViewModel) : ItemViewBinder<TeamChildModel, ProjectEditTeamChildAdapter.ViewHolder>() {

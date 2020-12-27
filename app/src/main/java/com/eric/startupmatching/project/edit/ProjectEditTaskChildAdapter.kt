@@ -18,7 +18,7 @@ import com.eric.startupmatching.databinding.ItemProjectEditTodoRecyclerViewBindi
 import com.eric.startupmatching.project.treeview.model.task.TaskChildModel
 import kotlinx.android.synthetic.main.item_child.view.*
 import kotlinx.android.synthetic.main.item_child.view.tvContent
-import kotlinx.android.synthetic.main.item_project_edit_task_recycler_view.view.*
+import kotlinx.android.synthetic.main.item_project_edit_todo_recycler_view.view.*
 
 
 class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : ItemViewBinder<TaskChildModel, ProjectEditTaskChildAdapter.ViewHolder>() {
@@ -40,6 +40,8 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
             binding.model = model
             holderType = 1
 
+            binding.name.text = model.content.name
+
             binding.detailText.isFocusable = true
             binding.detailText.isFocusableInTouchMode = true
             binding.detailText.inputType = TYPE_NULL
@@ -48,20 +50,15 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
                 Log.d("BTN", "Clicked")
                 if (binding.confirmButton.text == EditTodoDescriptionBtn.Edit.type) {
                     binding.confirmButton.text = EditTodoDescriptionBtn.Confirm.type
-//                    binding.detailText.isFocusable = true
-//                    binding.detailText.isFocusableInTouchMode = true
                     binding.detailText.inputType = InputType.TYPE_CLASS_TEXT
                 } else {
                     binding.confirmButton.text = EditTodoDescriptionBtn.Edit.type
                     var description = binding.detailText.text.toString()
                     viewModel.editTodoDescription(model.content, description)
+                    binding.detailText.text= null
                     hideKeyboard(binding.detailText)
-//                    binding.detailText.isFocusable = true
-//                    binding.detailText.isFocusableInTouchMode = true
                     binding.detailText.inputType = TYPE_NULL
                 }
-
-
             }
             binding.detailText.setText(model.content.description)
         }
@@ -76,7 +73,7 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: TaskChildModel) {
-        holder.itemView.tvContent.text = model.content.name
+
         holder.bind(model)
         holder.itemView.detail_text.addTextChangedListener {
 //            if (it.isNullOrEmpty()) {
