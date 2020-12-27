@@ -93,23 +93,28 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
             for ((index, taskModel) in adapter.items.withIndex()) {
                 if (taskModel is TaskParentModel) {
                     task = taskModel.content
+                    task.serial = taskList.size
                     taskList.add(task)
                 } else if (taskModel is TaskChildModel) {
                     var todo = taskModel.content
+                    todo.serial = todoList.size
                     todoList.add(todo)
+                    viewModel.updateTodos(todo, task!!)
                     if (adapter.items[index].javaClass != adapter.items[index + 1].javaClass) {
-                        for ((index, todo) in todoList.withIndex()) {
-                            todo.serial = index
-                            if (task != null) {
-                                viewModel.updateTodos(todo, task)
-                            }
-                        }
+                        todoList = mutableListOf()
+////                        for ((index, todo) in todoList.withIndex()) {
+////                            todo.serial = index
+////                            if (task != null) {
+////                                viewModel.updateTodos(todo, task)
+////                            }
+////                        }
                     }
                 }
             }
             for (task in taskList) {
                 viewModel.updateTasks(task)
             }
+            viewModel.updateReadyAndNav()
         }
         // get and snapshot data change on Firebase
         viewModel.getTaskByProject(project)
@@ -118,9 +123,11 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
             viewModel.getTaskByProjectWhenTodoAdded(project)
         })
 
-        binding.create.setOnClickListener {
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
-        }
+        viewModel.updateReadyAndNav.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
+            }
+        })
 
 
         return binding.root

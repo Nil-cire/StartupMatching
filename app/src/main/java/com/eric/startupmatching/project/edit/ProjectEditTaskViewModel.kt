@@ -280,6 +280,15 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         _taskListGet.value = false
     }
 
+    //// Navigation when task and to-do are all updated
+    private val _updateReadyAndNav = MutableLiveData<Boolean>()
+    val updateReadyAndNav: LiveData<Boolean>
+        get() = _updateReadyAndNav
+
+    fun updateReadyAndNav() {
+        _updateReadyAndNav.value = true
+    }
+
     init {
         _getTodoCount.value = 0
 //        observeTaskDataChanged()
