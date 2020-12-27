@@ -100,7 +100,8 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
                     todo.serial = todoList.size
                     todoList.add(todo)
                     viewModel.updateTodos(todo, task!!)
-                    if (adapter.items[index].javaClass != adapter.items[index + 1].javaClass) {
+                    if (adapter.items[index].javaClass != adapter.items[index + 1].javaClass ||
+                        index == adapter.items.size.minus(1) ) {
                         todoList = mutableListOf()
 ////                        for ((index, todo) in todoList.withIndex()) {
 ////                            todo.serial = index

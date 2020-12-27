@@ -72,7 +72,7 @@ class AddTaskDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
         }
 
         binding.submit.setOnClickListener {
-            if (startTime2 != null && endTime2 != null) {
+//            if (startTime2 != null && endTime2 != null) {
 //                viewModel.getNewTaskState()
                 // set task value
                 viewModel.taskInstance.serial = viewModel.taskList.value?.size ?: 0
@@ -83,13 +83,12 @@ class AddTaskDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
                 Log.d("taskInstance", viewModel.taskInstance.toString())
                 viewModel.addTask(viewModel.taskInstance)
                 dismiss()
-            }
-
-            binding.cancel.setOnClickListener {
-                dismiss()
-            }
+//            }
         }
 
+        binding.cancel.setOnClickListener {
+            dismiss()
+        }
 
         return binding.root
     }

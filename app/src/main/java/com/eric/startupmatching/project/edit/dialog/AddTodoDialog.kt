@@ -81,10 +81,10 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
                 viewModel.todoAdded()
                 dismiss()
 //            }
+        }
 
-            binding.cancel.setOnClickListener {
-                dismiss()
-            }
+        binding.cancel.setOnClickListener {
+            dismiss()
         }
 
         return binding.root
