@@ -35,10 +35,10 @@ class LoginFragment: Fragment() {
 //            override fun onAnimationRepeat(animation: Animator?) {}
 //        })
 
-        binding.loginBtn.setOnClickListener {
-//            binding.lottie.cancelAnimation()
-            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectMainFragment())
-        }
+//        binding.loginBtn.setOnClickListener {
+////            binding.lottie.cancelAnimation()
+//            this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectMainFragment())
+//        }
         return binding.root
     }
 }

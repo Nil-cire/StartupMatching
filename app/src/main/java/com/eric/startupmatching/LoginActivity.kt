@@ -4,23 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.eric.startupmatching.databinding.ActivityLoginBinding
-import com.eric.startupmatching.login.UserManager
 
 private const val RC_SIGN_IN = 20
 class LoginActivity : AppCompatActivity() {
@@ -57,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.status.observe(this, Observer {
             startActivity(Intent(this, MainActivity::class.java))
         })
+
     }
     private fun signIn(mGoogleSignInClient: GoogleSignInClient) {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
@@ -69,10 +68,11 @@ class LoginActivity : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
+                Log.d("L", account.email.toString())
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
+                Log.d("Google sign in failed" , e.message.toString())
             }
         }
     }
@@ -99,4 +99,8 @@ class LoginActivity : AppCompatActivity() {
         drawable.setBounds(0, 0, 50, 50)
         tv.setCompoundDrawables(drawable, null, null, null)
     }
+    // 8d:d0:4d:64:ee:51:e7:fb:ef:e7:6b:41:27:94:d4:04:a3:1a:53:f1
+
+
+
 }

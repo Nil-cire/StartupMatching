@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity() {
 //        } else {
 //
 //        }
+
+        if (UserManager.userToken == null
+        ) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.statusBarColor = Color.TRANSPARENT
