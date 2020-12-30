@@ -40,3 +40,11 @@ enum class EditTodoDescriptionBtn(val type: String) {
     Edit("更動"),
     Confirm("確認")
 }
+
+enum class FragmentName(val type: String) {
+    SocialMediaFragment("socialMediaFragment"),
+    ProjectMainFragment("projectMainFragment"),
+    PeopleMainFragment("peopleMainFragment"),
+    ChatRoomMainFragment("chatRoomMainFragment"),
+    ProfileMainFragment("profileMainFragment")
+}
