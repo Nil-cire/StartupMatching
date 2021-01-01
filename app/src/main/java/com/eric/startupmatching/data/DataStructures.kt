@@ -11,6 +11,7 @@ data class User(
     val image: String? = null,
     val skills: List<String?>? = null, //skill id
     val currentTeam: List<String?>? = null, // team id
+    val email: String?, // user email
     val currentProject: List<String?>? = null, // project id
     val applyProject: List<String?>? = null, //ProjectApply id
     val achievements: List<String?>? = null, // Achievement id

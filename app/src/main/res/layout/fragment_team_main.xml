@@ -37,6 +37,7 @@
             android:layout_height="64dp"
             android:layout_marginStart="@dimen/regular_margin"
             android:layout_marginTop="16dp"
+            setImages="@{viewModel.user.image}"
             app:srcCompat="@drawable/icons_abstract"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +65,7 @@
             android:layout_marginStart="@dimen/regular_margin"
             android:layout_marginTop="8dp"
             android:textSize="16sp"
-            android:text="Jojo"
+            android:text="@{viewModel.user.name}"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/user_icon"
             app:layout_constraintTop_toTopOf="@+id/user_icon" />

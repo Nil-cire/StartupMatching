@@ -48,3 +48,13 @@ enum class FragmentName(val type: String) {
     ChatRoomMainFragment("chatRoomMainFragment"),
     ProfileMainFragment("profileMainFragment")
 }
+
+enum class ProfileViewpagerCatagory(val catagory: String) {
+    FollowingList("關注清單"),
+
+}
+
+enum class ToolBarText(val type: String) {
+    ProfileMain("Profile"),
+
+}
