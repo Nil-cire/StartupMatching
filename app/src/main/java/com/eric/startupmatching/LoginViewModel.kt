@@ -1,5 +1,6 @@
 package com.eric.startupmatching
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,13 +34,18 @@ class LoginViewModel : ViewModel() {
             firebaseUser.value?.let {
                 val user = when (getUserData.value?.id == it.uid) {
                     true -> getUserData.value
-                    else -> user(it)
+                    false -> user(it)
                 }
-                user?.let {data->
-                    db.collection("User").document(user.id!!)
-                        .update("id", data.id, "name", data.name, "image", data.image, "briefIntro", data.briefIntro)
-                        .addOnSuccessListener {
+                user?.let { data->
+                    db.collection("User").document(data.id!!)
+//                        .update("id", data.id, "name", data.name, "image", data.image, "briefIntro", data.briefIntro)
+                        .set(user)
+                        .addOnCompleteListener {
                             _status.value = true
+                            Log.d("userLoginStatus", status.value.toString())
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.d("userCreateFailed", exception.message.toString())
                         }
                 }
             }
@@ -50,7 +56,7 @@ class LoginViewModel : ViewModel() {
             id = it.uid,
             name = it.displayName.toString(),
             image = it.photoUrl.toString(),
-            briefIntro = it.email.toString()
+            email = it.email.toString()
         )
     }
     fun getUser(uid: String) {

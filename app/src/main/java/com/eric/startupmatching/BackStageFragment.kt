@@ -153,6 +153,7 @@ class BackStageFragment: Fragment() {
             blacklist = null,
             briefIntro = " -- ",
             time = Calendar.getInstance().time
+
         )
 
         addUserBtn.setOnClickListener {

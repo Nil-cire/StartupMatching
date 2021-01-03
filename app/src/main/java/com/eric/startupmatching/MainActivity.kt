@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // check if User has signed in, if not, jump to login activity
-//        if (UserManager.userToken == null) {
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//        }
+//         check if User has signed in, if not, jump to login activity
+        if (UserManager.userToken == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         // status bar controll
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

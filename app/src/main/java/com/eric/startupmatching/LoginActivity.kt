@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken("145352377830-dl5tt65kcv3vgcam6004feumvvj84cgu.apps.googleusercontent.com")
             .requestEmail()
             .build()
         // Build a GoogleSignInClient with the options specified by gso.
@@ -57,10 +57,14 @@ class LoginActivity : AppCompatActivity() {
         })
 
     }
+
+
+
     private fun signIn(mGoogleSignInClient: GoogleSignInClient) {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -76,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
