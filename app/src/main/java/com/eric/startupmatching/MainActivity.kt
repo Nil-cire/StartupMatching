@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         socialmediaBtn.setOnClickListener {
-            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalTeamMainFragment())
+            findNavController(R.id.myNavHostFragment).navigate(MainNavigationDirections.actionGlobalProfileFragment())
         }
 
         //tool bar button functions

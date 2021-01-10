@@ -8,19 +8,13 @@ import com.eric.startupmatching.project.treeview.model.TreeViewModel
 class TreeViewUtil {
     companion object {
 
-        /**
-         * 旋转指示图标
-         */
         fun rotationExpandIcon(imgView: View, startAngle: Float, endAngle: Float) {
             val animator = ObjectAnimator.ofFloat(imgView, "rotation", startAngle, endAngle)
             animator.duration = 300
             animator.start()
         }
 
-        /**
-         * 实现展开/收起时数据的添加和移除
-         * 核心代码是不是非常少
-         */
+
         fun generateExpandAndHideListener(): OnExpandAndHideListener {
             return object : OnExpandAndHideListener {
                 override fun onExpand(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>, adapterItems: ArrayList<TreeViewModel>, clickedItem: TreeViewModel, clickedItemPosition: Int) {

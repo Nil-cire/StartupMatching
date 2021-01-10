@@ -1,7 +1,7 @@
 package com.eric.startupmatching
 
 import android.app.Application
-import android.content.Context
+import kotlin.properties.Delegates
 
 
 class MyApplication : Application() {
@@ -10,10 +10,12 @@ class MyApplication : Application() {
 //        get() = ServiceLocator.provideTasksRepository(this)
     override fun onCreate() {
         super.onCreate()
-        appContext = applicationContext
+//        appContext = applicationContext
+        MyApplication.appContext = this
     }
     companion object {
-        var appContext: Context? = null
-            private set
+//        var appContext: Context? = null
+//            private set
+        var appContext: MyApplication by Delegates.notNull()
     }
 }

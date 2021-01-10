@@ -12,18 +12,13 @@ import com.eric.startupmatching.project.treeview.model.team.TeamParentModel
 import com.eric.startupmatching.project.treeview.model.TreeViewModel
 import kotlinx.android.synthetic.main.item_parent.view.*
 
-/**
- * Created by zzw on 2018/6/22.
- */
 class TeamParentViewBinder : ItemViewBinder<TeamParentModel, TeamParentViewBinder.ViewHolder>() {
     private lateinit var mExpandAndHideListener: OnExpandAndHideListener
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
         val root = inflater.inflate(R.layout.item_parent, parent, false)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
-        return ViewHolder(
-            root
-        )
+        return ViewHolder(root)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: TeamParentModel) {

@@ -19,6 +19,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.eric.startupmatching.databinding.ActivityLoginBinding
+import com.eric.startupmatching.login.UserManager
 
 private const val RC_SIGN_IN = 20
 class LoginActivity : AppCompatActivity() {
@@ -50,7 +51,11 @@ class LoginActivity : AppCompatActivity() {
             signIn(mGoogleSignInClient)
         }
         viewModel.getUserData.observe(this, Observer {
-            viewModel.createUser()
+            if(it == null){
+                viewModel.createUser()
+            }else{
+                startActivity(Intent(this, MainActivity::class.java))
+            }
         })
         viewModel.status.observe(this, Observer {
             startActivity(Intent(this, MainActivity::class.java))
@@ -88,11 +93,11 @@ class LoginActivity : AppCompatActivity() {
                 // Sign in success, intent to main activity with the signed-in user's information
                 val user = auth.currentUser
                 if (user != null) {
-                    UserInfo.userToken = user.uid
+                    UserManager.userToken = user.uid
                     viewModel.firebaseUser.value = user
                     viewModel.getUser(user.uid)
                 }
-                startActivity(Intent(this, MainActivity::class.java))
+//                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 // If sign in fails, display a message to the user.
                 Log.w(TAG,"signInWithCredential:failure", task.exception)

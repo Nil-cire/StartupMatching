@@ -157,4 +157,8 @@
             app:argType="com.eric.startupmatching.data.Project" />
     </fragment>
     <action android:id="@+id/action_global_projectDoneMainFragment" app:destination="@id/projectDoneMainFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.eric.startupmatching.profile.ProfileFragment"
+        android:label="ProfileFragment" /><action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment"/>
 </navigation>

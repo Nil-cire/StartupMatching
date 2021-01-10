@@ -10,9 +10,14 @@ import com.eric.startupmatching.data.User
 object UserManager {
     private const val USER_DATA = "user_data"
     private const val USER_TOKEN = "user_token"
+
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
+
+    val userUid = MutableLiveData<String>()
+
+
     var userToken: String? = null
         get() = MyApplication.appContext
             ?.getSharedPreferences(USER_DATA, Context.MODE_PRIVATE)
