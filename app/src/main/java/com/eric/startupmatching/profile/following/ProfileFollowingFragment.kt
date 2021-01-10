@@ -43,6 +43,8 @@ class ProfileFollowingFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getFollowingList(UserInfo.currentUser.value!!)  // 1. get user followingList
+        UserInfo.currentUser.value?.let {
+            viewModel.getFollowingList(UserInfo.currentUser.value!!)  // 1. get user followingList
+        }
     }
 }

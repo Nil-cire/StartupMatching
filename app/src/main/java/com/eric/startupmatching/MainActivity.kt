@@ -17,10 +17,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
 //         check if User has signed in, if not, jump to login activity
-        if (UserManager.userToken == null) {
+        if (UserInfo.userToken == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+        } else {
+            viewModel.getUser(UserInfo.userToken!!)
         }
 
         // status bar controll
@@ -32,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 //        this.actionBar?.hide()
 
         val binding = androidx.databinding.DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-        val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         val teamBtn = binding.assistant
         val matchingBtn = binding.search

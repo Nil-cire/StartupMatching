@@ -11,7 +11,7 @@ object UserManager {
     private const val USER_DATA = "user_data"
     private const val USER_TOKEN = "user_token"
 
-    private val _user = MutableLiveData<User>()
+    val _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
 

@@ -41,6 +41,7 @@ class LoginViewModel : ViewModel() {
 //                        .update("id", data.id, "name", data.name, "image", data.image, "briefIntro", data.briefIntro)
                         .set(user)
                         .addOnCompleteListener {
+                            UserInfo.currentUser.value = user
                             _status.value = true
                             Log.d("userLoginStatus", status.value.toString())
                         }
@@ -66,6 +67,7 @@ class LoginViewModel : ViewModel() {
                     .get()
                     .addOnSuccessListener {
                         val result = it.toObject(User::class.java)
+                        UserInfo.currentUser.value = result
                         _getUserData.value = result
                     }
             } catch (e: Exception) {

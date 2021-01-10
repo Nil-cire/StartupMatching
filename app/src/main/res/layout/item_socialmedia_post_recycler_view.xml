@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/post_image"
         setImages="@{post.image}"
+        android:scaleType="centerCrop"
         android:layout_marginTop="@dimen/half_regular_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

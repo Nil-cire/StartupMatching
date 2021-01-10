@@ -39,16 +39,18 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
 //                }
             var followed = true
             fun followBtnTexChecker() {
-                if (UserInfo.currentUser.value?.following?.contains(user.id)!!) {
-                    binding.iconPin.text = FollowStatus.Followed.type
-                    binding.iconPin.setBackgroundResource(R.drawable.round_corner)
-                    binding.iconPin.setTextColor(R.color.white)
-                    followed = true
-                } else {
-                    binding.iconPin.text = FollowStatus.Follow.type
-                    binding.iconPin.setBackgroundResource(R.drawable.round_corner_light_blue)
-                    binding.iconPin.setTextColor(R.color.black)
-                    followed = false
+                if (!UserInfo.currentUser.value?.following.isNullOrEmpty()) {
+                    if (UserInfo.currentUser.value?.following?.contains(user.id)!!) {
+                        binding.iconPin.text = FollowStatus.Followed.type
+                        binding.iconPin.setBackgroundResource(R.drawable.round_corner)
+                        binding.iconPin.setTextColor(R.color.white)
+                        followed = true
+                    } else {
+                        binding.iconPin.text = FollowStatus.Follow.type
+                        binding.iconPin.setBackgroundResource(R.drawable.round_corner_light_blue)
+                        binding.iconPin.setTextColor(R.color.black)
+                        followed = false
+                    }
                 }
             }
 

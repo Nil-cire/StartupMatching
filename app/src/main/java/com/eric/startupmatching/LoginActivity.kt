@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
                 // Sign in success, intent to main activity with the signed-in user's information
                 val user = auth.currentUser
                 if (user != null) {
-                    UserManager.userToken = user.uid
+                    UserInfo.userToken = user.uid
                     viewModel.firebaseUser.value = user
                     viewModel.getUser(user.uid)
                 }
