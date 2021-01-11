@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="event"
+            type="com.eric.startupmatching.data.Event" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/half_regular_margin"
+        android:paddingTop="@dimen/half_regular_margin"
+        android:paddingEnd="@dimen/half_regular_margin"
+        tools:ignore="RtlSymmetry">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardBackgroundColor="@color/light_blue"
+            app:cardCornerRadius="12dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:padding="@dimen/regular_margin">
+
+
+                <TextView
+                    android:id="@+id/user_name"
+                    style="@style/center_text_font_noto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@{event.type}"
+                    android:background="@color/lighgt_yellow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="分類" />
+
+                <TextView
+                    android:id="@+id/duty_status"
+                    style="@style/center_text_font_noto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/user_name"
+                    android:layout_marginStart="@dimen/regular_margin"
+                    app:layout_constraintTop_toTopOf="@+id/user_name"
+                    tools:text="使用者" />
+
+                <TextView
+                    android:id="@+id/time"
+                    style="@style/center_text_font_noto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{event.messages}"
+                    tools:text="時間"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/duty_status"
+                    app:layout_constraintStart_toEndOf="@+id/duty_status" />
+
+                <TextView
+                    android:id="@+id/time2"
+                    style="@style/center_text_font_noto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/duty_status"
+                    app:layout_constraintStart_toEndOf="@+id/time"
+                    tools:text="目標" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

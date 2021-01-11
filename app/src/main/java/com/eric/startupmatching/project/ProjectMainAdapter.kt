@@ -22,7 +22,6 @@ class ProjectMainAdapter(val onClickListener: OnClickListener) : ListAdapter<Pro
         fun bind(project: Project) {
             binding.project = project
             binding.executePendingBindings()
-
         }
     }
 
@@ -38,11 +37,11 @@ class ProjectMainAdapter(val onClickListener: OnClickListener) : ListAdapter<Pro
 //        holder.bind(item)
 
         if (holder is ViewHolder) {
-            val teamMember = getItem(position)
+            val project = getItem(position)
             holder.itemView.setOnClickListener {
-                onClickListener.onClick(teamMember)
+                onClickListener.onClick(project)
             }
-            holder.bind(teamMember)
+            holder.bind(project)
         } else {
             Log.d("Boooo", "cant bind data")
         }

@@ -49,6 +49,7 @@ class BackStageFragment: Fragment() {
         val addChatRoom = binding.addChatRoom
         val addTask = binding.addTask
         val addTodo = binding.addTodo
+        val addEvent = binding.addEvent
 
         //instances
 
@@ -134,10 +135,7 @@ class BackStageFragment: Fragment() {
             Position("00005", "Bassist")
         )
 
-        val allPost = mutableListOf<Post>(
-            Post("00001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
-            Post("00002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
-        )
+
 
         //Functions
 
@@ -155,6 +153,7 @@ class BackStageFragment: Fragment() {
             blacklist = null,
             briefIntro = " -- ",
             time = Calendar.getInstance().time
+
         )
 
         addUserBtn.setOnClickListener {
@@ -174,8 +173,8 @@ class BackStageFragment: Fragment() {
             projectName = "Cost reduction of new product",
             description = "Current cost: 15 USD/Kg \nTarget cost: 12 USD/Kg",
             tasks = mutableListOf("00001", "00002"),
-            teams = mutableListOf("000, 001, 002, 003"),
-            startupStatus = mutableListOf("Running", "Recruiting"),
+            teams = mutableListOf("000", "001", "002", "003"),
+            startupStatus = "running",
             positions = mutableListOf("001", "002", "003", "004"),
             hiringPosition = mutableListOf("004"),
             industry = null,
@@ -232,17 +231,22 @@ class BackStageFragment: Fragment() {
             }
         }
 
-        addPosts.setOnClickListener {
-            try {
-                for (post in allPost) {
-                    db.collection("Post")
-                        .add(post)
-                }
-                Log.d("add position:", "Success")
-            } catch (e:Exception) {
-                Log.d("add position fail:", e.message ?: null.toString())
-            }
-        }
+//        val allPost = mutableListOf<Post>(
+//            Post("001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
+//            Post("002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
+//        )
+
+//        addPosts.setOnClickListener {
+//            try {
+//                for (post in allPost) {
+//                    db.collection("Post")
+//                        .add(post)
+//                }
+//                Log.d("add position:", "Success")
+//            } catch (e:Exception) {
+//                Log.d("add position fail:", e.message ?: null.toString())
+//            }
+//        }
 
         val teamMembers = mutableListOf(
             TeamMember("singer", "00001",
@@ -275,7 +279,8 @@ class BackStageFragment: Fragment() {
         }
 
         val messages = mutableListOf(
-            Message("00003", "Hi sample", "00001", Calendar.getInstance().time, mutableListOf("00001", "00002"))
+            Message("002", "Hi all", "004", Calendar.getInstance().time, mutableListOf("004", "005")),
+            Message("004", "Hi", "005", Calendar.getInstance().time, mutableListOf("004", "005"))
         )
 
         addMessage.setOnClickListener {
@@ -291,8 +296,8 @@ class BackStageFragment: Fragment() {
         }
 
         val chatRooms = mutableListOf(
-            ChatRoom(null, "User","00001", mutableListOf("00001", "00002"), Calendar.getInstance().time, mutableListOf("00001", "00003")),
-            ChatRoom(null, "Team","00002", mutableListOf("00001", "00002", "00003"), Calendar.getInstance().time, mutableListOf("00002", "00002"))
+            ChatRoom(null, "User","001", mutableListOf("000", "004"), Calendar.getInstance().time, mutableListOf("001", "003")),
+            ChatRoom(null, "Team","002", mutableListOf("004", "005"), Calendar.getInstance().time, mutableListOf("002", "004"))
 
         )
 
@@ -309,18 +314,18 @@ class BackStageFragment: Fragment() {
         }
 
         val tasks = mutableListOf<Task>(
-            Task(id="00001", serial = 0, members = mutableListOf("00001"), name = "Write a song",
-                chatRoom = "00003", todo = mutableListOf("00001"), status = "proposal",
+            Task(id="001", serial = 0, members = mutableListOf("000", "001", "004"), name = "1st task",
+                chatRoom = "003", todo = mutableListOf(), status = "proposal",
                 startTime = null, endTime = null, preTask = null, deadline=null),
-            Task(id="00002", serial = 1, members = mutableListOf("00001, 00002"), name = "Record",
-                chatRoom = "00004", todo = mutableListOf("00002", "00003"), status = "proposal",
-                startTime = null, endTime = null, preTask = "00001", deadline=null)
+            Task(id="002", serial = 1, members = mutableListOf("001", "004"), name = "2nd task",
+                chatRoom = "004", todo = mutableListOf(), status = "proposal",
+                startTime = null, endTime = null, preTask = "001", deadline=null)
         )
 
         addTask.setOnClickListener {
             try {
                 for (task in tasks) {
-                    db.collection("Task")
+                    db.collection("Project").document("m4eORfGbZIchw1zfE1m0").collection("Task")
                         .add(task)
                 }
                 Log.d("add task:", "Success")
@@ -331,23 +336,51 @@ class BackStageFragment: Fragment() {
 
 
         val todos = mutableListOf<Todo>(
-            Todo(id = "00001", serial = 0, members = mutableListOf("00001"), name = "Construct",
-                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = ""),
-            Todo(id = "00002", serial = 0, members = mutableListOf("00001, 00002"), name = "record it",
-                status = "proposal", startTime = null, endTime = null, preTodo = null, deadline = null, description = ""),
-            Todo(id = "00003", serial = 1, members = mutableListOf("00001, 00002"), name = "CM",
-                status = "proposal", startTime = null, endTime = null, preTodo = "00002", deadline = null, description = "")
+            Todo(id = "005", serial = 0, members = mutableListOf("004"), name = "1st todo",
+                status = "proposal", startTime = null, endTime = null, preTodo = null, task = null, description = "111"),
+            Todo(id = "006", serial = 1, members = mutableListOf("000", "004"), name = "2nd todo",
+                status = "proposal", startTime = null, endTime = null, preTodo = null, task = null, description = "222"),
+            Todo(id = "007", serial = 2, members = mutableListOf("000", "004"), name = "3rd todo",
+                status = "proposal", startTime = null, endTime = null, preTodo = "00002", task = null, description = "333")
         )
 
         addTodo.setOnClickListener {
             try {
                 for (todo in todos) {
-                    db.collection("Todo")
+                    db.collection("Project").document("m4eORfGbZIchw1zfE1m0")
+                        .collection("Task")
+                        .document("3U9m6ud4OkE4lY3He9pJ")
+                        .collection("Todo")
                         .add(todo)
                 }
                 Log.d("add todo:", "Success")
             } catch (e:Exception) {
                 Log.d("add todo fail:", e.message ?: null.toString())
+            }
+        }
+
+        val events = mutableListOf<Event>(
+            Event(fromUser = "001", type = "team", project = null, task = null,
+                todo = null, team = "ThUkrGaCYJNulR5ECb8U" , toUsers = mutableListOf("004", "005"), id = "001", time = null, messages = "加入了"),
+            Event(fromUser = "004", type = "team", project = null, task = null,
+                todo = null, team = "nWjaFIKAmJXtyghPEsLS" , toUsers = mutableListOf("004", "005"), id = "002", time = null, messages = "加入了"),
+            Event(fromUser = "004", type = "task", project = null, task = "002",
+                todo = null, team = null, toUsers = mutableListOf("004", "001"), id = "003", time = null, messages = "新增了"),
+            Event(fromUser = "001", type = "todo", project = null, task = "Construct",
+                todo = null, team = null, toUsers = null, id = "004", time = null, messages = "完成了"),
+            Event(fromUser = "001", type = "project", project = "001", task = "Construct",
+                todo = null, team = null, toUsers = null, id = "005", time = null, messages = "建立了")
+        )
+
+        addEvent.setOnClickListener {
+            try {
+                for (event in events) {
+                    db.collection("Event")
+                        .add(event)
+                }
+                Log.d("add event:", "Success")
+            } catch (e:Exception) {
+                Log.d("add event fail:", e.message ?: null.toString())
             }
         }
 

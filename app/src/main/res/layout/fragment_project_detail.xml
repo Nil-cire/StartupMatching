@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.eric.startupmatching.project.detail.ProjectDetailViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint_project_info"
+            android:layout_marginBottom="@dimen/regular_margin"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/tools" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="40dp"
+            android:id="@+id/constraint_project_info">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/twox_regular_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/twox_regular_margin"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/light_blue">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/constraint_in_card">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:text="@string/preparing"
+                        android:id="@+id/schedule_image"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginEnd="@dimen/regular_margin"
+                        android:background="@drawable/round_corner"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_name"
+                        android:text="名稱"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="@dimen/regular_margin"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:id="@+id/project_name_content"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textColor="@color/white"
+                        android:layout_marginEnd="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/regular_margin"
+                        android:text="@{viewModel.projectArgs.projectName}"
+                        app:layout_constraintEnd_toStartOf="@+id/schedule_image"
+                        app:layout_constraintStart_toEndOf="@+id/project_name"
+                        app:layout_constraintTop_toTopOf="@+id/project_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_status"
+                        android:text="狀態"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toBottomOf="@+id/project_name_content"
+                        android:layout_marginTop="@dimen/half_regular_margin"
+                        app:layout_constraintStart_toStartOf="@+id/project_name"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_status_content"
+                        android:text="@{viewModel.projectArgs.startupStatus}"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_status"
+                        app:layout_constraintStart_toEndOf="@+id/project_status"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_time"
+                        android:text="時間"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toBottomOf="@+id/project_status"
+                        android:layout_marginTop="@dimen/half_regular_margin"
+                        app:layout_constraintStart_toStartOf="@+id/project_status"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_time_content"
+                        setTimeWithFormat="@{viewModel.projectArgs.startTime}"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_time"
+                        app:layout_constraintStart_toEndOf="@+id/project_time"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/to"
+                        android:text="~"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_time"
+                        app:layout_constraintStart_toEndOf="@+id/project_time_content"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/end_time"
+                        setTimeWithFormat="@{viewModel.projectArgs.endTime}"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_time"
+                        app:layout_constraintStart_toEndOf="@+id/to"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_description"
+                        android:text="說明"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toBottomOf="@+id/project_time"
+                        android:layout_marginTop="@dimen/half_regular_margin"
+                        app:layout_constraintStart_toStartOf="@+id/project_time"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_description_content"
+                        android:text="@{viewModel.projectArgs.description}"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_description"
+                        app:layout_constraintStart_toEndOf="@+id/project_description"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/regular_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_bulletinBoard"
+                        android:text="公告"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toBottomOf="@+id/project_description_content"
+                        android:layout_marginTop="@dimen/half_regular_margin"
+                        app:layout_constraintStart_toStartOf="@+id/project_description"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/project_bulletinBoard_content"
+                        android:text="@{viewModel.projectArgs.bulletinBoard}"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="@+id/project_bulletinBoard"
+                        app:layout_constraintStart_toEndOf="@+id/project_bulletinBoard"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="@dimen/regular_margin"
+                        android:layout_marginStart="@dimen/regular_margin"
+                        android:layout_marginBottom="@dimen/regular_margin"
+                        android:visibility="gone"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_assistant"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/done_prepare"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_project_info"
+            app:layout_constraintVertical_bias="1.0">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs_assistant"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:tabIndicatorColor="#3f3a3a"
+                app:tabSelectedTextColor="#3f3a3a"
+                app:tabTextColor="#888888">
+
+            </com.google.android.material.tabs.TabLayout>
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="準備完成"
+            android:id="@+id/done_prepare"
+            android:background="@drawable/round_corner_light_blue"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager_assistant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/center_text_font_noto"
+            android:layout_marginStart="@dimen/threex_regular_margin"
+            android:layout_marginEnd="@dimen/threex_regular_margin"
+            android:layout_marginBottom="@dimen/regular_margin"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:textSize="16sp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

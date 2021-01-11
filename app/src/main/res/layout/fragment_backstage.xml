@@ -166,6 +166,17 @@
             android:text="add todo"
             style="@style/center_text_font_noto"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:id="@+id/add_Event"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginStart="@dimen/regular_margin"
+            app:layout_constraintTop_toBottomOf="@id/add_Todo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="add event"
+            style="@style/center_text_font_noto"/>
+
 
         <!--    <TextView-->
         <!--        android:layout_width="wrap_content"-->

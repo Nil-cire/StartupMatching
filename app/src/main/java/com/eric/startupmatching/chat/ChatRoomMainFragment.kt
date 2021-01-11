@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.eric.startupmatching.chat.childfragment.ChatRoomPersonFragment
+import com.eric.startupmatching.chat.childfragment.ChatRoomTaskFragment
+import com.eric.startupmatching.chat.childfragment.ChatRoomTeamFragment
 import com.eric.startupmatching.databinding.FragmentChatRoomMainBinding
 import com.google.android.material.tabs.TabLayout
-import com.google.firebase.firestore.FirebaseFirestore
 
 class ChatRoomMainFragment: Fragment() {
 
@@ -26,9 +27,9 @@ class ChatRoomMainFragment: Fragment() {
 
         binding.lifecycleOwner = this
 
-//        viewpagerAdapter.addFragment(ItemChatroomPersonFragment(),"個人")
-//        viewpagerAdapter.addFragment(ItemChatroomGroupFragment(),"團隊")
-//        viewpagerAdapter.addFragment(ItemChatroomGroupFragment(),"任務")
+        viewpagerAdapter.addFragment(ChatRoomPersonFragment(),"個人")
+        viewpagerAdapter.addFragment(ChatRoomTeamFragment(),"團隊")
+        viewpagerAdapter.addFragment(ChatRoomTaskFragment(),"任務")
 
         viewPager.adapter = viewpagerAdapter
 

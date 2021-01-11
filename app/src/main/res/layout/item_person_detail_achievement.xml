@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="achievement"
+            type="com.eric.startupmatching.data.Achievement" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="@dimen/regular_margin"
+    android:paddingEnd="@dimen/regular_margin"
+    android:paddingTop="@dimen/regular_margin"
+    android:paddingBottom="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/round_corner_light_blue">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="12dp"
+            setTrophyImages="@{achievement.team}"
+            android:id="@+id/achievement_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/achievement_name"
+            android:text="@string/project_name_cn"
+            android:textColor="@color/white"
+            android:layout_marginStart="@dimen/regular_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/half_regular_margin"
+            app:layout_constraintStart_toEndOf="@+id/achievement_icon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/achievement_name_detail"
+            android:text="@{achievement.name}"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="@+id/achievement_name"
+            app:layout_constraintStart_toEndOf="@+id/achievement_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/achievement_position"
+            android:text="@string/positoin"
+            android:layout_marginTop="@dimen/half_regular_margin"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/achievement_name"
+            app:layout_constraintStart_toStartOf="@+id/achievement_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/achievement_position_detail"
+            android:text="@{achievement.position}"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="@+id/achievement_position"
+            app:layout_constraintStart_toEndOf="@+id/achievement_position"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/achievement_time"
+            android:text="@string/finish_date"
+            android:layout_marginTop="@dimen/half_regular_margin"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/achievement_position"
+            app:layout_constraintStart_toStartOf="@+id/achievement_name"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/achievement_time_detail"
+            setTimeWithFormat="@{achievement.time}"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="@+id/achievement_time"
+            app:layout_constraintStart_toEndOf="@+id/achievement_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/half_regular_margin"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

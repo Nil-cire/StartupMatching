@@ -22,6 +22,10 @@ class TeamMainViewModel: ViewModel() {
 
     val db = FirebaseFirestore.getInstance()
 
+//    private val _team = MutableLiveData<Team>()
+//    val team: LiveData<Team>
+//        get() = _team
+
     private val _team = MutableLiveData<Team>()
     val team: LiveData<Team>
         get() = _team
@@ -30,9 +34,9 @@ class TeamMainViewModel: ViewModel() {
     val teamList: LiveData<List<TeamMember>>
         get() = _teamList
 
-//    private val _getTeamList = MutableLiveData<Int>()
-//    val getTeamList: LiveData<Int>
-//        get() = _getTeamList
+//    private val _currentUser = MutableLiveData<User>()
+//    val currentUser: LiveData<User>
+//        get() = _currentUser
 
     var user = UserInfo.currentUser
 

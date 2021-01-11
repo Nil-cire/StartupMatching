@@ -37,6 +37,7 @@
                 android:layout_marginStart="@dimen/regular_margin"
                 android:layout_marginTop="@dimen/regular_margin"
                 android:text="@string/project_name_cn"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/regular_margin"
-                android:text="@string/project_name_cn"
+                android:text="@{project.projectName}"
+                tools:text="@string/project_name_cn"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/project_name"
                 app:layout_constraintTop_toTopOf="@+id/project_name" />
 
@@ -55,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/half_regular_margin"
                 android:text="@string/supervisor"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/project_name"
                 app:layout_constraintTop_toBottomOf="@+id/project_name" />
 
@@ -62,7 +66,9 @@
                 android:id="@+id/leader_name_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/supervisor"
+                android:text="@{project.projectLeader}"
+                tools:text="@string/supervisor"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/project_name_content"
                 app:layout_constraintTop_toTopOf="@+id/leader_name" />
 
@@ -72,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/half_regular_margin"
                 android:text="@string/time"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/leader_name"
                 app:layout_constraintTop_toBottomOf="@+id/leader_name" />
 
@@ -79,7 +86,9 @@
                 android:id="@+id/start_time_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/start_time"
+                setTimeWithFormat="@{project.startTime}"
+                tools:text="@string/start_time"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/project_name_content"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -89,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_regular_margin"
                 android:text="~"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/start_time_content"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -98,7 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_regular_margin"
-                android:text="@string/end_time"
+                setTimeWithFormat="@{project.endTime}"
+                tools:text="@string/end_time"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/to"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -109,6 +121,7 @@
                 android:layout_marginTop="@dimen/half_regular_margin"
                 android:layout_marginBottom="@dimen/regular_margin"
                 android:text="@string/description"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/start_time"
                 app:layout_constraintTop_toBottomOf="@+id/start_time" />
@@ -117,9 +130,13 @@
                 android:id="@+id/description_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/description"
+                android:text="@{project.description}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/regular_margin"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/start_time_content"
-                app:layout_constraintTop_toTopOf="@+id/description" />
+                app:layout_constraintTop_toTopOf="@+id/description"
+                tools:text="@string/description" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

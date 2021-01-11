@@ -37,6 +37,7 @@ class TeamStatusViewModel: ViewModel() {
                 .addSnapshotListener { value, error ->
                     for (teamMember in value?.toObjects(User::class.java) as MutableList<User>) {
                         if(teamMember.id != user.value?.id) {
+                            Log.d("TeamMainMember", teamMember.toString())
                             teamMenberList.add(teamMember)
                         }
                     }

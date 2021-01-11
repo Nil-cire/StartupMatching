@@ -11,15 +11,16 @@ data class User(
     val image: String? = null,
     val skills: List<String?>? = null, //skill id
     val currentTeam: List<String?>? = null, // team id
+    val email: String? = "", // user email
     val currentProject: List<String?>? = null, // project id
     val applyProject: List<String?>? = null, //ProjectApply id
     val achievements: List<String?>? = null, // Achievement id
-    val following: List<String?>? = null, // user id
+    var following: List<String?>? = null, // user id
     val follower: List<String?>? = null,
     val blacklist: List<String?>? = null, // user id
     val briefIntro: String? = null,
     val time: Date? = null,
-    val workingStatus: String? = null
+    val workingStatus: String? = null // On, Off
 ): Parcelable
 
 @Parcelize
@@ -43,17 +44,18 @@ data class Team(
     val image: String? = "",
     val members: List<String?>? = mutableListOf(), //TeamMember id
     val hiringPosition: List<String?>? = mutableListOf(), //Position id
-    val teamLeader: String = "" // User id
+    val teamLeader: String = "", // User id
+    val description: String? = null
 ): Parcelable
 
 @Parcelize
 data class Project(
-    val id: String? = "",
+    var id: String? = "",
     val projectName: String? = "",
     val description: String? = "",
     val tasks: List<String?>? = mutableListOf(), //Task id
     val teams: List<String?>? = mutableListOf(), // Team id
-    val startupStatus: List<String?>? = mutableListOf(), // Recruiting, Planning ,Ready, Running
+    val startupStatus: String? = "", // preparing, running, done
     val positions:List<String?>? = mutableListOf(), // position
     val hiringPosition: List<String?>? = mutableListOf(), // position
     val industry: String? = "", // industry id
@@ -62,26 +64,35 @@ data class Project(
     val applicationList: List<String?>? = mutableListOf(), //User id
     val bulletinBoard: String? = "",
     val startTime: Date? = Calendar.getInstance().time,
-    val endTime: Date? = Calendar.getInstance().time
+    val endTime: Date? = Calendar.getInstance().time,
+    val taskEditable: String? = null,
+    val teamEditable: String? = null,
+    val members: List<String?>? = mutableListOf()
 ): Parcelable
 
 @Parcelize
 data class Post(
+    val id: String = "", // Post id
     val poster: String = "", // User id
     val content: String = "",
     val image: String? = null,
     val timeDate: Date = Calendar.getInstance().time,
     val comments: List<String?>? = mutableListOf(), // Comment ID
 //    val achievement: List<String?>?, //Achievement id
-    val likes: List<String?>? = mutableListOf() // user id
+    val likes: List<String?>? = mutableListOf(), // user id
+    val achievementId: String? = ""
 ): Parcelable
 
 @Parcelize
 data class Achievement(
     val id: String? = null,
+    val postId: String? = null,
     val project: String? = null,
     val team: String? = null,
-    val position: String? = null
+    val members: List<String?>? = mutableListOf(),
+    val position: String? = null,
+    val time: Date? = Calendar.getInstance().time,
+    val name: String? = ""
 ): Parcelable
 
 @Parcelize
@@ -120,31 +131,31 @@ data class Skill(
 @Parcelize
 data class Task(
     val id: String? = null,
-    val serial: Int? = null,
+    var serial: Int? = null,
     val members: List<String?>? = mutableListOf(), //TeamMember id
-    val name: String? = null,
+    var name: String? = null,
     val chatRoom: String? = null, //chatRoom id
     val todo: List<String?>? = mutableListOf(), // Todo id
     val status: String? = null, //proposal, await, doing, done
-    val startTime: Date? = null,
-    val endTime: Date? = null,
+    var startTime: Date? = null,
+    var endTime: Date? = null,
     val preTask: String? = null, //Task id
     val deadline: Date? = null,
-    val description: String? = null
+    var description: String? = null
 ): Parcelable
 
 @Parcelize
 data class Todo( //adjust while crafting project manage page
     val id: String? = null,
-    val serial: Int? = null,
+    var serial: Int? = null,
     val members: List<String?>? = mutableListOf(),
-    val name: String? = null,
-    val status: String? = null, //proposal, await, doing, done
-    val startTime: Date? = null,
-    val endTime: Date? = null,
+    var name: String? = null,
+    var status: String? = null, //running, done
+    var startTime: Date? = null,
+    var endTime: Date? = null,
     val preTodo: String? = null,
-    val deadline: Date? = null,
-    val description: String? = null
+    var task: String? = null,
+    var description: String? = null
 ): Parcelable
 
 @Parcelize
@@ -169,7 +180,7 @@ data class Comment(
 @Parcelize
 data class ChatRoom(
     val name: String? = null, // Task.id or Team.id or null for personal chat room
-    val type: String? = null, // User, Task, Team
+    val type: String? = null, // Private, Task, Team
     val id: String? = null ,
     val member: List<String?>? = null, // User id
     val updateTime: Date = Calendar.getInstance().time,
@@ -178,9 +189,14 @@ data class ChatRoom(
 
 @Parcelize
 data class Event(
-    val from: List<String?>? = null, // User.name
-    val to: List<String?>? = null, //
+    val fromUser: String? = null, // User.name
+    val type: String? = null, // team, task, atodo, project
+    val project: String? = null,
+    val task: String? = null,
+    val todo: String? = null,
+    val team: String? = null,
+    val toUsers: List<String?>? = null, // all user involved
     val id: String? = null ,
-    val time: Date = Calendar.getInstance().time, // done time
-    val messages: MutableList<String?>? = null // Message id
+    val time: Date? = Calendar.getInstance().time, // done time
+    val messages: String? = null // Message id
 ): Parcelable

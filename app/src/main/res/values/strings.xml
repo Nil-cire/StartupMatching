@@ -48,4 +48,47 @@
     <string name="todo_name">待辦事項</string>
     <string name="member">成員</string>
     <string name="supervisor">負責人</string>
+    <string name="hiring_position">職缺</string>
+    <string name="must">必須</string>
+    <string name="add_task">新增任務</string>
+    <string name="cancel">取消</string>
+    <string name="addTodo">新增細項</string>
+    <string name="create">建立</string>
+    <string name="do_follow">+關注</string>
+    <string name="achievement">成就一覽</string>
+    <string name="chat">聊天</string>
+    <string name="change">更動</string>
+    <string name="add_team">新增團隊</string>
+    <string name="positoin">擔任職務</string>
+    <string name="finish_date">完成時間</string>
+    <string name="friend_list">好友清單</string>
+    <string name="finish">完成</string>
+    <string name="current_no_data">尚無資料</string>
+    <string name="running">進行中</string>
+    <string name="name">名稱</string>
+    <string name="confirm_project_done">確定完成案件?</string>
+    <string name="confirm">確定</string>
+    <string name="complete">已完成</string>
+    <string name="share_my_thought">我想說</string>
+    <string name="sharing">我要分享</string>
+    <string name="send_post">發佈</string>
+    <string name="preparing">規劃中</string>
+
+    <array name="dummy_items">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+    </array>
+
+    <array name="main_items">
+        <item>List - Basic Drag and Swipe</item>
+        <item>Grid - Basic Swipe</item>
+    </array>
 </resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.eric.startupmatching.socialmedia.SocialMediaMainViewModel" />
+    </data>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/following_title"
+            android:layout_height="32dp"
+            android:textSize="16sp"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginStart="@dimen/regular_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/center_text_font_noto"
+            android:text="本日熱門" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/regular_margin"
+            android:layout_marginEnd="@dimen/regular_margin"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/regular_margin"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            android:id="@+id/following_user_recycler_view"
+            app:layout_constraintTop_toBottomOf="@+id/following_title"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/new_post_title"
+            android:layout_height="32dp"
+            android:textSize="16sp"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginStart="@dimen/regular_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/following_user_recycler_view"
+            style="@style/center_text_font_noto"
+            android:text="@string/new_posts"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_recycler_view"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_marginTop="@dimen/regular_margin"
+            android:layout_marginBottom="@dimen/regular_margin"
+            app:layout_constraintTop_toBottomOf="@+id/new_post_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_socialmedia_post_recycler_view"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</layout>
