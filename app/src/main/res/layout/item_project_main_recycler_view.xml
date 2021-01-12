@@ -6,6 +6,9 @@
         <variable
             name="project"
             type="com.eric.startupmatching.data.Project" />
+        <variable
+            name="projectStage"
+            type="com.eric.startupmatching.data.ProjectStage" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -21,23 +24,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="6dp"
         android:padding="6dp"
-        app:cardBackgroundColor="@color/light_blue"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="6dp">
+        app:cardCornerRadius="6dp"
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/background_image"
+                android:src="@drawable/profile_main1"
+                android:scaleType="centerCrop"
+                />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@{project.startupStatus == projectStage.Preparing.stage ? @drawable/round_corner_light_blue : project.startupStatus == projectStage.Running.stage ? @drawable/round_corner : @drawable/round_corner_3}"
+                android:textColor="@{project.startupStatus == projectStage.Preparing.stage ? @color/white : project.startupStatus == projectStage.Running.stage ? @color/black : @color/black}"
+                android:text="@{project.startupStatus}"
+                app:layout_constraintBottom_toBottomOf="@+id/project_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/project_name" />
+
             <TextView
                 android:id="@+id/project_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="@dimen/regular_margin"
-                android:layout_marginTop="@dimen/regular_margin"
+                android:layout_marginTop="20dp"
                 android:text="@string/project_name_cn"
                 android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/textView12"
+                android:layout_marginEnd="@dimen/regular_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/regular_margin"
                 android:text="@{project.projectName}"
+                android:visibility="gone"
                 tools:text="@string/project_name_cn"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/project_name"
@@ -56,9 +84,9 @@
                 android:id="@+id/leader_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/half_regular_margin"
+                android:layout_marginTop="24dp"
                 android:text="@string/supervisor"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/project_name"
                 app:layout_constraintTop_toBottomOf="@+id/project_name" />
 
@@ -67,10 +95,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{project.projectLeader}"
-                tools:text="@string/supervisor"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/project_name_content"
-                app:layout_constraintTop_toTopOf="@+id/leader_name" />
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/leader_name"
+                app:layout_constraintStart_toStartOf="@+id/project_name"
+                android:layout_marginStart="60dp"
+                app:layout_constraintTop_toTopOf="@+id/leader_name"
+                tools:text="@string/supervisor" />
 
             <TextView
                 android:id="@+id/start_time"
@@ -78,19 +108,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/half_regular_margin"
                 android:text="@string/time"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/leader_name"
                 app:layout_constraintTop_toBottomOf="@+id/leader_name" />
 
             <TextView
                 android:id="@+id/start_time_content"
+                setTimeWithFormat="@{project.startTime}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                setTimeWithFormat="@{project.startTime}"
-                tools:text="@string/start_time"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/project_name_content"
-                app:layout_constraintTop_toTopOf="@+id/start_time" />
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/start_time"
+                app:layout_constraintStart_toStartOf="@+id/project_name"
+                android:layout_marginStart="60dp"
+                app:layout_constraintTop_toTopOf="@+id/start_time"
+                tools:text="@string/start_time" />
 
             <TextView
                 android:id="@+id/to"
@@ -98,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_regular_margin"
                 android:text="~"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/start_time_content"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -110,7 +142,7 @@
                 android:layout_marginStart="@dimen/half_regular_margin"
                 setTimeWithFormat="@{project.endTime}"
                 tools:text="@string/end_time"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/to"
                 app:layout_constraintTop_toTopOf="@+id/start_time" />
 
@@ -121,7 +153,7 @@
                 android:layout_marginTop="@dimen/half_regular_margin"
                 android:layout_marginBottom="@dimen/regular_margin"
                 android:text="@string/description"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/start_time"
                 app:layout_constraintTop_toBottomOf="@+id/start_time" />
@@ -133,7 +165,7 @@
                 android:text="@{project.description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="@dimen/regular_margin"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/start_time_content"
                 app:layout_constraintTop_toTopOf="@+id/description"
                 tools:text="@string/description" />
