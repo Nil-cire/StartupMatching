@@ -62,4 +62,37 @@ object FirebaseDataSource: DataSourceFunction {
             }
     }
 
+    override suspend fun getAchievements(user: User): List<Achievement?>? = suspendCoroutine {continuation ->
+        var result = mutableListOf<Achievement>()
+        var count = 0
+        db.collection("User")
+            .whereEqualTo("id", user.id)
+            .get()
+            .addOnCompleteListener {
+                val userAchievementsId = it.result?.toObjects(User::class.java)?.get(0)?.achievements
+                if (!userAchievementsId.isNullOrEmpty()) {
+                    for (achievementId in userAchievementsId) {
+                        db.collection("Achievement")
+                            .document(achievementId!!)
+                            .get()
+                            .addOnSuccessListener {doc ->
+                                if (doc.toObject(Achievement::class.java) != null) {
+                                    result.add(doc.toObject(Achievement::class.java)!!)
+                                }
+                                count += 1
+                                if(count == userAchievementsId.size) {
+                                    continuation.resume(result)
+                                }
+                            }
+                    }
+                }
+                continuation.resume(result)
+            }
+            .addOnFailureListener {
+                Log.d("error", it.message.toString())
+            }
+    }
+
+
+
 }

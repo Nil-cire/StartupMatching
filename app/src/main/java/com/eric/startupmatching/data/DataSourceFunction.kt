@@ -8,4 +8,6 @@ interface DataSourceFunction {
 
     suspend fun getAllUser(): List<User?>?
 
+    suspend fun getAchievements(user: User): List<Achievement?>?
+
 }

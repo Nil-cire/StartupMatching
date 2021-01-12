@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.Achievement
+import com.eric.startupmatching.data.FirebaseDataSource
 import com.eric.startupmatching.data.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -28,8 +29,8 @@ class PersonDetailViewModel(user: User): ViewModel() {
     val followed: LiveData<Boolean>
         get() = _followed
 
-    private val _achievementList = MutableLiveData<List<Achievement>>()
-    val achievementList: LiveData<List<Achievement>>
+    private val _achievementList = MutableLiveData<List<Achievement?>?>()
+    val achievementList: LiveData<List<Achievement?>?>
         get() = _achievementList
 
     private val _achievementListSubmit = MutableLiveData<List<Achievement>>()
@@ -88,8 +89,10 @@ class PersonDetailViewModel(user: User): ViewModel() {
             }
     }
 
-
     fun getAchievements(user: User) {
+//        coroutineScope.launch {
+//            _achievementList.value = FirebaseDataSource.getAchievements(user)
+//        }
         var count = 0
         var list = mutableListOf<Achievement>()
         coroutineScope.launch {
