@@ -26,7 +26,7 @@ enum class TodoStatus(val status: String) {
 }
 
 enum class ChatRoomType(val type: String) {
-    User("User"),
+    User("Private"),
     Task("Task"),
     Team("Team")
 }

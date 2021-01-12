@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.ChatRoom
+import com.eric.startupmatching.data.ChatRoomType
 import com.eric.startupmatching.data.Team
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +34,7 @@ class ChatRoomPersonViewModel: ViewModel() {
         var list = mutableListOf<ChatRoom>()
         coroutineScope.launch {
             db.collection("ChatRoom")
-                .whereEqualTo("type", "Private")
+                .whereEqualTo("type", ChatRoomType.User.type)
                 .whereArrayContains("member", user.value!!.id.toString())
                 .get()
                 .addOnSuccessListener { data ->

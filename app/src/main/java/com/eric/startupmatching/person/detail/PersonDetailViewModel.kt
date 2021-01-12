@@ -39,7 +39,9 @@ class PersonDetailViewModel(user: User): ViewModel() {
 
     //// follow and unfollow new user
     fun followBtnTexChecker() {
-        _followed.value = UserInfo.currentUser.value?.following?.contains(user.value?.id)!!
+        UserInfo.currentUser.value?.following?.let{
+            _followed.value = UserInfo.currentUser.value?.following?.contains(user.value?.id) ?: false
+        }
     }
 
     fun follow(userId: String) {

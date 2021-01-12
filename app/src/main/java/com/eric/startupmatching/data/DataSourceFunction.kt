@@ -6,6 +6,6 @@ interface DataSourceFunction {
 
     suspend fun getFollowingList(userIds: List<String?>?): List<User?>?
 
-
+    suspend fun getAllUser(): List<User?>?
 
 }
