@@ -49,10 +49,13 @@ object FirebaseDataSource: DataSourceFunction {
             .get()
             .addOnCompleteListener {
                 val result = it.result?.toObjects(User::class.java)
-                if (result != null) {
-                    for ((index, user) in result.withIndex()) {
-                        if (user.id == UserInfo.currentUser.value?.id)
-                            result.removeAt(index)
+                val result2 = it.result?.toObjects(User::class.java)
+                if (!result2.isNullOrEmpty()) {
+                    for ((index, user) in result2.withIndex()) {
+                        if (user.id == UserInfo.currentUser.value?.id) {
+                            result!!.removeAt(index)
+                        }
+
                     }
                 }
                 continuation.resume(result)
@@ -91,6 +94,22 @@ object FirebaseDataSource: DataSourceFunction {
             .addOnFailureListener {
                 Log.d("error", it.message.toString())
             }
+    }
+
+    override suspend fun setUserName(user:User) {
+
+    }
+
+    override suspend fun setUserImage(user:User) {
+
+    }
+
+    override suspend fun setUserDescription(user:User) {
+
+    }
+
+    override suspend fun setUserEmail(user:User) {
+
     }
 
 

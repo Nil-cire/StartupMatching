@@ -10,4 +10,12 @@ interface DataSourceFunction {
 
     suspend fun getAchievements(user: User): List<Achievement?>?
 
+    suspend fun setUserName(user:User)
+
+    suspend fun setUserImage(user:User)
+
+    suspend fun setUserDescription(user:User)
+
+    suspend fun setUserEmail(user:User)
+
 }
