@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.projectMainFragment -> FragmentName.ProjectMainFragment.type
                 R.id.personMainFragment -> FragmentName.PeopleMainFragment.type
                 R.id.chatRoomMainFragment -> FragmentName.ChatRoomMainFragment.type
-                R.id.teamMainFragment -> FragmentName.ProfileMainFragment.type
+                R.id.profileFragment -> FragmentName.ProfileMainFragment.type
                 else -> viewModel.fragmentType.value
             }
         }
