@@ -18,4 +18,6 @@ interface DataSourceFunction {
 
     suspend fun setUserEmail(user:User)
 
+    suspend fun checkIfUserRoomExist(user: User, otherUser: User): ChatRoom?
+
 }

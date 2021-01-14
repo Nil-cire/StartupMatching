@@ -112,6 +112,20 @@ object FirebaseDataSource: DataSourceFunction {
 
     }
 
-
+    override suspend fun checkIfUserRoomExist(user: User, otherUser: User): ChatRoom? = suspendCoroutine { continuation->
+        val list = listOf<String>(user.id!!, otherUser.id!!)
+        db.collection("ChatRoom")
+            .whereEqualTo("type", ChatRoomType.User.type)
+            .whereArrayContains("member", list)
+            .get()
+            .addOnCompleteListener {
+                val result = if (!it.result?.toObjects(ChatRoom::class.java).isNullOrEmpty()) {
+                    it.result?.toObjects(ChatRoom::class.java)?.get(0)
+                } else {
+                    null
+                }
+                continuation.resume(result)
+            }
+    }
 
 }

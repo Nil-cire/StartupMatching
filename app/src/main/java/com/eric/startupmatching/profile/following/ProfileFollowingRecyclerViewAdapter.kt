@@ -8,23 +8,32 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemProfileFollowingRecyclerViewBinding
+import com.eric.startupmatching.project.edit.ProjectEditTaskParentAdapter
 
-class ProfileFollowingRecyclerViewAdapter(val onClickListener: OnClickListener) : ListAdapter<User, RecyclerView.ViewHolder>(CategoryDiffCallback) {
+class ProfileFollowingRecyclerViewAdapter(val viewModel: ProfileFollowingViewModel,
+                                          val onClickListener: OnClickListener) : ListAdapter<User, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 
-    class ViewHolder(var binding: ItemProfileFollowingRecyclerViewBinding):
+    class ViewHolder(var binding: ItemProfileFollowingRecyclerViewBinding,
+                     var onClickListener: ProfileFollowingRecyclerViewAdapter.OnClickListener,
+                     var viewModel: ProfileFollowingViewModel):
         RecyclerView.ViewHolder(binding.root) {
+
+        class OnClickListener(val clickListener: (user: User) -> Unit) {
+            fun onClick(user: User) = clickListener(user)
+        }
 
 
         fun bind(user: User) {
             binding.user = user
             binding.executePendingBindings()
+            binding.chatBtn.setOnClickListener { viewModel.setChatUser(user) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemProfileFollowingRecyclerViewBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, onClickListener, viewModel)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

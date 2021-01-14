@@ -14,17 +14,17 @@
         android:layout_height="match_parent"
         tools:context=".LoginActivity">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="awake-person-and-ui.json"
-            app:lottie_loop="true" />
+<!--        <com.airbnb.lottie.LottieAnimationView-->
+<!--            android:id="@+id/lottie"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/sign_in_button"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:lottie_autoPlay="true"-->
+<!--            app:lottie_fileName="awake-person-and-ui.json"-->
+<!--            app:lottie_loop="true" />-->
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
