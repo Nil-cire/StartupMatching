@@ -59,6 +59,21 @@ class ProfileFollowingViewModel: ViewModel() {
 
     // get or fetch chat room after checking room existing
 
+    private val _chatRoomId = MutableLiveData<String>()
+    val chatRoomId: LiveData<String>
+        get() = _chatRoomId
+
+    fun setChatRoomId(chatRoomId: String) {
+        _chatRoomId.value = chatRoomId
+    }
+
+    fun createChatRoom() {
+        coroutineScope.launch {
+            val chatRoomId = FirebaseDataSource.createUserChatRoom(UserInfo.currentUser.value!!, chatUser.value!!)
+            setChatRoomId(chatRoomId)
+        }
+    }
+
     fun getFollowingList(user: User) {
         coroutineScope.launch {
             _followingIdList.value = FirebaseDataSource.getFollowingIdList(user)

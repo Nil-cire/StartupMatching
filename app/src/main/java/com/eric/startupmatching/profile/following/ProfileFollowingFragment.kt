@@ -47,10 +47,14 @@ class ProfileFollowingFragment: Fragment() {
 
         viewModel.checkChatRoom.observe(viewLifecycleOwner, Observer {
             if (it == null) {
-                // fetch Chat Room Id and navigate
+                viewModel.createChatRoom()
             } else {
-                // create Chat Room Id and navigate
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it.id!!))
             }
+        })
+
+        viewModel.chatRoomId.observe(viewLifecycleOwner, Observer {
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
         })
 
 
