@@ -154,6 +154,15 @@ object FirebaseDataSource: DataSourceFunction {
             }
     }
 
+    override suspend fun getUserById(userId: String): User? = suspendCoroutine { continuation ->
+        db.collection("User").document(userId)
+            .get()
+            .addOnCompleteListener {
+                val result = it.result?.toObject(User::class.java)
+                continuation.resume(result)
+            }
+    }
+
 
 
 }

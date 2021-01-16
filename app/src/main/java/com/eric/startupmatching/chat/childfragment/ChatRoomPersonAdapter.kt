@@ -50,10 +50,6 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
                         binding.userIcon.setImage(user.image)
                     }
                 }}
-
-
-
-//            TODO("Snapshopt message update and change text")
         }
     }
 
@@ -65,9 +61,6 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
-
         if (holder is ViewHolder) {
             val chatRoom = getItem(position)
             holder.itemView.setOnClickListener {
@@ -77,7 +70,6 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
         } else {
             Log.d("Boooo", "cant bind data")
         }
-
     }
 
     companion object CategoryDiffCallback : DiffUtil.ItemCallback<ChatRoom>() {

@@ -19,6 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/user_name"
+            android:visibility="gone"
             style="@style/center_text_font_noto"/>
 
         <androidx.recyclerview.widget.RecyclerView
