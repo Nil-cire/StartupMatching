@@ -42,7 +42,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/light_blue"
+            app:cardBackgroundColor="@color/lightBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user_icon"
             android:layout_marginStart="@dimen/half_regular_margin"
@@ -66,13 +66,14 @@
                     style="@style/center_text_font_noto"
                     android:layout_width="0dp"
                     android:textSize="16dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:text="@{message.content}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="@dimen/half_regular_margin"
+                    android:layout_marginEnd="@dimen/regular_margin"
                     android:gravity="start"
                     tools:text="訊息"/>
 

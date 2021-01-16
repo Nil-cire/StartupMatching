@@ -140,6 +140,8 @@ object FirebaseDataSource: DataSourceFunction {
             }
     }
 
+
+// [Chat Room Fragment - Private Chat Room] Functions for display all Private Chat Room
     override suspend fun getPrivateChatRoom(user: User): List<ChatRoom?> = suspendCoroutine { continuation ->
         db.collection("ChatRoom")
             .whereEqualTo("type", ChatRoomType.User.type)
