@@ -16,7 +16,6 @@ class PersonDetailAchievementAdapter(val onClickListener: OnClickListener) : Lis
         fun bind(achievement: Achievement) {
             binding.achievement = achievement
             binding.executePendingBindings()
-
         }
     }
 

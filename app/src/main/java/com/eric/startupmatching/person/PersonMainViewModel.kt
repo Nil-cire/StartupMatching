@@ -1,9 +1,11 @@
 package com.eric.startupmatching.person
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eric.startupmatching.UserInfo
+import com.eric.startupmatching.data.FirebaseDataSource
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.data.User
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,27 +24,17 @@ class PersonMainViewModel: ViewModel() {
     val team: LiveData<Project>
         get() = _team
 
-    private val _userList = MutableLiveData<List<User>>()
-    val userList: LiveData<List<User>>
+    private val _userList = MutableLiveData<List<User?>?>()
+    val userList: LiveData<List<User?>?>
         get() = _userList
 
     fun getAllUser() {
         coroutineScope.launch {
-            db.collection("User")
-                .get().addOnSuccessListener {
-                    var list = it.toObjects(User::class.java)
-                    var list2 = list.toMutableList()
-                    for ((index, user) in list.withIndex()) {
-                        if (user.id == UserInfo.currentUser.value?.id)
-                            list2.removeAt(index)
-                    }
-                    _userList.value = list2
-                }
+            try {
+                _userList.value = FirebaseDataSource.getAllUser()
+            } catch (e: Exception) {
+                Log.d("error", e.message.toString())
+            }
         }
     }
-
-    init {
-
-    }
-
 }

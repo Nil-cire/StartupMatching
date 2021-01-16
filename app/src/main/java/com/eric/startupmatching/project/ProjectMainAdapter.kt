@@ -6,22 +6,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.eric.startupmatching.data.FirebaseDataSource
 import com.eric.startupmatching.data.Project
 import com.eric.startupmatching.databinding.ItemProjectMainRecyclerViewBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ProjectMainAdapter(val onClickListener: OnClickListener) : ListAdapter<Project, RecyclerView.ViewHolder>(CategoryDiffCallback) {
 
     class ViewHolder(var binding: ItemProjectMainRecyclerViewBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-        class OnClickChatListener(val clickListener: (project: Project) -> Unit) {
-            fun onClick(product: Project) = clickListener(product)
-        }
-
+        private var viewModelJob = Job()
+        private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
         fun bind(project: Project) {
             binding.project = project
             binding.executePendingBindings()
+            coroutineScope.launch {
+                val result = FirebaseDataSource.getUserById(project.projectLeader.toString())
+                binding.leaderNameContent.text = result?.name
+            }
         }
     }
 
@@ -32,9 +39,6 @@ class ProjectMainAdapter(val onClickListener: OnClickListener) : ListAdapter<Pro
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-//        val item = getItem(position)
-//        holder.bind(item)
 
         if (holder is ViewHolder) {
             val project = getItem(position)

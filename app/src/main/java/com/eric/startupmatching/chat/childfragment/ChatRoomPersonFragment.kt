@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.eric.startupmatching.MainNavigationDirections
+import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.databinding.FragmentChatRoomPersonBinding
 
 class ChatRoomPersonFragment:Fragment() {
@@ -36,7 +37,7 @@ class ChatRoomPersonFragment:Fragment() {
     override fun onStart() {
         super.onStart()
         val viewModel = ViewModelProvider(this).get(ChatRoomPersonViewModel::class.java)
-        viewModel.getPrivateChatRoom()
+        viewModel.getPrivateChatRoom(UserInfo.currentUser.value!!)
     }
 }
 

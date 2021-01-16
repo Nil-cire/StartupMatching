@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.eric.startupmatching.data.FragmentName
 import com.eric.startupmatching.databinding.ActivityMainBinding
 import com.eric.startupmatching.login.UserManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             projectBtn.alpha = 0.3F
             chatBtn.alpha = 0.3F
             socialmediaBtn.alpha = 0.3F
+            toolBar_text.text = FragmentName.SocialMediaFragment.title
         }
 
         fun matchPageIconSetup() {
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             projectBtn.alpha = 0.3F
             chatBtn.alpha = 0.3F
             socialmediaBtn.alpha = 0.3F
+            toolBar_text.text = FragmentName.ProjectMainFragment.title
         }
 
         fun projectPageIconSetup() {
@@ -67,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             projectBtn.alpha = 1.0F
             chatBtn.alpha = 0.3F
             socialmediaBtn.alpha = 0.3F
+            toolBar_text.text = FragmentName.PeopleMainFragment.title
         }
 
         fun chatPageIconSetup() {
@@ -75,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             projectBtn.alpha = 0.3F
             chatBtn.alpha = 1.0F
             socialmediaBtn.alpha = 0.3F
+            toolBar_text.text = FragmentName.ChatRoomMainFragment.title
         }
 
         fun socialMediaPageIconSetup() {
@@ -83,6 +88,7 @@ class MainActivity : AppCompatActivity() {
             projectBtn.alpha = 0.3F
             chatBtn.alpha = 0.3F
             socialmediaBtn.alpha = 1.0F
+            toolBar_text.text = FragmentName.ProfileMainFragment.title
         }
 
         //setup bottom navigation buttons onClick function
@@ -115,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.projectMainFragment -> FragmentName.ProjectMainFragment.type
                 R.id.personMainFragment -> FragmentName.PeopleMainFragment.type
                 R.id.chatRoomMainFragment -> FragmentName.ChatRoomMainFragment.type
-                R.id.teamMainFragment -> FragmentName.ProfileMainFragment.type
+                R.id.profileFragment -> FragmentName.ProfileMainFragment.type
                 else -> viewModel.fragmentType.value
             }
         }

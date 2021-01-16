@@ -25,10 +25,6 @@ class LoginViewModel : ViewModel() {
 
     val db = FirebaseFirestore.getInstance()
 
-    init {
-
-    }
-
     fun createUser() {
         coroutineScope.launch {
             firebaseUser.value?.let {

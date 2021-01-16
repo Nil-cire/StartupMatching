@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.ChatRoom
 import com.eric.startupmatching.data.Message
+import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemChatRoomPersonRecyclerViewBinding
+import com.eric.startupmatching.setImage
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<ChatRoom, RecyclerView.ViewHolder>(CategoryDiffCallback) {
@@ -26,17 +29,27 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
                 for (messageId in chatRoom.messages) {
                     db.collection("Message")
                         .whereEqualTo("id", messageId)
-                        .get()
-                        .addOnSuccessListener {
-                            messageList.addAll(it.toObjects(Message::class.java))
+                        . addSnapshotListener { value, error ->
+                            if (value != null) {
+                                messageList.addAll(value.toObjects(Message::class.java))
+                            }
                             messageList.sortByDescending { it.postTimestamp }
                             binding.lastMessage.text = messageList[0].content
+                            binding.messageTime.text = messageList[0].postTimestamp.toString()
+
                         }
                 }
             }
+            val otherUser = chatRoom.member?.filter { it != UserInfo.currentUser.value?.id }
 
-
-//            TODO("Snapshopt message update and change text")
+            otherUser?.get(0)?.let { db.collection("User").document(it)
+                .get().addOnCompleteListener {
+                    val user = it.result?.toObject(User::class.java)
+                    binding.let { binding ->
+                        binding.userName.text = user!!.name
+                        binding.userIcon.setImage(user.image)
+                    }
+                }}
         }
     }
 
@@ -48,9 +61,6 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
-
         if (holder is ViewHolder) {
             val chatRoom = getItem(position)
             holder.itemView.setOnClickListener {
@@ -60,7 +70,6 @@ class ChatRoomPersonAdapter(val onClickListener: OnClickListener) : ListAdapter<
         } else {
             Log.d("Boooo", "cant bind data")
         }
-
     }
 
     companion object CategoryDiffCallback : DiffUtil.ItemCallback<ChatRoom>() {

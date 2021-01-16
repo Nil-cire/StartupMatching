@@ -21,14 +21,11 @@ class TeamStatusFragment: Fragment() {
         val viewModel = ViewModelProvider(this).get(TeamStatusViewModel::class.java)
 
         val adapter = TeamStatusAdapter(TeamStatusAdapter.OnClickListener{
-//        this.findNavController().navigate(MainNavigationDirections.actionGlobalChatroomDetailFragment(it))
         })
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerView.adapter = adapter
-
-//        UserInfo.currentUser.id?.let { viewModel.observeNewMessage(it) }
 
         viewModel.teamMemberList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

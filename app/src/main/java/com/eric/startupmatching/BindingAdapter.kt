@@ -68,8 +68,8 @@ fun TextView.setAchievementCount(achievement: Int?) {
 @BindingAdapter("setTimeWithFormat")
 fun TextView.setTimeWithFormat(date: Date?) {
     text = if (date == null) {
-        "超過5年以前"
+        " -- "
     } else {
-        "${date.year} - ${date.month} - ${date.day}"
+        "${date.year + 1900} - ${date.month + 1} - ${date.day}"
     }
 }

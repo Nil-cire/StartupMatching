@@ -35,7 +35,7 @@ class ChatRoomDetailViewModel(arg: String): ViewModel() {
     val messageAdded: LiveData<Int>
         get() = _messageAdded
 
-    var chatRoomId = arg
+    private var chatRoomId = arg
 
     val db = FirebaseFirestore.getInstance()
 
@@ -71,23 +71,16 @@ class ChatRoomDetailViewModel(arg: String): ViewModel() {
                     .whereEqualTo("id", id)
                     .get()
                     .addOnSuccessListener { it ->
-//                        Log.d("Geta", it.toString())
                         it?.let{
-//                            Log.d("Getaa", it.toString())
                             it.toObjects(Message::class.java).forEach{ message ->
-//                                Log.d("Getaaa", message.toString())
                                 listForQuery.add(message)
-//                                Log.d("Getaaaa", listForQuery.toString())
                             }
                         }
 
                         _messageList.value = listForQuery.sortedByDescending { list1 -> list1.postTimestamp }
-//                        Log.d("Getaaaaa", _messageList.value.toString())
                     }
             }
         }
-//        _messageList.value = listForQuery
-//        Log.d("Getaaaaa", _messageList.value.toString())
     }
 
     fun sendText(text: String) {
@@ -134,6 +127,8 @@ class ChatRoomDetailViewModel(arg: String): ViewModel() {
                 }
             }
     }
+
+
 
     init {
         UserInfo.currentUser.value!!.id?.let { getMessagesId(it) }

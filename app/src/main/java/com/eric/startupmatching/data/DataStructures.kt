@@ -78,7 +78,6 @@ data class Post(
     val image: String? = null,
     val timeDate: Date = Calendar.getInstance().time,
     val comments: List<String?>? = mutableListOf(), // Comment ID
-//    val achievement: List<String?>?, //Achievement id
     val likes: List<String?>? = mutableListOf(), // user id
     val achievementId: String? = ""
 ): Parcelable

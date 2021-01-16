@@ -29,9 +29,7 @@ class PersonDetailFragment: Fragment() {
         val viewModelFactory = PersonDetailViewModelFactory(userArgs)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(PersonDetailViewModel::class.java)
         val adapter = ItemPersonSkillRecyclerViewAdapter(ItemPersonSkillRecyclerViewAdapter.OnClickListener{})
-        val adapter2 = PersonDetailAchievementAdapter(PersonDetailAchievementAdapter.OnClickListener{
-//            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatroomDetailFragment(it))
-        })
+        val adapter2 = PersonDetailAchievementAdapter(PersonDetailAchievementAdapter.OnClickListener{ })
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerView.adapter = adapter
@@ -44,15 +42,9 @@ class PersonDetailFragment: Fragment() {
         binding.followBtnText.setOnClickListener {
             if (!viewModel.followed.value!!) {
                 viewModel.follow(userArgs.id!!)
-//                binding.followBtnText.text = FollowStatus.Followed.type
-//                binding.followBtn.setBackgroundResource(R.drawable.round_corner)
-//                binding.followBtnText.setTextColor(R.color.black)
                 Log.d("follow", "follow")
             } else {
                 viewModel.unFollow(userArgs.id!!)
-//                binding.followBtnText.text = FollowStatus.Follow.type
-//                binding.followBtn.setBackgroundResource(R.drawable.round_corner_light_blue)
-//                binding.followBtnText.setTextColor(R.color.white)
                 Log.d("unFollow", "unFollow")
             }
         }
@@ -68,8 +60,6 @@ class PersonDetailFragment: Fragment() {
                 binding.followBtnText.setTextColor(R.color.white)
             }
         })
-
-//        UserInfo.currentUser.id?.let { viewModel.observeNewMessage(it) }
 
         viewModel.achievementListSubmit.observe(viewLifecycleOwner, Observer {
             adapter2.submitList(it)

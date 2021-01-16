@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.eric.startupmatching.MainNavigationDirections
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.databinding.FragmentProfileFollowingBinding
 
@@ -25,7 +27,7 @@ class ProfileFollowingFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val adapter = ProfileFollowingRecyclerViewAdapter(ProfileFollowingRecyclerViewAdapter.OnClickListener{
+        val adapter = ProfileFollowingRecyclerViewAdapter(viewModel, ProfileFollowingRecyclerViewAdapter.OnClickListener{
 //            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment())
         })
         binding.recyclerView.adapter = adapter
@@ -37,6 +39,24 @@ class ProfileFollowingFragment: Fragment() {
         viewModel.followingUsers.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+
+        viewModel.chatUser.observe(viewLifecycleOwner, Observer {
+            viewModel.checkIfUserRoomExist(UserInfo.currentUser.value!!, it)
+        })
+
+        viewModel.checkChatRoom.observe(viewLifecycleOwner, Observer {
+            if (it == null) {
+                viewModel.createChatRoom()
+            } else {
+                this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it.id!!))
+            }
+        })
+
+        viewModel.chatRoomId.observe(viewLifecycleOwner, Observer {
+            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
+        })
+
+
 
         return binding.root
     }

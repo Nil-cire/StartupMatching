@@ -100,7 +100,6 @@ class ProjectDetailFragment: Fragment() {
                 this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectRunningFragment(arg))
             }
         })
-        ///// --
 
         return binding.root
     }

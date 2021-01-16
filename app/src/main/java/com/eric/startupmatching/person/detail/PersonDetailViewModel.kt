@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.eric.startupmatching.UserInfo
 import com.eric.startupmatching.data.Achievement
+import com.eric.startupmatching.data.FirebaseDataSource
 import com.eric.startupmatching.data.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -28,8 +29,8 @@ class PersonDetailViewModel(user: User): ViewModel() {
     val followed: LiveData<Boolean>
         get() = _followed
 
-    private val _achievementList = MutableLiveData<List<Achievement>>()
-    val achievementList: LiveData<List<Achievement>>
+    private val _achievementList = MutableLiveData<List<Achievement?>?>()
+    val achievementList: LiveData<List<Achievement?>?>
         get() = _achievementList
 
     private val _achievementListSubmit = MutableLiveData<List<Achievement>>()
@@ -39,7 +40,9 @@ class PersonDetailViewModel(user: User): ViewModel() {
 
     //// follow and unfollow new user
     fun followBtnTexChecker() {
-        _followed.value = UserInfo.currentUser.value?.following?.contains(user.value?.id)!!
+        UserInfo.currentUser.value?.following?.let{
+            _followed.value = UserInfo.currentUser.value?.following?.contains(user.value?.id) ?: false
+        }
     }
 
     fun follow(userId: String) {
@@ -85,7 +88,6 @@ class PersonDetailViewModel(user: User): ViewModel() {
                     .addOnSuccessListener { _followed.value = false }
             }
     }
-
 
     fun getAchievements(user: User) {
         var count = 0

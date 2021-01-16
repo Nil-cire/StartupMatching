@@ -54,17 +54,4 @@ class ProjectDoneMainFragment: Fragment() {
 
         return binding.root
     }
-
-    override fun onResume() {
-        super.onResume()
-//        val arg = ProjectDetailFragmentArgs.fromBundle(requireArguments()).projectArgs
-//        requireActivity().project_detail_edit.visibility = View.VISIBLE
-
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        requireActivity().project_detail_edit.visibility = View.GONE
-    }
 }

@@ -20,7 +20,6 @@ class ProjectDetailViewPagerAdapter(fragmentManager: FragmentManager) : Fragment
         titles.add(title)
     }
 
-
     override fun getPageTitle(position: Int): CharSequence? {
         return titles[position]
     }

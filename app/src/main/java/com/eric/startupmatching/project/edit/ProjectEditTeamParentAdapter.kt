@@ -39,7 +39,6 @@ class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val 
             binding.addTodo.setOnClickListener { onClickListener.onClick(model) }
             binding.confirmButton.setOnClickListener {
                 var description = binding.detailText.text.toString()
-//                viewModel.editTaskDescription(model.content, description)
                 binding.detailText.text= null}
 
         }
@@ -50,14 +49,11 @@ class ProjectEditTeamParentAdapter(var viewModel: ProjectEditTeamViewModel, val 
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemProjectEditTeamRecyclerViewBinding.inflate(layoutInflater, parent, false)
 
-//        val root = inflater.inflate(R.layout.item_parent, parent, false)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
-//        return ViewHolder(root)
         return ViewHolder(binding, viewModel, onClickListener, 0)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: TeamParentModel) {
-//        holder.itemView.itemCount.text = (model.content.serial?.plus(1)).toString()
         holder.itemView.tvContent.text = model.content.teamName
         holder.bind(model)
         holder.itemView.detail_text.addTextChangedListener {

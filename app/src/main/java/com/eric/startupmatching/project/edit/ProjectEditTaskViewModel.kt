@@ -66,14 +66,11 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         coroutineScope.launch {
             db.collection("Project").document(project.id!!)
                 .collection("Task")
-//                .orderBy("serial", Query.Direction.ASCENDING)
-//                .get()
                 .addSnapshotListener { value, error ->
                     if (value != null) {
                         list.addAll(value.toObjects(Task::class.java))
                         list.sortBy { it.serial }
                     }
-//                    list.sortBy { it.serial }
                     Log.d("editTaskList", list.toString())
                     _taskList.value = list
                     list = mutableListOf()
@@ -95,14 +92,12 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         coroutineScope.launch {
             db.collection("Project").document(project.id!!)
                 .collection("Task")
-//                .orderBy("serial", Query.Direction.ASCENDING)
                 .get()
                 .addOnSuccessListener {result ->
                     if (result != null) {
                         list.addAll(result.toObjects(Task::class.java))
                         list.sortBy { it.serial }
                     }
-//                    list.sortBy { it.serial }
                     Log.d("editTaskList", list.toString())
                     _taskList.value = list
                     list = mutableListOf()
@@ -110,23 +105,6 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
                 }
         }
     }
-
-//    fun getTaskByProject(project: Project) {
-//        var list = mutableListOf<Task>()
-//        coroutineScope.launch {
-//            db.collection("Project").document(project.id!!)
-//                .collection("Task")
-//                .orderBy("serial", Query.Direction.ASCENDING)
-//                .get()
-//                .addOnSuccessListener { qs ->
-//                    list.addAll(qs.toObjects(Task::class.java))
-////                    list.sortBy { it.serial }
-//                    Log.d("editTaskList", list.toString())
-//                    _taskList.value = list
-//                    Log.d("getTaskByProject", taskList.value.toString())
-//                }
-//        }
-//    }
 
     fun getTodoByTask(task: Task) {
         var list = mutableListOf<Todo>()
@@ -196,10 +174,6 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
                     Log.d("fuked", projectArgs.id.toString())
                 }
         }
-
-//        val s = treeChildList[0] as TaskChildModel
-//        s.content.serial = 1
-//        treeChildList[0] = s
     }
 
     fun getTodoSize(task: Task) {
@@ -232,10 +206,6 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         }
     }
 
-    fun reArrangeTaskAndTodo() {
-        //re-arrange
-        //upload to db
-    }
 
     fun updateTodos(todo: Todo, task: Task) {
         coroutineScope.launch {
@@ -271,18 +241,6 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
         }
     }
 
-    //snapShotListener
-    fun observeTaskDataChanged() {
-        if (taskListGet.value == true) {
-            coroutineScope.launch {
-                db.collection("Project").document(projectArgs.id!!)
-                    .collection("Task")
-                    .addSnapshotListener { value, error ->
-                        getTaskByProject(projectArgs)
-                    }
-            }
-        }
-    }
 
     fun resetTaskListGet() {
         _taskListGet.value = false
@@ -299,7 +257,6 @@ ProjectEditTaskViewModel(project: Project): ViewModel() {
 
     init {
         _getTodoCount.value = 0
-//        observeTaskDataChanged()
     }
 }
 

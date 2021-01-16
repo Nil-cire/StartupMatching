@@ -95,12 +95,6 @@ class RecyclerListAdapter(context: Context, dragStartListener: OnStartDragListen
         return mItems.size
     }
 
-    /**
-     * Simple example of a view holder that implements [ItemTouchHelperViewHolder] and has a
-     * "handle" view that initiates a drag event when touched.
-     */
-
-
     init {
         mDragStartListener = dragStartListener
         mItems.addAll((context.resources.getStringArray(R.array.dummy_items)))

@@ -58,9 +58,6 @@ class ProjectAddFragment: Fragment() {
             },year,month,day).show()
         }
 
-//        binding.editTextTextPersonName4.
-
-
         binding.constraintBot.setOnClickListener {
             viewModel.addTeam()
         }

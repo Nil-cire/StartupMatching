@@ -41,26 +41,11 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
     val teamList: LiveData<List<Team>>
         get() = _teamList
 
-    private val _getUserCount = MutableLiveData<Int>()
-    val getUserCount: LiveData<Int>
-        get() = _getUserCount
-
     var listToSubmitHolder = mutableListOf<Any>()
-
-    var teamInstance = Task()
 
     private val _listToSubmit = MutableLiveData<List<Any>>()
     val listToSubmit: LiveData<List<Any>>
         get() = _listToSubmit
-
-    private val _teamListGet = MutableLiveData<Boolean>()
-    val teamListGet: LiveData<Boolean>
-        get() = _teamListGet
-
-    //todo val
-    private val _todoSize = MutableLiveData<Int>()
-    val todoSize: LiveData<Int>
-        get() = _todoSize
 
     private val _getTeamCount = MutableLiveData<Int>()
     val getTeamCount: LiveData<Int>
@@ -74,9 +59,6 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
     val followList: LiveData<List<User>>
         get() = _followList
 
-//    private val _selectedFollowList = MutableLiveData<List<User>>()
-//    val selectedFollowList: LiveData<List<User>>
-//        get() = _selectedFollowList
 
     var selectedFollowList = mutableListOf<String>()
 
@@ -119,10 +101,6 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
         }
     }
 
-
-    val todoTask = MutableLiveData<Task>()
-
-    var todoInstance = User()
 
     val db = FirebaseFirestore.getInstance()
 
@@ -208,39 +186,6 @@ class ProjectEditTeamViewModel(project: Project): ViewModel() {
             }
     }
 
-
-    fun getUserByTeam(team: Team) {
-        var list = mutableListOf<User>()
-        var treeChildList = mutableListOf<TreeViewModel>()
-        coroutineScope.launch {
-            db.collection("User").whereArrayContains("currentTeam", team.id.toString())
-                .get()
-                .addOnSuccessListener {qs ->
-                    for (user in qs.toObjects(User::class.java)) {
-                        if (user.id == team.teamLeader) {
-                            list.add(0, user)
-                        } else list.add(user)
-                    }
-                    Log.d("editUserList", list.toString())
-                    for (user in list) {
-                        treeChildList.add(TeamChildModel(user))
-                    }
-                    val treeParent = TeamParentModel(team)
-                    treeParent.children = treeChildList as ArrayList<TreeViewModel>
-                    listToSubmitHolder.add(treeParent)
-                    _getTeamCount.value = _getTeamCount.value?.plus(1)
-                    if (getTeamCount.value == teamList.value?.size) {
-                        var a = listToSubmitHolder as MutableList<TaskParentModel>
-//                        a.sortBy { it.content.serial }
-                        _listToSubmit.value = a
-                        listToSubmitHolder = mutableListOf()
-                        _getTeamCount.value = 0
-//                        _taskListGet.value = true
-                        Log.d("listToSubmit", listToSubmit.value.toString())
-                    }
-                }
-        }
-    }
 
     fun getFriendList() {
         var followList = mutableListOf<User>()

@@ -18,7 +18,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/light_blue"
+            app:cardBackgroundColor="@color/lightBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,10 +40,13 @@
                     android:layout_height="wrap_content"
                     android:text="@{message.content}"
                     android:textSize="16dp"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="end"
+                    android:layout_marginStart="@dimen/regular_margin"
+                    android:layout_marginEnd="@dimen/regular_margin"
                     tools:text="訊息"/>
 
 

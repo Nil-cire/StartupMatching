@@ -30,13 +30,6 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
             binding.recyclerView.adapter = adapter
             adapter.submitList(user.skills)
             val db = FirebaseFirestore.getInstance()
-//            val db = FirebaseFirestore.getInstance()
-//            db.collection("User").document(user.id!!)
-//                .get()
-//                .addOnSuccessListener {
-//                    val userData = it.toObject(User::class.java)
-//                    adapter.submitList(user.skills)
-//                }
             var followed = true
             fun followBtnTexChecker() {
                 if (!UserInfo.currentUser.value?.following.isNullOrEmpty()) {
@@ -51,20 +44,32 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                         binding.iconPin.setTextColor(R.color.black)
                         followed = false
                     }
+                } else {
+                    binding.iconPin.text = FollowStatus.Follow.type
+                    binding.iconPin.setBackgroundResource(R.drawable.round_corner_light_blue)
+                    binding.iconPin.setTextColor(R.color.black)
+                    followed = false
                 }
             }
 
             fun follow(userId: String) {
                 db.collection("User").document(UserInfo.currentUser.value?.id!!)
                     .get()
-                    .addOnSuccessListener {
-                        var followList = it.toObject(User::class.java)?.following as MutableList<String?>?
-                        followList?.add(userId)
-                        it.reference.update("following", followList)
+                    .addOnSuccessListener {doc ->
+                        var followingList = mutableListOf<String>()
+                        if (!doc.toObject(User::class.java)?.following.isNullOrEmpty()) {
+                            followingList = doc.toObject(User::class.java)?.following as MutableList<String>
+                        }
+                        followingList.add(userId)
+                        doc.reference.update("following", followingList)
                         db.collection("User").document(userId)
                             .get()
                             .addOnSuccessListener { doc ->
-                                var followerList = doc.toObject(User::class.java)?.follower as MutableList<String>
+                                var followerList = mutableListOf<String>()
+                                if (!doc.toObject(User::class.java)?.following.isNullOrEmpty()) {
+                                    followerList = doc.toObject(User::class.java)?.following as MutableList<String>
+                                }
+//                                var followerList = doc.toObject(User::class.java)?.follower as MutableList<String>
                                 followerList.add(UserInfo.currentUser.value!!.id.toString())
                                 doc.reference.update("follower", followerList)
 //                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
@@ -77,10 +82,13 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
             }
 
             fun unFollow(userId: String) {
+                var followList = mutableListOf<String>()
                 db.collection("User").document(UserInfo.currentUser.value?.id!!)
                     .get()
                     .addOnSuccessListener {doc ->
-                        var followList = doc.toObject(User::class.java)?.following as MutableList<String>
+                        if (!doc.toObject(User::class.java)?.following.isNullOrEmpty()) {
+                            followList = doc.toObject(User::class.java)?.following as MutableList<String>
+                        }
                         var followList2 = mutableListOf<String>()
                         followList.filterTo(followList2, {it != userId})
                         doc.reference.update("following", followList2)
@@ -91,9 +99,6 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                                 var followerList2 = mutableListOf<String>()
                                 followerList.filterTo(followerList2, { it != UserInfo.currentUser.value?.id!! })
                                 doc.reference.update("follower", followerList2)
-//                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
-//                                list.filter { it != userId }
-//                                UserInfo.currentUser.value!!.following = list
                                 UserInfo.setFollowerList(followList2)
                             }
                             .addOnSuccessListener { followed = false }

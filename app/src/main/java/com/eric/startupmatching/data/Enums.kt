@@ -26,7 +26,7 @@ enum class TodoStatus(val status: String) {
 }
 
 enum class ChatRoomType(val type: String) {
-    User("User"),
+    User("Private"),
     Task("Task"),
     Team("Team")
 }
@@ -41,12 +41,12 @@ enum class EditTodoDescriptionBtn(val type: String) {
     Confirm("確認")
 }
 
-enum class FragmentName(val type: String) {
-    SocialMediaFragment("socialMediaFragment"),
-    ProjectMainFragment("projectMainFragment"),
-    PeopleMainFragment("peopleMainFragment"),
-    ChatRoomMainFragment("chatRoomMainFragment"),
-    ProfileMainFragment("profileMainFragment")
+enum class FragmentName(val type: String, val title: String) {
+    SocialMediaFragment("socialMediaFragment", "Community"),
+    ProjectMainFragment("projectMainFragment", "Project"),
+    PeopleMainFragment("peopleMainFragment", "Connections"),
+    ChatRoomMainFragment("chatRoomMainFragment", "Chat Room"),
+    ProfileMainFragment("profileMainFragment", "Profile")
 }
 
 enum class ProfileViewpagerCatagory(val catagory: String) {

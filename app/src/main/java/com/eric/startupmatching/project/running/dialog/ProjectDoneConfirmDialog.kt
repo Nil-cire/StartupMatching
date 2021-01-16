@@ -13,11 +13,6 @@ import com.eric.startupmatching.project.running.child.ProjectRunningTaskViewMode
 
 class ProjectDoneConfirmDialog(val viewModel: ProjectRunningTaskViewModel) : DialogFragment() {
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.custom_dialog)
-//    }
-
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
         inflater: LayoutInflater,

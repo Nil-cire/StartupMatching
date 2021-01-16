@@ -17,14 +17,10 @@ class MatchProjectFragment: Fragment() {
     ): View? {
         val binding = FragmentMatchProjectBinding.inflate(inflater, container, false)
         val viewModel = ViewModelProvider(this).get(MatchProjectViewModel::class.java)
-        val adapter = MatchProjectAdapter(MatchProjectAdapter.OnClickListener{
-//            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatroomDetailFragment(it))
-        })
+        val adapter = MatchProjectAdapter(MatchProjectAdapter.OnClickListener{ })
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.teamSearchingRecyclerView.adapter = adapter
-
-//        UserInfo.currentUser.id?.let { viewModel.observeNewMessage(it) }
 
         viewModel.projectList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)

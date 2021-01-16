@@ -18,13 +18,6 @@ class BackStageFragment: Fragment() {
     var positionC = Position("00003","Drummer")
     var positionD = Position("00004","Keyboard")
     var industryA = Industry("00001", "Music", mutableListOf(positionA, positionB, positionC, positionD))
-//    var userB: Any? = null
-//    var userC: Any? = null
-//    var userD: Any? = null
-//    var teamA: Any? = null
-//    var projectA: Any? = null
-//    var taskA: Any? = null
-//    var taskB: Any? = null
 
 
 
@@ -231,23 +224,6 @@ class BackStageFragment: Fragment() {
             }
         }
 
-//        val allPost = mutableListOf<Post>(
-//            Post("001", "Heartbreak Rocket had lunched!",null, Calendar.getInstance().time, null, mutableListOf("00002")),
-//            Post("002", "A dangerous week!",null, Calendar.getInstance().time, null, mutableListOf("00002", "00003"))
-//        )
-
-//        addPosts.setOnClickListener {
-//            try {
-//                for (post in allPost) {
-//                    db.collection("Post")
-//                        .add(post)
-//                }
-//                Log.d("add position:", "Success")
-//            } catch (e:Exception) {
-//                Log.d("add position fail:", e.message ?: null.toString())
-//            }
-//        }
-
         val teamMembers = mutableListOf(
             TeamMember("singer", "00001",
                 "eric", "00001", "00001",
@@ -387,85 +363,5 @@ class BackStageFragment: Fragment() {
 
         return binding.root
 
-        // backup variables
-//        taskA = hashMapOf<String, Any?>(
-//            "id" to "001",
-//            "members" to mutableListOf(teamMemberA, teamMemberB),
-//            "name" to "Write a song",
-//            "messageList" to mutableListOf<Message>(),
-//            "todo" to mutableListOf<Todo>(),
-//            "status" to "doing",
-//            "startTIme" to null,
-//            "endTime" to null,
-//            "preTask" to null,
-//            "deadline" to null
-//        )
-//
-//        taskB = hashMapOf<String, Any?>(
-//            "id" to "002",
-//            "members" to mutableListOf(teamMemberA, teamMemberB),
-//            "name" to "Record it",
-//            "messageList" to mutableListOf<Message>(),
-//            "todo" to mutableListOf<Todo>(),
-//            "status" to "await",
-//            "startTIme" to null,
-//            "endTime" to null,
-//            "preTask" to "001",
-//            "deadline" to null
-//        )
-//
-//
-//
-//
-//        teamA = hashMapOf<String, Any?>(
-//            "id" to "00001",
-//            "teamName" to "Heartbreak Rocket",
-//            "members" to "00001, 00002",
-//            "achievements" to "00001, 00002",
-//            "hiringPosition" to mutableListOf("keyboard", "singer", "guitar"),
-//            "projectStatus" to "preparing",
-//            "follower" to "00003, 00004",
-//            "teamLeader" to userA
-//        )
-//
-//        projectA = hashMapOf<String, Any?>(
-//            "id" to "00001",
-//            "projectName" to "Heartbreak Rocket till 2020",
-//            "description" to "cool Band in Taipei",
-//            "tasks" to mutableListOf(taskA, taskB),
-//            "teams" to mutableListOf("00001"),
-//            "startupStatus" to "recruiting",
-//            "hiringPosition" to mutableListOf(positionC, positionD),
-//            "industry" to "00001",
-//            "taskProposal" to null,
-//            "projectLeader" to userA,
-//            "applicationList" to mutableListOf(userB),
-//            "bulletinBoard" to "",
-//            "startTime" to null,
-//            "endTime" to null
-//        )
-//
-//        userA = hashMapOf<String, Any?>(
-//            "id" to "00001",
-//            "name" to "eric",
-//            "gender" to "Male",
-//            "skills" to "Chemistry, Kotlin",
-//            "currentTeam" to teamA,
-//            "currentProject" to mutableListOf(projectA),
-//            "applyProject" to mutableListOf<ProjectApply>(),
-//            "achievements" to mutableListOf<String>(),
-//            "following" to mutableListOf(userC),
-//            "follower" to mutableListOf(userB),
-//            "blacklist" to mutableListOf("0004"),
-//            "briefIntro" to "I'm so fking lost!"
-//        )
-//
-//        val allSkills = mutableListOf<Skill>(
-//            Skill("0001", "Singer"),
-//            Skill("0002", "Guitar"),
-//            Skill("0003", "Drum"),
-//            Skill("0004", "Keyboard"),
-//            Skill("0005", "Bass")
-//        )
     }
 }

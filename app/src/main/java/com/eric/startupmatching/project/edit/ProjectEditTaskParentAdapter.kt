@@ -79,15 +79,6 @@ class ProjectEditTaskParentAdapter(var viewModel: ProjectEditTaskViewModel, val 
         holder.itemView.itemCount.text = (model.content.serial?.plus(1)).toString()
         holder.bind(model)
 
-        //change btn show and gone control
-//        holder.itemView.detail_text.addTextChangedListener {
-//            if (it.isNullOrEmpty()) {
-//                holder.itemView.confirm_button.visibility = View.GONE
-//            } else {
-//                holder.itemView.confirm_button.visibility = View.VISIBLE
-//            }
-//        }
-
         holder.itemView.setOnClickListener {
             when (model.expand) {
                 true -> {

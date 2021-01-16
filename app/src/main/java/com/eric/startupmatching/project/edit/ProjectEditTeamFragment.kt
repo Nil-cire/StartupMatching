@@ -45,31 +45,10 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
             viewModel, ProjectEditTeamAdapter.OnClickListener2{})
         binding.recyclerView.adapter = adapter
 
-//        val adapter = MultiTypeAdapter2(this)
-//        adapter.register(
-//            TeamParentModel::class.java, ProjectEditTeamParentAdapter(
-//            viewModel, ProjectEditTeamParentAdapter.OnClickListener{
-////                var task = it.content
-////                viewModel.todoTeam.value = task
-////                viewModel.getTodoSize(task)
-////                Log.d("addTodoBtn", "Add")
-//            }))
-
-//        adapter.register(TeamChildModel::class.java, ProjectEditTeamChildAdapter(viewModel))
-//        val recyclerView = binding.recyclerView
-//        recyclerView.setHasFixedSize(true)
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(activity)
-//        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
-//        mItemTouchHelper = ItemTouchHelper(callback)
-//        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
-
         viewModel.teamIdList.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
-//                for (teamId in it) {
                     Log.d("aTeammmm", it.toString())
                     viewModel.getTeamsByIds(it)
-//                }
             }
         })
 
@@ -78,9 +57,6 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
             adapter.submitList(list)
             Log.d("listSubmitxx", list.toString())
             adapter.notifyDataSetChanged()
-//            for (team in it) {
-//                viewModel.getUserByTeam(team)
-//            }
         })
 
         viewModel.editTeam.observe(viewLifecycleOwner, Observer {
@@ -88,54 +64,14 @@ class ProjectEditTeamFragment : Fragment(), OnStartDragListener {
             fragmentManager?.let { it1 -> SelectMemberDialog(viewModel).show(it1, "addMember") }
         })
 
-
-
-//        viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
-//            adapter.items = list
-//            adapter.notifyDataSetChanged()
-////            Log.d("listToSubmit", it.toString())
-//        })
-
         requireActivity().project_edit_task.setOnClickListener {
             fragmentManager?.let { it1 -> AddTeamDialog(viewModel).show(it1, "show") }
-//            Log.d("listToSubmit2222", adapter.items.toString())
         }
 
         binding.create.setOnClickListener {
             this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectDetailFragment(project))
         }
 
-        // add todoo
-//        viewModel.todoSize.observe(viewLifecycleOwner, Observer {
-//            fragmentManager?.let { it1 -> AddTeamDialog(viewModel).show(it1, "show") }
-//        })
-
-        // done edit
-//        binding.create.setOnClickListener {
-//            var task: Team? = null
-//            var taskList = mutableListOf<Team>()
-//            var todoList = mutableListOf<Todo>()
-//            for ((index, taskModel) in adapter.items.withIndex()) {
-//                if (taskModel is TeamParentModel) {
-//                    task = taskModel.content
-//                    taskList.add(task)
-//                } else if (taskModel is TeamChildModel) {
-//                    var todo = taskModel.content
-//                    todoList.add(todo)
-//                    if (adapter.items[index].javaClass != adapter.items[index + 1].javaClass) {
-//                        for ((index, todo) in todoList.withIndex()) {
-//                            todo.serial = index
-//                            if (task != null) {
-//                                viewModel.updateTodos(todo, task)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            for (task in taskList) {
-//                viewModel.updateTeams(task)
-//            }
-//        }
         return binding.root
     }
 

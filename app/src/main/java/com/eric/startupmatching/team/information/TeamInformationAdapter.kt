@@ -33,15 +33,6 @@ class TeamInformationAdapter(val onClickListener: OnClickListener) : ListAdapter
                         var user = it.toObjects(User::class.java)
                         binding.dutyStatus.text = user[0].name
                     }
-//                db.collection("Team")
-//                    .whereEqualTo("id", event.team)
-//                    .get()
-//                    .addOnSuccessListener {
-//                        var team = mutableListOf<Team>()
-//                        team.addAll(it.toObjects(Team::class.java))
-//                        Log.d("evnetTeam", team.toString())
-//                        binding.time2.text = team[0].teamName
-//                    }
             }
         }
     }

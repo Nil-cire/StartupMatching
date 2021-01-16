@@ -67,23 +67,6 @@ class TeamMainFragment: Fragment() {
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
-//        binding.teamMemberRecyclerView.adapter = adapter
-
-//        UserInfo.currentUser.id?.let { viewModel.observeMemberStatus() }
-
-//        viewModel.teamList.observe(viewLifecycleOwner, Observer {
-//            if (!it.isNullOrEmpty()) {
-//                adapter.submitList(it)
-//                binding.joinBtn.text = "團隊資訊"
-//            }
-//        })
-//
-//        binding.joinBtn.setOnClickListener {
-//            if (binding.joinBtn.text != "團隊資訊") {
-//                TODO() // navigation
-//            }
-//        }
-
         binding.textView.setOnClickListener {
             this.findNavController().navigate(MainNavigationDirections.actionGlobalBackStageFragment())
         }

@@ -14,11 +14,6 @@ class ProjectDetailTeamAdapter(val onClickListener: OnClickListener) : ListAdapt
     class ViewHolder(var binding: ItemProjectMainRecyclerViewBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-        class OnClickChatListener(val clickListener: (project: Project) -> Unit) {
-            fun onClick(product: Project) = clickListener(product)
-        }
-
-
         fun bind(project: Project) {
             binding.project = project
             binding.executePendingBindings()
@@ -33,9 +28,6 @@ class ProjectDetailTeamAdapter(val onClickListener: OnClickListener) : ListAdapt
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-//        val item = getItem(position)
-//        holder.bind(item)
 
         if (holder is ViewHolder) {
             val project = getItem(position)

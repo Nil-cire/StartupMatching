@@ -64,35 +64,8 @@ class ProjectDetailTaskFragment(val arg: Project): Fragment(), OnStartDragListen
             adapter.notifyDataSetChanged()
         })
 
-//        viewModel.todoList.observe(viewLifecycleOwner, Observer {
-//            val items = mutableListOf<Any>()
-//            for (i in it.indices) {
-//                var member = mutableListOf<TreeViewModel>()
-//                val team = viewModel.taskList2.value?.get(i)?.let { it1 ->
-//                    TaskParentModel(it1)
-//                }
-//                for (j in it[i]) {
-//                    member.add(TaskChildModel(j))
-//                }
-//                if (team != null) {
-//                    team.children = member as ArrayList<TreeViewModel>
-//                    items.add(team)
-//                }
-//            }
-//            adapter.items = items
-//            adapter.notifyDataSetChanged()
-//            Log.d("adapteritems", items.toString())
-//        })
         viewModel.getTasks()
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val arg = arg
-        val viewModelFactory = ProjectDetailTaskViewModelFactory(arg)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectDetailTaskViewModel::class.java)
-
     }
 
     override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {

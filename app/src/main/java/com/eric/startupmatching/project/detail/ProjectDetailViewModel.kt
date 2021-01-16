@@ -33,15 +33,10 @@ class ProjectDetailViewModel(arg: Project): ViewModel() {
     fun confirmProjectReady() {
         _confirmProjectDone.value = true
     }
-    //// --
 
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>
         get() = _teamList
-
-    private val _projectList = MutableLiveData<List<Project>>()
-    val projectList: LiveData<List<Project>>
-        get() = _projectList
 
     val user = UserInfo.currentUser
 

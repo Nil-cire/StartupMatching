@@ -16,9 +16,7 @@ import kotlinx.android.synthetic.main.item_child.view.*
 class RunTaskChildViewBinder(val viewModel: ProjectRunningTaskViewModel) : ItemViewBinder<TaskChildModel, RunTaskChildViewBinder.ViewHolder>() {
 
     class ViewHolder(var binding: ItemProjectRunChildBinding, var viewModel: ProjectRunningTaskViewModel) : RecyclerView.ViewHolder(binding.root) {
-        class OnClickChatListener(val clickListener: (project: Project) -> Unit) {
-            fun onClick(product: Project) = clickListener(product)
-        }
+
 
         fun bind(model: TaskChildModel) {
             binding.model = model
@@ -26,8 +24,8 @@ class RunTaskChildViewBinder(val viewModel: ProjectRunningTaskViewModel) : ItemV
                 "running" -> binding.imgExpand.setBackgroundResource(R.drawable.baseline_panorama_fish_eye_black_18dp)
                 "done" -> binding.imgExpand.setBackgroundResource(R.drawable.baseline_task_alt_black_18dp)
             }
-//            Log.d("model", model.content.status!!)
             binding.executePendingBindings()
+
             // check to-do list
             binding.imgExpand.setOnClickListener {
                 if (model.content.status == TodoStatus.Running.status) {
@@ -52,7 +50,6 @@ class RunTaskChildViewBinder(val viewModel: ProjectRunningTaskViewModel) : ItemV
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: TaskChildModel) {
-//        holder.itemView.tvContent.text = child.content.name
         holder.bind(model)
     }
 

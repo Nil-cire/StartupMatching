@@ -26,7 +26,6 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
 
     class ViewHolder(var binding: ItemProjectEditTodoRecyclerViewBinding,
                      var viewModel: ProjectEditTaskViewModel,
-//                     var onClickListener: ProjectEditTaskParentAdapter.OnClickListener,
                      var holderType: Int) : RecyclerView.ViewHolder(binding.root) {
 
         private fun hideKeyboard(view: View) {
@@ -76,11 +75,6 @@ class ProjectEditTaskChildAdapter(var viewModel: ProjectEditTaskViewModel) : Ite
 
         holder.bind(model)
         holder.itemView.detail_text.addTextChangedListener {
-//            if (it.isNullOrEmpty()) {
-//                holder.itemView.confirm_button.visibility = View.GONE
-//            } else {
-//                holder.itemView.confirm_button.visibility = View.VISIBLE
-//            }
         }
     }
 }

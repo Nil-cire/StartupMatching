@@ -52,9 +52,6 @@ class ChatRoomTeamAdapter(val onClickListener: OnClickListener) : ListAdapter<Ch
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
-
         if (holder is ViewHolder) {
             val chatRoom = getItem(position)
             holder.itemView.setOnClickListener {

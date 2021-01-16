@@ -62,7 +62,6 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         mItemTouchHelper!!.attachToRecyclerView(recyclerView)
 
         viewModel.taskList.observe(viewLifecycleOwner, Observer { taskList ->
-//            taskList.sortedByDescending { it.serial }
             for (task in taskList) {
                 viewModel.getTodoByTask(task)
             }
@@ -71,7 +70,6 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         viewModel.listToSubmit.observe(viewLifecycleOwner, Observer {list ->
             adapter.items = list
             adapter.notifyDataSetChanged()
-//            Log.d("listToSubmit", it.toString())
         })
 
         //Show add task dialog
@@ -103,12 +101,6 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
                     if (adapter.items[index].javaClass != adapter.items[index + 1].javaClass ||
                         index == adapter.items.size.minus(1) ) {
                         todoList = mutableListOf()
-////                        for ((index, todo) in todoList.withIndex()) {
-////                            todo.serial = index
-////                            if (task != null) {
-////                                viewModel.updateTodos(todo, task)
-////                            }
-////                        }
                     }
                 }
             }
@@ -144,14 +136,12 @@ class ProjectEditTaskFragment : Fragment(), OnStartDragListener {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTaskViewModel::class.java)
 
         Log.d("ProjectResume", "Resume")
-//        viewModel.observeTaskDataChanged()
 
         var backBtn = requireActivity().back_button
         backBtn.visibility = View.VISIBLE
         backBtn.setOnClickListener {
             requireActivity().onBackPressed()
         }
-
     }
 
     override fun onPause() {

@@ -22,7 +22,6 @@ class ProjectEditTeamChildAdapter(var viewModel: ProjectEditTeamViewModel) : Ite
 
     class ViewHolder(var binding: ItemProjectEditUserRecyclerViewBinding,
                      var viewModel: ProjectEditTeamViewModel,
-//                     var onClickListener: ProjectEditTaskParentAdapter.OnClickListener,
                      var holderType: Int) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: TeamChildModel) {
             holderType = 1
@@ -30,7 +29,6 @@ class ProjectEditTeamChildAdapter(var viewModel: ProjectEditTeamViewModel) : Ite
                 Log.d("BTN", "Clicked")
                 binding.model = model
                 var description = binding.detailText.text.toString()
-//                viewModel.editTodoDescription(model.content, description)
                 binding.detailText.text = null}
 
         }

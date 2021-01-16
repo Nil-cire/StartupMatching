@@ -44,8 +44,6 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
         val binding = FragmentProjectRunningTaskBinding.inflate(inflater, container, false)
         val viewModelFactory = ProjectRunningTaskViewModelFactory(arg)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectRunningTaskViewModel::class.java)
-        val viewModelFactory2 = ProjectRunningViewModelFactory(arg)
-        val viewModel2 = ViewModelProvider(this, viewModelFactory2).get(ProjectRunningViewModel::class.java)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -54,12 +52,7 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
             this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it))
         }))
         adapter.register(TaskChildModel::class.java, RunTaskChildViewBinder(viewModel))
-
-//        val recyclerView = binding.recyclerView
         binding.recyclerView.adapter = adapter
-//        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback(adapter)
-//        mItemTouchHelper = ItemTouchHelper(callback)
-//        mItemTouchHelper!!.attachToRecyclerView(recyclerView)
         binding.noData.visibility = View.GONE
 
         viewModel.taskList.observe(viewLifecycleOwner, Observer {
@@ -106,9 +99,6 @@ class ProjectRunningTaskFragment(val arg: Project): Fragment(), OnStartDragListe
             }
         })
 
-
-
-//        viewModel.observeTaskDataChanges(arg)
         return binding.root
     }
 

@@ -1,15 +1,17 @@
 package com.eric.startupmatching.chat.detail
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.eric.startupmatching.databinding.FragmentChatRoomDetailBinding
-import kotlinx.android.synthetic.main.fragment_chat_room_detail.*
+
 
 class ChatRoomDetailFragment: Fragment() {
     override fun onCreateView(
@@ -40,8 +42,9 @@ class ChatRoomDetailFragment: Fragment() {
         //// send text and upload to firebase
         binding.sendBtn.setOnClickListener {
             var text = binding.inputMessage.text.toString()
+            binding.inputMessage.text.clear()
             viewModel.sendText(text)
-            send_btn.text = ""
+            hideKeyboard(this.requireActivity())
         }
 
         viewModel.messageAdded.observe(viewLifecycleOwner, Observer {
@@ -50,11 +53,16 @@ class ChatRoomDetailFragment: Fragment() {
 
         viewModel.observeNewMessage()
 
-//        UserManager.currentUser.id?.let { viewModel.observeNewMessage(it) }
-//
-//        viewModel.chatRoomList.observe(viewLifecycleOwner, Observer {
-//            adapter.submitList(it)
-//        })
         return binding.root
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val imm =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = activity.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

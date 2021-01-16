@@ -16,11 +16,6 @@ class UserProfileFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentProjectMainBinding.inflate(inflater, container, false)
-//        val arg = UserProfileFragmentArgs.
-//        val viewModelFactory = UserProfileViewModelFactory(arg)
-//        val viewModel = UserProfileViewModel(this).get(UserProfileViewModel::class.java)
-//        binding.lifecycleOwner = this
-//        binding.viewModel = viewModel
 
         return binding.root
     }
