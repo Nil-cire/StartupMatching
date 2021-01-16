@@ -42,7 +42,6 @@ class ProfileFollowingFragment: Fragment() {
 
         viewModel.chatUser.observe(viewLifecycleOwner, Observer {
             viewModel.checkIfUserRoomExist(UserInfo.currentUser.value!!, it)
-//            this.findNavController().navigate(MainNavigationDirections.actionGlobalChatRoomDetailFragment(it.id))
         })
 
         viewModel.checkChatRoom.observe(viewLifecycleOwner, Observer {

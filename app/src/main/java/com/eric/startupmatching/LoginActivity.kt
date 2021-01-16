@@ -109,7 +109,6 @@ class LoginActivity : AppCompatActivity() {
         drawable.setBounds(0, 0, 50, 50)
         tv.setCompoundDrawables(drawable, null, null, null)
     }
-    // 8d:d0:4d:64:ee:51:e7:fb:ef:e7:6b:41:27:94:d4:04:a3:1a:53:f1
 
 
 

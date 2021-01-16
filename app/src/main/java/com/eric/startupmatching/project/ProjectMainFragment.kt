@@ -126,58 +126,10 @@ class ProjectMainFragment: Fragment() {
             adapter.submitList(list)
         })
 
-
-
-
-
-        // chip select logic setup
-
-//        binding.chipPo.setOnCheckedChangeListener { view, isChecked ->
-//            binding.chipTl.isChecked = false
-//        }
-//
-//        binding.chipTl.setOnCheckedChangeListener { view, isChecked ->
-//            binding.chipPo.isChecked = false
-//        }
-//
-//        binding.chipRun.setOnCheckedChangeListener { view, isChecked ->
-//            binding.chipEnd.isChecked = false
-//        }
-//
-//        binding.chipEnd.setOnCheckedChangeListener { view, isChecked ->
-//            binding.chipRun.isChecked = false
-//        }
-//
         requireActivity().project_main_add.setOnClickListener {
             Log.d("project_main_add", "pressed")
             this.findNavController().navigate(MainNavigationDirections.actionGlobalProjectAddFragment())
         }
-//
-//        // filter projects on chip selected
-//        binding.chipsGroup.setOnCheckedChangeListener { view, isChecked ->
-//            if (view.chip_po.isChecked && view.chip_run.isChecked) {
-//                TODO()
-//            } else if (view.chip_po.isChecked && view.chip_end.isChecked) {
-//                TODO()
-//            } else if (view.chip_tl.isChecked && view.chip_run.isChecked) {
-//                TODO()
-//            } else if (view.chip_tl.isChecked && view.chip_end.isChecked) {
-//                TODO()
-//            } else if (view.chip_po.isChecked) {
-//                viewModel.getProjectAsOwner()
-//                adapter.submitList(viewModel.projectList.value)
-//                Log.d("chip_po clicked", "success")
-//            } else if (view.chip_tl.isChecked) {
-//                TODO()
-//            } else if (view.chip_run.isChecked) {
-//                TODO()
-//            } else if (view.chip_end.isChecked) {
-//                TODO()
-//            } else {
-//                viewModel.getAllProject()
-//                adapter.submitList(viewModel.projectList.value)
-//            }
-//        }
 
 
         return binding.root

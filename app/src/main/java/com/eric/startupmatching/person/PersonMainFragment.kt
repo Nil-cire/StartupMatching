@@ -28,9 +28,6 @@ class PersonMainFragment: Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.recyclerView.adapter = adapter
-
-//        UserInfo.currentUser.id?.let { viewModel.observeNewMessage(it) }
-
         viewModel.userList.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })

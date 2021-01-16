@@ -23,10 +23,6 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
     val team: LiveData<Team>
         get() = _team
 
-    private val _teamAsTeamleader = MutableLiveData<List<Team>>()
-    val teamAsTeamleader: LiveData<List<Team>>
-        get() = _teamAsTeamleader
-
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>
         get() = _teamList
@@ -70,29 +66,6 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
         }
     }
 
-    fun getProjectTeams2(project: Project) {
-        var count3 = 0
-        coroutineScope.launch {
-            var teamList = mutableListOf<Team>()
-            if (!project.teams.isNullOrEmpty()) {
-                for (teamId in project.teams) {
-                    db.collection("Team")
-                        .whereEqualTo("id", teamId)
-                        .get()
-                        .addOnSuccessListener {qs ->
-                            teamList.addAll(qs.toObjects(Team::class.java))
-                            count3 += 1
-                            if (count3 == project.teams.size) {
-                                teamList.sortBy { it.id }
-                                _teamList.value = teamList
-                                Log.d("ProjectTeams", _teamList.value.toString())
-                            }
-
-                        }
-                }
-            }
-        }
-    }
 
     fun getProjectTeamMember(teamList: List<Team>) {
         coroutineScope.launch {
@@ -146,22 +119,11 @@ class ProjectDetailTeamViewModel(arg: Project): ViewModel() {
         }
     }
 
-    fun observeTeamChanges() {
-        coroutineScope.launch {
-            db.collection("Project").document(arg.id.toString())
-                .addSnapshotListener { value, error ->
-                    getProjectTeams(arg)
-                }
-        }
-    }
 
     fun observeTeamDataChanged() {
         db.collection("Project").document(arg.id.toString())
             .addSnapshotListener { value, error ->
                 getProjectTeams(arg)
             }
-    }
-
-    init {
     }
 }

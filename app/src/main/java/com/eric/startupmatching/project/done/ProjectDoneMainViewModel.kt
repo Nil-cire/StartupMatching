@@ -69,15 +69,11 @@ class ProjectDoneMainViewModel(arg: Project): ViewModel() {
                             }
                     }
                 }
-//                .addOnSuccessListener {
-//                    _userIdList.value = userIdList
-//                }
         }
     }
 
     //// add achievement to each user
     fun addAchievementIdToUsers(userIdList: List<String>, achievementId: String) {
-        var count = 0
         var userAcievementList = mutableListOf<String>()
         coroutineScope.launch {
             for (userId in userIdList) {

@@ -34,9 +34,6 @@ class ChatRoomTaskAdapter(val onClickListener: OnClickListener) : ListAdapter<Ch
                         }
                 }
             }
-
-
-//            TODO("Snapshopt message update and change text")
         }
     }
 
@@ -47,9 +44,6 @@ class ChatRoomTaskAdapter(val onClickListener: OnClickListener) : ListAdapter<Ch
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-//        val item = getItem(position)
-//        holder.bind(item)
 
         if (holder is ViewHolder) {
             val chatRoom = getItem(position)

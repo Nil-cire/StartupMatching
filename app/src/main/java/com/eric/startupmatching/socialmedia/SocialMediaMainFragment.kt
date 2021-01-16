@@ -42,15 +42,10 @@ class SocialMediaMainFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         requireActivity().assistant.alpha = 1.0f
-//        requireActivity().social_media_post_btn.visibility = View.VISIBLE
-//        requireActivity().social_media_post_btn.setOnClickListener {
-//            Log.d("add Social Media post", "TODO")
-//        }
     }
 
     override fun onPause() {
         super.onPause()
-//        requireActivity().social_media_post_btn.visibility = View.GONE
         requireActivity().assistant.alpha = 0.3f
     }
 

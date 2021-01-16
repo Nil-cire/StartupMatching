@@ -29,57 +29,10 @@ class MatchTeamViewModel: ViewModel() {
     val teamList: LiveData<List<Team>>
         get() = _teamList
 
-//    private val _getTeamList = MutableLiveData<Int>()
-//    val getTeamList: LiveData<Int>
-//        get() = _getTeamList
-
     var user = UserInfo.currentUser
-
-//    fun getTeamList() {
-//        var list = mutableListOf<Team>()
-//        coroutineScope.launch{
-//
-//            try {
-//                db.collection("Team")
-//                    .whereNotIn("members", user.id)
-//                    .get()
-//                    .addOnSuccessListener {
-//                        list.addAll(it.toObjects(Team::class.java))
-//                        _teamList.value = list
-//                        Log.d("ProjectListaa", teamList.value.toString())
-//                    }
-//            } catch (e: Exception) {
-//                Log.d("error", e.message.toString())
-//            }
-//
-////                _projectList.value = list.sortedBy { it.startTime }
-//
-//        }
-//    }
-
-//    fun observeProjectUpdate() {
-//        db.collection("Project")
-//            .whereEqualTo("startupStatus", "Running")
-//            .addSnapshotListener { value, error ->
-//                value?.let {
-//                    getRunningProjectList(user)
-//                }
-//            }
-//    }
-
-//    fun liveUpdateMemeberStatus() {
-//        db.collection("TeamMember").addSnapshotListener { value, error ->
-//            value?.let {
-//                it.forEach {
-//                    Log.i("REALTIMETAG", "${it.data}")
-//                }
-//            }
-//        }
-//    }
 
     init {
         user = UserInfo.currentUser
-//        getTeamList()
     }
 
 }

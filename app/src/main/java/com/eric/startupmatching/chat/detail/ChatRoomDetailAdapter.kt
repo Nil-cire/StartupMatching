@@ -24,9 +24,6 @@ class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<
         fun bind(message: Message) {
             binding.message = message
             binding.executePendingBindings()
-
-            //get user image and user name with message
-
             db.collection("User").document(message.poster)
                 .get()
                 .addOnSuccessListener {
@@ -44,8 +41,6 @@ class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<
         fun bind(message: Message) {
             binding.message = message
             binding.executePendingBindings()
-//            binding.sendText.setOnClickListener {
-//            }
         }
     }
 
@@ -68,8 +63,6 @@ class ChatRoomDetailAdapter(val onClickListener: OnClickListener) : ListAdapter<
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
         val chatRoom = getItem(position)
         when (holder) {
             is ViewHolder -> {

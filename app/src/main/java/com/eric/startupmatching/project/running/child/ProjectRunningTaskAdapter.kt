@@ -14,9 +14,6 @@ class ProjectRunningTaskAdapter(val onClickListener: OnClickListener) : ListAdap
     class ViewHolder(var binding: ItemProjectMainRecyclerViewBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-        class OnClickChatListener(val clickListener: (project: Project) -> Unit) {
-            fun onClick(product: Project) = clickListener(product)
-        }
 
 
         fun bind(project: Project) {
@@ -34,8 +31,6 @@ class ProjectRunningTaskAdapter(val onClickListener: OnClickListener) : ListAdap
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
 
         if (holder is ViewHolder) {
             val project = getItem(position)

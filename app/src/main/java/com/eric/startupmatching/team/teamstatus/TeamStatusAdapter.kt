@@ -28,9 +28,6 @@ class TeamStatusAdapter(val onClickListener: OnClickListener) : ListAdapter<User
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
-
         if (holder is ViewHolder) {
             val user = getItem(position)
             holder.itemView.setOnClickListener {

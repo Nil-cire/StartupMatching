@@ -22,10 +22,6 @@ class TeamMainViewModel: ViewModel() {
 
     val db = FirebaseFirestore.getInstance()
 
-//    private val _team = MutableLiveData<Team>()
-//    val team: LiveData<Team>
-//        get() = _team
-
     private val _team = MutableLiveData<Team>()
     val team: LiveData<Team>
         get() = _team
@@ -33,10 +29,6 @@ class TeamMainViewModel: ViewModel() {
     private val _teamList = MutableLiveData<List<TeamMember>>()
     val teamList: LiveData<List<TeamMember>>
         get() = _teamList
-
-//    private val _currentUser = MutableLiveData<User>()
-//    val currentUser: LiveData<User>
-//        get() = _currentUser
 
     var user = UserInfo.currentUser
 
@@ -59,21 +51,5 @@ class TeamMainViewModel: ViewModel() {
         }
     }
 
-//    fun observeMemberStatus() {
-//        db.collection("TeamMember")
-//            .whereEqualTo("project", user.currentProject?.get(0))
-//            .whereEqualTo("team", user.currentTeam)
-//            .addSnapshotListener { value, error ->
-//                value?.let {
-//                    getTeamMemberList(user)
-//                }
-//            }
-//    }
-
-
-    init {
-        user = UserInfo.currentUser
-//        getTeamMemberList(user)
-    }
 
 }

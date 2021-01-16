@@ -30,7 +30,6 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val project = Project()
         val binding = DialogAddTodoBinding.inflate(inflater, container, false)
 
         var startTime = Calendar.getInstance()
@@ -66,9 +65,6 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
         }
 
         binding.submit.setOnClickListener {
-//            if (startTime2 != null && endTime2 != null) {
-//                viewModel.getNewTaskState()
-                // set task value
                 viewModel.todoInstance.serial = viewModel.todoSize.value ?: 0
                 viewModel.todoInstance.name = binding.editTextTextPersonName.text.toString()
                 viewModel.todoInstance.startTime = startTime2
@@ -80,7 +76,6 @@ class AddTodoDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
                 viewModel.addTodo(viewModel.todoInstance)
                 viewModel.todoAdded()
                 dismiss()
-//            }
         }
 
         binding.cancel.setOnClickListener {

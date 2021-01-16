@@ -37,14 +37,10 @@ class ProjectMainViewModel: ViewModel() {
     val projectList: LiveData<List<Project>>
         get() = _projectList
 
-    private val _projectListFilted = MutableLiveData<List<Project>>()
-    val projectListFilted: LiveData<List<Project>>
-        get() = _projectListFilted
 
     val user = UserInfo.currentUser
 
     //// project filter status
-
     private val _projectOwnerBtnChecked = MutableLiveData<Boolean>()
     val projectOwnerBtnChecked: LiveData<Boolean>
         get() = _projectOwnerBtnChecked
@@ -216,19 +212,4 @@ class ProjectMainViewModel: ViewModel() {
         }
     }
 
-
-//filter on Chip Selected
-    fun getProjectAsOwner() {
-        var projectAsOwnerList = mutableListOf<Project>()
-        coroutineScope.launch {
-            db.collection("Project")
-                .whereEqualTo("projectLeader", user.value?.id)
-                .get()
-                .addOnSuccessListener {
-                    projectAsOwnerList.addAll(it.toObjects(Project::class.java))
-                    _projectList.value = projectAsOwnerList
-                    Log.d("projectAsOwnerList", _projectList.toString())
-                }
-        }
-}
 }

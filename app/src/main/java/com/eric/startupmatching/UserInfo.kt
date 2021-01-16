@@ -19,22 +19,6 @@ object UserInfo {
     val user: LiveData<User>
         get() = _user
 
-//    var userA = User(
-//        id = "004",
-//        name = "D",
-//        image = null,
-//        skills = mutableListOf("002"),
-//        currentTeam = mutableListOf("001"),
-//        currentProject = mutableListOf("001"),
-//        applyProject = null,
-//        achievements = null,
-//        following = mutableListOf("000", "001", "002", "005"),
-//        follower = mutableListOf("000", "001", "002", "003", "005"),
-//        blacklist = null,
-//        briefIntro = "Will be on vacation on 12/10 ~ 1/2",
-//        time = Calendar.getInstance().time
-//    )
-
     var currentUser = MutableLiveData<User>()
     fun setFollowerList(followerList: MutableList<String>) {
         currentUser.value?.following = followerList

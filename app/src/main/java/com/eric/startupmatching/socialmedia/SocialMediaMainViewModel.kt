@@ -27,8 +27,6 @@ class SocialMediaMainViewModel: ViewModel() {
         var list = mutableListOf<Post>()
         coroutineScope.launch {
             db.collection("Post")
-//                .whereNotEqualTo("poster", userId)
-//                .orderBy("timeDate")
                 .get()
                 .addOnSuccessListener { it2 ->
                     Log.d("postLista", it2.toString())

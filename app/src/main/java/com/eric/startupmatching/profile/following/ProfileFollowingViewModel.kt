@@ -31,7 +31,6 @@ class ProfileFollowingViewModel: ViewModel() {
         get() = _followingUsers
 
     // Navigate to chat room (personal)
-
     private val _chatUser = MutableLiveData<User>()
     val chatUser: LiveData<User>
         get() = _chatUser
@@ -41,7 +40,6 @@ class ProfileFollowingViewModel: ViewModel() {
     }
 
     // Check if chat room exist
-
     private val _checkChatRoom = MutableLiveData<ChatRoom?>()
     val checkChatRoom: LiveData<ChatRoom?>
         get() = _checkChatRoom
@@ -58,7 +56,6 @@ class ProfileFollowingViewModel: ViewModel() {
     }
 
     // get or fetch chat room after checking room existing
-
     private val _chatRoomId = MutableLiveData<String>()
     val chatRoomId: LiveData<String>
         get() = _chatRoomId

@@ -22,12 +22,6 @@ class ProjectMainAdapter(val onClickListener: OnClickListener) : ListAdapter<Pro
         private var viewModelJob = Job()
         private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
-        class OnClickChatListener(val clickListener: (project: Project) -> Unit) {
-            fun onClick(product: Project) = clickListener(product)
-        }
-
-
         fun bind(project: Project) {
             binding.project = project
             binding.executePendingBindings()

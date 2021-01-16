@@ -6,8 +6,6 @@ import java.util.*
 class MultiTypeAdapter2(dragStartListener: OnStartDragListener):
     MultiTypeAdapter(), ItemTouchHelperAdapter {
 
-//    override var items: List<Any> = mutableListOf()
-//    private val mItems: MutableList<String> = ArrayList()
     private val mDragStartListener: OnStartDragListener
 
     override fun getItemViewType(position: Int): Int {
@@ -35,7 +33,6 @@ class MultiTypeAdapter2(dragStartListener: OnStartDragListener):
 
     init {
         mDragStartListener = dragStartListener
-//        mItems.addAll((context.resources.getStringArray(R.array.dummy_items)))
     }
 }
 

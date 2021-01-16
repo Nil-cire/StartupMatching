@@ -36,8 +36,6 @@ class AddTaskDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
     ): View? {
         val project = Project()
         val binding = DialogAddTaskBinding.inflate(inflater, container, false)
-//        val viewModelFactory = ProjectEditTaskViewModelFactory(project)
-//        val viewModel = ViewModelProvider(this, viewModelFactory).get(ProjectEditTaskViewModel::class.java)
 
         var startTime = Calendar.getInstance()
         var startTime2: Date? = null
@@ -72,9 +70,6 @@ class AddTaskDialog(val viewModel: ProjectEditTaskViewModel) : DialogFragment() 
         }
 
         binding.submit.setOnClickListener {
-//            if (startTime2 != null && endTime2 != null) {
-//                viewModel.getNewTaskState()
-                // set task value
                 viewModel.taskInstance.serial = viewModel.taskList.value?.size ?: 0
                 viewModel.taskInstance.name = binding.editTextTextPersonName.text.toString()
                 viewModel.taskInstance.startTime = startTime2

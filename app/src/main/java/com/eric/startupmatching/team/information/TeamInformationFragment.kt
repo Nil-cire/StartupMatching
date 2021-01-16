@@ -22,7 +22,6 @@ class TeamInformationFragment: Fragment() {
         val viewModel = ViewModelProvider(this).get(TeamInformationViewModel::class.java)
 
         val adapter = TeamInformationAdapter(TeamInformationAdapter.OnClickListener{
-//        this.findNavController().navigate(MainNavigationDirections.actionGlobalChatroomDetailFragment(it))
         })
 
         binding.lifecycleOwner = this

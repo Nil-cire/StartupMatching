@@ -28,9 +28,6 @@ class MatchProjectAdapter(val onClickListener: OnClickListener) : ListAdapter<Pr
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-//        val item = getItem(position)
-//        holder.bind(item)
-
         if (holder is ViewHolder) {
             val task = getItem(position)
             holder.itemView.setOnClickListener {

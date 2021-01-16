@@ -90,9 +90,6 @@ class PersonDetailViewModel(user: User): ViewModel() {
     }
 
     fun getAchievements(user: User) {
-//        coroutineScope.launch {
-//            _achievementList.value = FirebaseDataSource.getAchievements(user)
-//        }
         var count = 0
         var list = mutableListOf<Achievement>()
         coroutineScope.launch {

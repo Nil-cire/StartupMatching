@@ -22,14 +22,12 @@ class RunTaskParentViewBinder(val viewModel: ProjectRunningTaskViewModel, val on
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-//        val root = inflater.inflate()
         val binding = ItemProjectRunParentBinding.inflate(layoutInflater)
         mExpandAndHideListener = TreeViewUtil.generateExpandAndHideListener()
         return ViewHolder(binding, viewModel, onClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, model: TaskParentModel) {
-//        holder.itemView.tvContent.text = model.content.name
         holder.bind(model)
         holder.itemView.setOnClickListener {
             when (model.expand) {
@@ -54,13 +52,6 @@ class RunTaskParentViewBinder(val viewModel: ProjectRunningTaskViewModel, val on
         fun bind(model: TaskParentModel) {
             binding.model = model
             binding.executePendingBindings()
-            // set chat room id to viewmodel
-//            binding.chatroom.setOnClickListener {
-//                model.content.chatRoom?.let { it1 -> viewModel.setChatRoomId(it1) }
-//            }
-//            binding.chatroom.setOnClickListener {
-//                model.content.chatRoom?.let { it1 -> viewModel.setNavigationToChatRoom(it1) }
-//            }
 
             binding.chatroom.setOnClickListener {
                 model.content.chatRoom?.let { it1 -> onClickListener.onClick(it1) }

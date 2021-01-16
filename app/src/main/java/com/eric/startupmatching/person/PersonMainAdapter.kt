@@ -30,13 +30,6 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
             binding.recyclerView.adapter = adapter
             adapter.submitList(user.skills)
             val db = FirebaseFirestore.getInstance()
-//            val db = FirebaseFirestore.getInstance()
-//            db.collection("User").document(user.id!!)
-//                .get()
-//                .addOnSuccessListener {
-//                    val userData = it.toObject(User::class.java)
-//                    adapter.submitList(user.skills)
-//                }
             var followed = true
             fun followBtnTexChecker() {
                 if (!UserInfo.currentUser.value?.following.isNullOrEmpty()) {
@@ -106,9 +99,6 @@ class PersonMainAdapter(val onClickListener: OnClickListener) : ListAdapter<User
                                 var followerList2 = mutableListOf<String>()
                                 followerList.filterTo(followerList2, { it != UserInfo.currentUser.value?.id!! })
                                 doc.reference.update("follower", followerList2)
-//                                var list = UserInfo.currentUser.value!!.following as MutableList  // up date following list in UserInfo
-//                                list.filter { it != userId }
-//                                UserInfo.currentUser.value!!.following = list
                                 UserInfo.setFollowerList(followList2)
                             }
                             .addOnSuccessListener { followed = false }

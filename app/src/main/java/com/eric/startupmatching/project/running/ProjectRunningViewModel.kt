@@ -23,9 +23,6 @@ class ProjectRunningViewModel(arg: Project): ViewModel() {
     val team: LiveData<Team>
         get() = _team
 
-    private val _teamAsTeamleader = MutableLiveData<List<Team>>()
-    val teamAsTeamleader: LiveData<List<Team>>
-        get() = _teamAsTeamleader
 
     private val _teamList = MutableLiveData<List<Team>>()
     val teamList: MutableLiveData<List<Team>>

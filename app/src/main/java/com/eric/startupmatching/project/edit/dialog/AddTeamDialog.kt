@@ -1,7 +1,5 @@
 package com.eric.startupmatching.project.edit.dialog
 
-import android.app.DatePickerDialog
-import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -47,8 +45,5 @@ class AddTeamDialog(val viewModel: ProjectEditTeamViewModel) : DialogFragment() 
         }
 
         return binding.root
-    }
-    private fun setDateFormat(year: Int, month: Int, day: Int): String {
-        return "$year-${month + 1}-$day"
     }
 }
