@@ -131,12 +131,24 @@ object FirebaseDataSource: DataSourceFunction {
 // [All user Index Fragment - Following List] Functions for getting or creating User Chat Room
 
     override suspend fun createUserChatRoom(user: User, otherUser: User): String = suspendCoroutine { continuation->
-        val chatRoom = ChatRoom(messages = mutableListOf(user.id!!, otherUser.id!!))
+        val chatRoom = ChatRoom(member = mutableListOf(user.id!!, otherUser.id!!), type = ChatRoomType.User.type)
         db.collection("ChatRoom")
             .add(chatRoom)
             .addOnCompleteListener {
                 it.result?.update("id", it.result?.id)
                 continuation.resume(it.result!!.id)
+            }
+    }
+
+    override suspend fun getPrivateChatRoom(user: User): List<ChatRoom?> = suspendCoroutine { continuation ->
+        db.collection("ChatRoom")
+            .whereEqualTo("type", ChatRoomType.User.type)
+            .whereArrayContains("member", user.id.toString())
+            .get()
+            .addOnCompleteListener { data ->
+                val result = data.result?.toObjects(ChatRoom::class.java) ?: mutableListOf<ChatRoom>()
+                if (result.size > 0) { result.sortBy { it.updateTime } }
+                continuation.resume(result)
             }
     }
 

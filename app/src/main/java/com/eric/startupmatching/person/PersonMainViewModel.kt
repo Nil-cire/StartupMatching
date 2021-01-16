@@ -28,21 +28,6 @@ class PersonMainViewModel: ViewModel() {
     val userList: LiveData<List<User?>?>
         get() = _userList
 
-//    fun getAllUser() {
-//        coroutineScope.launch {
-//            db.collection("User")
-//                .get().addOnSuccessListener {
-//                    var list = it.toObjects(User::class.java)
-//                    var list2 = list.toMutableList()
-//                    for ((index, user) in list.withIndex()) {
-//                        if (user.id == UserInfo.currentUser.value?.id)
-//                            list2.removeAt(index)
-//                    }
-//                    _userList.value = list2
-//                }
-//        }
-//    }
-
     fun getAllUser() {
         coroutineScope.launch {
             try {
@@ -52,9 +37,4 @@ class PersonMainViewModel: ViewModel() {
             }
         }
     }
-
-    init {
-
-    }
-
 }

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.eric.startupmatching.data.User
 import com.eric.startupmatching.databinding.ItemProfileFollowingRecyclerViewBinding
-import com.eric.startupmatching.project.edit.ProjectEditTaskParentAdapter
 
 class ProfileFollowingRecyclerViewAdapter(val viewModel: ProfileFollowingViewModel,
                                           val onClickListener: OnClickListener) : ListAdapter<User, RecyclerView.ViewHolder>(CategoryDiffCallback) {

@@ -22,4 +22,6 @@ interface DataSourceFunction {
 
     suspend fun createUserChatRoom(user: User, otherUser: User): String
 
+    suspend fun getPrivateChatRoom(user: User): List<ChatRoom?>
+
 }
